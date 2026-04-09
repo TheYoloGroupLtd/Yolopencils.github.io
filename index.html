@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 
-<title>YOLO Pencils | Premium Writing Tools</title>
+<title>YOLO Pencils | Cinematic Experience</title>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -176,7 +176,7 @@ Send Message
 
 <script>
 
-/* SCROLL ANIMATION */
+/* SCROLL ANIMATIONS */
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if(entry.isIntersecting){
@@ -196,92 +196,127 @@ window.addEventListener("scroll", () => {
   }
 });
 
-/* ===== 3D PENCIL ===== */
+/* ===== 3D CINEMATIC PENCIL ===== */
 const container = document.getElementById("pencil3d");
 
 const scene = new THREE.Scene();
 
 const camera = new THREE.PerspectiveCamera(60, container.clientWidth / 500, 0.1, 1000);
-camera.position.set(0, 0, 7);
+camera.position.set(0,1,10);
 
-const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+const renderer = new THREE.WebGLRenderer({ antialias:true, alpha:true });
 renderer.setSize(container.clientWidth, 500);
+renderer.setPixelRatio(window.devicePixelRatio);
 container.appendChild(renderer.domElement);
 
+/* ENV LIGHT */
+const hemi = new THREE.HemisphereLight(0xffffff, 0x444444, 1);
+scene.add(hemi);
+
+const light1 = new THREE.DirectionalLight(0xffffff,1.5);
+light1.position.set(5,5,5);
+scene.add(light1);
+
+const light2 = new THREE.DirectionalLight(0xffffff,1);
+light2.position.set(-5,3,-5);
+scene.add(light2);
+
+/* WOOD TEXTURE */
+function wood(){
+  const c=document.createElement("canvas");
+  c.width=256;c.height=256;
+  const ctx=c.getContext("2d");
+  for(let i=0;i<256;i++){
+    let g=Math.sin(i*0.15)*30;
+    ctx.fillStyle=`rgb(${170+g},${110+g/2},60)`;
+    ctx.fillRect(0,i,256,1);
+  }
+  return new THREE.CanvasTexture(c);
+}
+
 /* MATERIALS */
-const bodyMat = new THREE.MeshStandardMaterial({ color: 0xffd27f });
-const woodMat = new THREE.MeshStandardMaterial({ color: 0xc68642 });
-const tipMat = new THREE.MeshStandardMaterial({ color: 0x222222 });
-const metalMat = new THREE.MeshStandardMaterial({ color: 0xd9d9d9, metalness: 1 });
-const eraserMat = new THREE.MeshStandardMaterial({ color: 0xff6b6b });
+const bodyMat=new THREE.MeshStandardMaterial({map:wood(),roughness:0.6});
+const metalMat=new THREE.MeshStandardMaterial({color:0xdcdcdc,metalness:1,roughness:0.1});
+const tipMat=new THREE.MeshStandardMaterial({color:0x222222});
+const eraserMat=new THREE.MeshStandardMaterial({color:0xff6b6b});
 
-const pencil = new THREE.Group();
+/* DISTORT */
+function distort(g){
+  let p=g.attributes.position;
+  for(let i=0;i<p.count;i++){
+    p.setXYZ(i,
+      p.getX(i)+(Math.random()-0.5)*0.04,
+      p.getY(i)+(Math.random()-0.5)*0.04,
+      p.getZ(i)+(Math.random()-0.5)*0.04
+    );
+  }
+  g.computeVertexNormals();
+}
 
-/* PARTS */
-const body = new THREE.Mesh(new THREE.CylinderGeometry(0.15, 0.15, 4.5, 64), bodyMat);
+/* MODEL */
+const pencil=new THREE.Group();
+
+const bodyGeo=new THREE.CylinderGeometry(0.15,0.15,4.5,64);
+distort(bodyGeo);
+const body=new THREE.Mesh(bodyGeo,bodyMat);
 pencil.add(body);
 
-const wood = new THREE.Mesh(new THREE.ConeGeometry(0.15, 0.7, 64), woodMat);
-wood.position.y = -2.6;
-pencil.add(wood);
-
-const tip = new THREE.Mesh(new THREE.ConeGeometry(0.07, 0.3, 64), tipMat);
-tip.position.y = -3;
+const tip=new THREE.Mesh(new THREE.ConeGeometry(0.07,0.3,64),tipMat);
+tip.position.y=-3;
 pencil.add(tip);
 
-const ferrule = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.16, 0.5, 64), metalMat);
-ferrule.position.y = 2.4;
+const ferrule=new THREE.Mesh(new THREE.CylinderGeometry(0.16,0.16,0.5,64),metalMat);
+ferrule.position.y=2.4;
 pencil.add(ferrule);
 
-const eraser = new THREE.Mesh(new THREE.CylinderGeometry(0.14, 0.14, 0.6, 64), eraserMat);
-eraser.position.y = 2.9;
+const eraser=new THREE.Mesh(new THREE.CylinderGeometry(0.14,0.14,0.6,64),eraserMat);
+eraser.position.y=2.9;
 pencil.add(eraser);
 
 scene.add(pencil);
 
-/* LIGHT */
-const light1 = new THREE.DirectionalLight(0xffffff, 1.2);
-light1.position.set(5,5,5);
-scene.add(light1);
-
-const light2 = new THREE.DirectionalLight(0xffffff, 0.5);
-light2.position.set(-5,3,2);
-scene.add(light2);
-
-scene.add(new THREE.AmbientLight(0xffffff, 0.4));
-
 /* INTERACTION */
-let mouseX = 0, mouseY = 0;
-
-window.addEventListener("mousemove", (e) => {
-  mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
-  mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+let drag=false,prev=0;
+window.addEventListener("mousedown",e=>{drag=true;prev=e.clientX});
+window.addEventListener("mouseup",()=>drag=false);
+window.addEventListener("mousemove",e=>{
+ if(!drag)return;
+ let d=e.clientX-prev;
+ pencil.rotation.y+=d*0.01;
+ prev=e.clientX;
 });
 
-let scroll = 0;
-window.addEventListener("scroll", () => {
-  scroll = window.scrollY / window.innerHeight;
-});
+/* SCROLL */
+let scroll=0;
+window.addEventListener("scroll",()=>scroll=window.scrollY/window.innerHeight);
 
-/* ANIMATION */
-function animate() {
-  requestAnimationFrame(animate);
+/* INTRO */
+let intro=0;
 
-  pencil.rotation.x += (mouseY * 0.3 - pencil.rotation.x) * 0.05;
-  pencil.rotation.z += (mouseX * 0.3 - pencil.rotation.z) * 0.05;
-  pencil.rotation.y = scroll * Math.PI;
+/* ANIMATE */
+function animate(){
+ requestAnimationFrame(animate);
 
-  pencil.position.y = Math.sin(Date.now() * 0.002) * 0.2;
+ if(intro<1){
+   intro+=0.01;
+   camera.position.z=15-intro*8;
+ }
 
-  renderer.render(scene, camera);
+ pencil.rotation.y+=0.002;
+ camera.position.z=7-scroll*3;
+
+ pencil.position.y=Math.sin(Date.now()*0.002)*0.2;
+ pencil.rotation.x=Math.sin(Date.now()*0.001)*0.1;
+
+ renderer.render(scene,camera);
 }
 animate();
 
 /* RESIZE */
-window.addEventListener("resize", () => {
-  renderer.setSize(container.clientWidth, 500);
-  camera.aspect = container.clientWidth / 500;
-  camera.updateProjectionMatrix();
+window.addEventListener("resize",()=>{
+ renderer.setSize(container.clientWidth,500);
+ camera.aspect=container.clientWidth/500;
+ camera.updateProjectionMatrix();
 });
 
 </script>
