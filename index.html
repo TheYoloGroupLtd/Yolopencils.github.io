@@ -2,13 +2,21 @@
 <html lang="en">
 <head>
 
-<title>YOLO Pencils</title>
+<title>YOLO Pencils | GOD MODE</title>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <script src="https://cdn.tailwindcss.com"></script>
 
+<!-- GSAP -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
 <style>
+html { scroll-behavior: smooth; overflow-x:hidden; }
+
+/* PAGE TRANSITION */
 body {
   opacity: 0;
   transform: scale(1.02);
@@ -20,63 +28,242 @@ body.loaded {
   transform: scale(1);
   filter: blur(0);
 }
+
+/* BACKGROUND */
+body {
+  background: linear-gradient(270deg,#ffffff,#ddd6fe,#a78bfa,#f472b6);
+  background-size: 800% 800%;
+  animation: gradientMove 15s ease infinite;
+}
+@keyframes gradientMove {
+  0% {background-position:0% 50%;}
+  50% {background-position:100% 50%;}
+  100% {background-position:0% 50%;}
+}
+
+/* NAV */
+nav {
+  backdrop-filter: blur(20px);
+  background: rgba(255,255,255,0.7);
+}
+
+/* HERO */
+.hero {
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
+.hero h1 {
+  font-size: clamp(3rem,8vw,6rem);
+  font-weight:900;
+}
+
+/* SECTION */
+.section {
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* GLASS */
+.glass {
+  background: rgba(255,255,255,0.5);
+  backdrop-filter: blur(20px);
+  padding:40px;
+  border-radius:20px;
+  text-align:center;
+}
+
+/* BUTTON */
+.btn {
+  padding:14px 28px;
+  border-radius:20px;
+  background: linear-gradient(135deg,#6366f1,#a78bfa);
+  color:white;
+  transition:0.3s;
+}
+.btn:hover { transform: scale(1.1); }
+
+/* CURSOR */
+.glow {
+  position: fixed;
+  width: 250px;
+  height: 250px;
+  border-radius:50%;
+  background: radial-gradient(circle, rgba(167,139,250,0.4), transparent);
+  pointer-events:none;
+  transform: translate(-50%,-50%);
+}
 </style>
 
 </head>
 
-<body class="bg-gradient-to-br from-white via-purple-50 to-indigo-100 text-gray-900">
+<body>
 
-<nav class="flex justify-between p-6 bg-white/70 backdrop-blur-lg">
-  <a href="index.html" class="flex items-center gap-2">
+<div class="glow" id="glow"></div>
+
+<!-- NAVBAR -->
+<nav class="fixed top-0 w-full z-50 flex justify-between items-center px-10 py-4">
+  
+  <a href="index.html" class="flex items-center gap-3">
     <img src="yolo-logo.png" class="w-10">
-    <span class="font-bold text-xl">YOLO</span>
+    <span class="font-bold text-lg text-indigo-600">YOLO</span>
   </a>
+
+  <div class="space-x-6 text-sm">
+    <a href="#products">Products</a>
+    <a href="#contact">Contact</a>
+  </div>
+
 </nav>
 
-<section class="text-center py-20">
-  <h1 class="text-5xl font-bold">YOLO Pencils</h1>
-  <p class="mt-4">Premium writing tools</p>
+<!-- HERO -->
+<section class="hero">
+
+  <img src="yolo-logo.png" class="w-40 mb-6" id="logoHero">
+
+  <h1 id="heroText">Write.</h1>
+
+  <p class="mt-6 text-lg">A new way to experience writing.</p>
+
+  <a href="#products" class="btn mt-8">Explore</a>
+
 </section>
 
-<section class="max-w-6xl mx-auto grid md:grid-cols-3 gap-10 px-6">
+<!-- STORY -->
+<section class="section"><div class="glass">Precision</div></section>
+<section class="section"><div class="glass">Crafted</div></section>
+<section class="section"><div class="glass">Perfection</div></section>
 
-<div class="bg-white p-6 rounded-xl shadow text-center">
-  <h3 class="text-xl font-bold">YOLO Maxx</h3>
-  <p>₹35</p>
-  <a href="yolo-maxx.html" class="mt-4 inline-block bg-indigo-600 text-white px-4 py-2 rounded">View</a>
-</div>
+<!-- PRODUCTS -->
+<section id="products" class="section">
+  <div class="glass">
+    <h2 class="text-3xl mb-6">Products</h2>
 
-<div class="bg-white p-6 rounded-xl shadow text-center">
-  <h3 class="text-xl font-bold">YOLO Lite</h3>
-  <p>₹30</p>
-  <a href="yolo-lite.html" class="mt-4 inline-block bg-indigo-600 text-white px-4 py-2 rounded">View</a>
-</div>
+    <div class="space-y-4">
 
-<div class="bg-white p-6 rounded-xl shadow text-center">
-  <h3 class="text-xl font-bold">Custom Pencil</h3>
-  <p>₹18</p>
-  <a href="custom-pencil.html" class="mt-4 inline-block bg-indigo-600 text-white px-4 py-2 rounded">View</a>
-</div>
+      <a href="yolo-maxx.html" class="btn block">YOLO Maxx →</a>
+      <a href="yolo-lite.html" class="btn block">YOLO Lite →</a>
+      <a href="custom-pencil.html" class="btn block">Custom Pencil →</a>
 
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="section">
+  <div class="glass">
+    <h2>Contact Us</h2>
+    <p class="mt-2">yolo@email.com</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<section class="section">
+  <div class="glass">
+    <img src="yolo-logo.png" class="w-16 mx-auto mb-4">
+    <p>© 2026 YOLO Pencils</p>
+  </div>
 </section>
 
 <script>
+
+/* PAGE LOAD */
 window.addEventListener("load", () => {
   document.body.classList.add("loaded");
 });
 
+/* PAGE TRANSITION */
 document.querySelectorAll("a").forEach(link => {
   link.addEventListener("click", function(e) {
     const href = this.getAttribute("href");
+
     if (href && !href.startsWith("#")) {
       e.preventDefault();
       document.body.classList.remove("loaded");
+
       setTimeout(() => {
         window.location.href = href;
       }, 500);
     }
   });
 });
+
+/* GSAP */
+gsap.registerPlugin(ScrollTrigger);
+
+gsap.to(".hero", {
+  scrollTrigger: {
+    trigger: ".hero",
+    start: "top top",
+    end: "+=200%",
+    scrub: true,
+    pin: true
+  }
+});
+
+gsap.to("#heroText", {
+  scrollTrigger: {
+    trigger: ".hero",
+    start: "top top",
+    end: "+=200%",
+    scrub: true
+  },
+  scale: 1.5,
+  opacity: 0
+});
+
+gsap.from("#logoHero", {
+  opacity: 0,
+  scale: 0.5,
+  duration: 1.5
+});
+
+gsap.to("#logoHero", {
+  scrollTrigger: {
+    trigger: ".hero",
+    start: "top top",
+    end: "+=200%",
+    scrub: true
+  },
+  scale: 2,
+  opacity: 0
+});
+
+gsap.utils.toArray(".section").forEach(sec=>{
+  gsap.from(sec.children, {
+    scrollTrigger: {
+      trigger: sec,
+      start: "top 80%",
+      end: "top 30%",
+      scrub: true
+    },
+    opacity:0,
+    y:100,
+    scale:0.8
+  });
+});
+
+/* TEXT MORPH */
+const words=["Write.","Create.","Design.","Inspire."];
+let i=0;
+setInterval(()=>{
+  i=(i+1)%words.length;
+  document.getElementById("heroText").innerText=words[i];
+},2000);
+
+/* CURSOR */
+const glow=document.getElementById("glow");
+window.addEventListener("mousemove",(e)=>{
+  glow.style.left=e.clientX+"px";
+  glow.style.top=e.clientY+"px";
+});
+
 </script>
 
 </body>
