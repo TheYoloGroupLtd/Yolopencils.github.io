@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 
-<title>YOLO Pencils | GOD MODE</title>
+<title>YOLO Pencils</title>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,76 +11,35 @@
 
 <!-- GSAP -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
 <style>
-html { scroll-behavior: smooth; overflow-x:hidden; }
+html { scroll-behavior: smooth; }
 
 /* PAGE TRANSITION */
 body {
   opacity: 0;
-  transform: scale(1.02);
-  filter: blur(10px);
-  transition: all 0.6s ease;
+  transition: 0.6s;
 }
-body.loaded {
-  opacity: 1;
-  transform: scale(1);
-  filter: blur(0);
-}
+body.loaded { opacity: 1; }
 
 /* BACKGROUND */
 body {
-  background: linear-gradient(270deg,#ffffff,#ddd6fe,#a78bfa,#f472b6);
-  background-size: 800% 800%;
-  animation: gradientMove 15s ease infinite;
-}
-@keyframes gradientMove {
-  0% {background-position:0% 50%;}
-  50% {background-position:100% 50%;}
-  100% {background-position:0% 50%;}
-}
-
-/* NAV */
-nav {
-  backdrop-filter: blur(20px);
-  background: rgba(255,255,255,0.7);
+  background: linear-gradient(135deg,#ffffff,#ddd6fe,#a78bfa);
 }
 
 /* HERO */
 .hero {
-  height:100vh;
+  height: 90vh;
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
   text-align:center;
 }
-.hero h1 {
-  font-size: clamp(3rem,8vw,6rem);
-  font-weight:900;
-}
-
-/* SECTION */
-.section {
-  height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-/* GLASS */
-.glass {
-  background: rgba(255,255,255,0.5);
-  backdrop-filter: blur(20px);
-  padding:40px;
-  border-radius:20px;
-  text-align:center;
-}
 
 /* BUTTON */
 .btn {
-  padding:14px 28px;
+  padding:12px 24px;
   border-radius:20px;
   background: linear-gradient(135deg,#6366f1,#a78bfa);
   color:white;
@@ -88,15 +47,17 @@ nav {
 }
 .btn:hover { transform: scale(1.1); }
 
-/* CURSOR */
-.glow {
-  position: fixed;
-  width: 250px;
-  height: 250px;
-  border-radius:50%;
-  background: radial-gradient(circle, rgba(167,139,250,0.4), transparent);
-  pointer-events:none;
-  transform: translate(-50%,-50%);
+/* PRODUCT CARDS */
+.card {
+  background:white;
+  padding:20px;
+  border-radius:20px;
+  text-align:center;
+  box-shadow:0 10px 30px rgba(0,0,0,0.1);
+  transition:0.3s;
+}
+.card:hover {
+  transform: translateY(-10px) scale(1.03);
 }
 </style>
 
@@ -104,71 +65,60 @@ nav {
 
 <body>
 
-<div class="glow" id="glow"></div>
-
-<!-- NAVBAR -->
-<nav class="fixed top-0 w-full z-50 flex justify-between items-center px-10 py-4">
-  
-  <a href="index.html" class="flex items-center gap-3">
+<!-- NAV -->
+<nav class="flex justify-between px-10 py-4 bg-white/70 backdrop-blur-lg">
+  <a href="index.html" class="flex items-center gap-2">
     <img src="yolo-logo.png" class="w-10">
     <span class="font-bold text-lg text-indigo-600">YOLO</span>
   </a>
-
-  <div class="space-x-6 text-sm">
-    <a href="#products">Products</a>
-    <a href="#contact">Contact</a>
-  </div>
-
 </nav>
 
 <!-- HERO -->
 <section class="hero">
 
-  <img src="yolo-logo.png" class="w-40 mb-6" id="logoHero">
+  <img src="yolo-logo.png" class="w-28 mb-6">
 
-  <h1 id="heroText">Write.</h1>
+  <h1 class="text-5xl font-bold">Write Better.</h1>
 
-  <p class="mt-6 text-lg">A new way to experience writing.</p>
+  <p class="mt-4 text-gray-600">Premium pencils for everyday creators.</p>
 
-  <a href="#products" class="btn mt-8">Explore</a>
+  <a href="#products" class="btn mt-6">Explore</a>
 
 </section>
 
-<!-- STORY -->
-<section class="section"><div class="glass">Precision</div></section>
-<section class="section"><div class="glass">Crafted</div></section>
-<section class="section"><div class="glass">Perfection</div></section>
-
 <!-- PRODUCTS -->
-<section id="products" class="section">
-  <div class="glass">
-    <h2 class="text-3xl mb-6">Products</h2>
+<section id="products" class="max-w-6xl mx-auto px-6 py-16">
 
-    <div class="space-y-4">
+<h2 class="text-3xl font-bold text-center mb-10">Our Products</h2>
 
-      <a href="yolo-maxx.html" class="btn block">YOLO Maxx →</a>
-      <a href="yolo-lite.html" class="btn block">YOLO Lite →</a>
-      <a href="custom-pencil.html" class="btn block">Custom Pencil →</a>
+<div class="grid md:grid-cols-3 gap-8">
 
-    </div>
+<div class="card">
+  <h3 class="font-bold text-lg">YOLO Maxx</h3>
+  <p class="text-gray-600">₹35</p>
+  <a href="yolo-maxx.html" class="btn mt-4 inline-block">View</a>
+</div>
 
-  </div>
+<div class="card">
+  <h3 class="font-bold text-lg">YOLO Lite</h3>
+  <p class="text-gray-600">₹30</p>
+  <a href="yolo-lite.html" class="btn mt-4 inline-block">View</a>
+</div>
+
+<div class="card">
+  <h3 class="font-bold text-lg">Custom Pencil</h3>
+  <p class="text-gray-600">₹18</p>
+  <a href="custom-pencil.html" class="btn mt-4 inline-block">View</a>
+</div>
+
+</div>
+
 </section>
 
 <!-- CONTACT -->
-<section id="contact" class="section">
-  <div class="glass">
-    <h2>Contact Us</h2>
-    <p class="mt-2">yolo@email.com</p>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<section class="section">
-  <div class="glass">
-    <img src="yolo-logo.png" class="w-16 mx-auto mb-4">
-    <p>© 2026 YOLO Pencils</p>
-  </div>
+<section class="text-center py-12">
+  <h2 class="text-2xl font-bold">Contact</h2>
+  <p class="text-gray-600 mt-2">yolo@email.com</p>
 </section>
 
 <script>
@@ -178,7 +128,7 @@ window.addEventListener("load", () => {
   document.body.classList.add("loaded");
 });
 
-/* PAGE TRANSITION */
+/* TRANSITIONS */
 document.querySelectorAll("a").forEach(link => {
   link.addEventListener("click", function(e) {
     const href = this.getAttribute("href");
@@ -189,80 +139,14 @@ document.querySelectorAll("a").forEach(link => {
 
       setTimeout(() => {
         window.location.href = href;
-      }, 500);
+      }, 400);
     }
   });
 });
 
-/* GSAP */
-gsap.registerPlugin(ScrollTrigger);
-
-gsap.to(".hero", {
-  scrollTrigger: {
-    trigger: ".hero",
-    start: "top top",
-    end: "+=200%",
-    scrub: true,
-    pin: true
-  }
-});
-
-gsap.to("#heroText", {
-  scrollTrigger: {
-    trigger: ".hero",
-    start: "top top",
-    end: "+=200%",
-    scrub: true
-  },
-  scale: 1.5,
-  opacity: 0
-});
-
-gsap.from("#logoHero", {
-  opacity: 0,
-  scale: 0.5,
-  duration: 1.5
-});
-
-gsap.to("#logoHero", {
-  scrollTrigger: {
-    trigger: ".hero",
-    start: "top top",
-    end: "+=200%",
-    scrub: true
-  },
-  scale: 2,
-  opacity: 0
-});
-
-gsap.utils.toArray(".section").forEach(sec=>{
-  gsap.from(sec.children, {
-    scrollTrigger: {
-      trigger: sec,
-      start: "top 80%",
-      end: "top 30%",
-      scrub: true
-    },
-    opacity:0,
-    y:100,
-    scale:0.8
-  });
-});
-
-/* TEXT MORPH */
-const words=["Write.","Create.","Design.","Inspire."];
-let i=0;
-setInterval(()=>{
-  i=(i+1)%words.length;
-  document.getElementById("heroText").innerText=words[i];
-},2000);
-
-/* CURSOR */
-const glow=document.getElementById("glow");
-window.addEventListener("mousemove",(e)=>{
-  glow.style.left=e.clientX+"px";
-  glow.style.top=e.clientY+"px";
-});
+/* SIMPLE ANIMATION */
+gsap.from(".hero img", { scale:0.5, opacity:0, duration:1 });
+gsap.from("h1", { y:50, opacity:0, duration:1 });
 
 </script>
 
