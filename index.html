@@ -2,35 +2,21 @@
 <html lang="en">
 <head>
 
-<title>YOLO Pencils | INSANE UI</title>
+<title>YOLO Pencils | GOD MODE</title>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <script src="https://cdn.tailwindcss.com"></script>
 
+<!-- GSAP -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
 <style>
 html { scroll-behavior: smooth; overflow-x:hidden; }
 
-/* ===== INTRO SCREEN ===== */
-#intro {
-  position: fixed;
-  inset: 0;
-  background: linear-gradient(135deg,#6366f1,#a78bfa);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  z-index:9999;
-  color:white;
-  font-size:3rem;
-  font-weight:bold;
-  animation: fadeOut 2s ease 2s forwards;
-}
-@keyframes fadeOut {
-  to { opacity:0; visibility:hidden; }
-}
-
-/* ===== LIQUID BACKGROUND ===== */
+/* BACKGROUND */
 body {
   background: linear-gradient(270deg,#ffffff,#ddd6fe,#a78bfa,#f472b6);
   background-size: 800% 800%;
@@ -42,56 +28,55 @@ body {
   100% {background-position:0% 50%;}
 }
 
-/* ===== TEXT MORPH ===== */
-.morph {
-  font-size: clamp(3rem,8vw,6rem);
-  font-weight:900;
-  text-align:center;
-}
-
-/* ===== FADE + SCALE ===== */
-.reveal {
-  opacity:0;
-  transform:scale(0.9) translateY(60px);
-  transition:1s;
-}
-.reveal.show {
-  opacity:1;
-  transform:scale(1) translateY(0);
-}
-
-/* ===== NAV ===== */
+/* NAV */
 nav {
   backdrop-filter: blur(20px);
   background: rgba(255,255,255,0.7);
   transition:0.4s;
 }
-.nav-scrolled {
-  background: rgba(255,255,255,0.95);
+
+/* HERO */
+.hero {
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
+.hero h1 {
+  font-size: clamp(3rem,8vw,6rem);
+  font-weight:900;
 }
 
-/* ===== GLASS ===== */
+/* SECTIONS */
+.section {
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* GLASS */
 .glass {
   background: rgba(255,255,255,0.5);
   backdrop-filter: blur(20px);
+  padding:40px;
   border-radius:20px;
+  text-align:center;
 }
 
-/* ===== MAGNET BUTTON ===== */
+/* BUTTON */
 .btn {
   padding:14px 28px;
   border-radius:20px;
   background: linear-gradient(135deg,#6366f1,#a78bfa);
   color:white;
-  display:inline-block;
-  transition:0.2s;
-  position:relative;
+  transition:0.3s;
 }
-.btn:hover {
-  transform: scale(1.1);
-}
+.btn:hover { transform: scale(1.1); }
 
-/* ===== CURSOR GLOW ===== */
+/* CURSOR GLOW */
 .glow {
   position: fixed;
   width: 250px;
@@ -101,123 +86,147 @@ nav {
   pointer-events:none;
   transform: translate(-50%,-50%);
 }
-
-/* ===== PARTICLES ===== */
-.particle {
-  position: fixed;
-  width:5px;
-  height:5px;
-  background:#a78bfa;
-  border-radius:50%;
-  pointer-events:none;
-  opacity:0.6;
-}
-
 </style>
+
 </head>
 
-<body class="text-gray-900">
+<body>
 
-<div id="intro">YOLO</div>
 <div class="glow" id="glow"></div>
 
-<!-- NAV -->
-<nav class="sticky top-0 z-50 py-4">
-  <div class="max-w-7xl mx-auto px-6 flex justify-between">
-    <div class="font-bold text-xl text-indigo-600">YOLO</div>
-    <div class="space-x-6">
-      <a href="#products">Products</a>
-      <a href="#contact">Contact</a>
-    </div>
+<!-- NAVBAR -->
+<nav class="fixed top-0 w-full z-50 flex justify-between items-center px-10 py-4">
+  
+  <div class="flex items-center gap-3">
+    <img src="yolo-logo.png" class="w-10">
+    <span class="font-bold text-lg text-indigo-600">YOLO</span>
   </div>
+
+  <div class="space-x-6 text-sm">
+    <a href="#products">Products</a>
+    <a href="#contact">Contact</a>
+  </div>
+
 </nav>
 
 <!-- HERO -->
-<section class="h-screen flex flex-col items-center justify-center text-center">
+<section class="hero">
 
-<h1 class="morph" id="morphText">Write.</h1>
+  <img src="yolo-logo.png" class="w-40 mb-6" id="logoHero">
 
-<p class="mt-6 text-lg">Experience next level writing.</p>
+  <h1 id="heroText">Write.</h1>
 
-<div class="mt-8 btn">Explore</div>
+  <p class="mt-6 text-lg">A new way to experience writing.</p>
+
+  <div class="btn mt-8">Explore</div>
 
 </section>
 
+<!-- STORY SECTIONS -->
+<section class="section"><div class="glass">Precision</div></section>
+<section class="section"><div class="glass">Crafted</div></section>
+<section class="section"><div class="glass">Perfection</div></section>
+
 <!-- PRODUCTS -->
-<section id="products" class="max-w-7xl mx-auto px-6">
-
-<h2 class="text-4xl text-center mb-20 reveal">Products</h2>
-
-<div class="grid md:grid-cols-3 gap-10">
-
-<div class="glass p-8 text-center reveal">
-<h3>YOLO Maxx</h3>
-<p>₹35</p>
-</div>
-
-<div class="glass p-8 text-center reveal">
-<h3>YOLO Lite</h3>
-<p>₹30</p>
-</div>
-
-<div class="glass p-8 text-center reveal">
-<h3>Custom Pencil</h3>
-<p>₹18</p>
-</div>
-
-</div>
-
+<section id="products" class="section">
+  <div class="glass">
+    <h2 class="text-3xl mb-4">Products</h2>
+    <p>YOLO Maxx • Lite • Custom</p>
+  </div>
 </section>
 
 <!-- CONTACT -->
-<section id="contact" class="text-center py-20">
+<section id="contact" class="section">
+  <div class="glass">
+    <h2>Contact Us</h2>
+    <p class="mt-2">yolo@email.com</p>
+  </div>
+</section>
 
-<h2 class="text-4xl reveal">Contact</h2>
-
-<form class="max-w-xl mx-auto mt-10 glass p-8 reveal">
-<input class="w-full mb-4 p-3 border rounded-xl" placeholder="Name">
-<input class="w-full mb-4 p-3 border rounded-xl" placeholder="Email">
-<textarea class="w-full p-3 border rounded-xl" placeholder="Message"></textarea>
-<button class="btn mt-6">Send</button>
-</form>
-
+<!-- FOOTER -->
+<section class="section">
+  <div class="glass">
+    <img src="yolo-logo.png" class="w-16 mx-auto mb-4">
+    <p>© 2026 YOLO Pencils</p>
+  </div>
 </section>
 
 <script>
+
+/* GSAP SETUP */
+gsap.registerPlugin(ScrollTrigger);
+
+/* HERO PIN */
+gsap.to(".hero", {
+  scrollTrigger: {
+    trigger: ".hero",
+    start: "top top",
+    end: "+=200%",
+    scrub: true,
+    pin: true
+  }
+});
+
+/* HERO TEXT ANIMATION */
+gsap.to("#heroText", {
+  scrollTrigger: {
+    trigger: ".hero",
+    start: "top top",
+    end: "+=200%",
+    scrub: true
+  },
+  scale: 1.5,
+  opacity: 0
+});
+
+/* LOGO INTRO */
+gsap.from("#logoHero", {
+  opacity: 0,
+  scale: 0.5,
+  duration: 1.5,
+  ease: "power3.out"
+});
+
+/* LOGO SCROLL EFFECT */
+gsap.to("#logoHero", {
+  scrollTrigger: {
+    trigger: ".hero",
+    start: "top top",
+    end: "+=200%",
+    scrub: true
+  },
+  scale: 2,
+  opacity: 0
+});
+
+/* SECTION ANIMATIONS */
+gsap.utils.toArray(".section").forEach(sec=>{
+  gsap.from(sec.children, {
+    scrollTrigger: {
+      trigger: sec,
+      start: "top 80%",
+      end: "top 30%",
+      scrub: true
+    },
+    opacity:0,
+    y:100,
+    scale:0.8
+  });
+});
 
 /* TEXT MORPH */
 const words=["Write.","Create.","Design.","Inspire."];
 let i=0;
 setInterval(()=>{
   i=(i+1)%words.length;
-  document.getElementById("morphText").innerText=words[i];
+  document.getElementById("heroText").innerText=words[i];
 },2000);
-
-/* SCROLL REVEAL */
-const observer=new IntersectionObserver(e=>{
-e.forEach(x=>{if(x.isIntersecting)x.target.classList.add("show")});
-});
-document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
-
-/* NAV */
-window.addEventListener("scroll",()=>{
-document.querySelector("nav").classList.toggle("nav-scrolled",window.scrollY>50);
-});
 
 /* CURSOR GLOW */
 const glow=document.getElementById("glow");
-window.addEventListener("mousemove",e=>{
-glow.style.left=e.clientX+"px";
-glow.style.top=e.clientY+"px";
-
-/* PARTICLES */
-let p=document.createElement("div");
-p.className="particle";
-p.style.left=e.clientX+"px";
-p.style.top=e.clientY+"px";
-document.body.appendChild(p);
-
-setTimeout(()=>p.remove(),500);
+window.addEventListener("mousemove",(e)=>{
+  glow.style.left=e.clientX+"px";
+  glow.style.top=e.clientY+"px";
 });
 
 </script>
