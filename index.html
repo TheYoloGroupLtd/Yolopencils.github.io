@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 
-<title>YOLO Pencils | Premium Experience</title>
+<title>YOLO Pencils | INSANE UI</title>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,129 +10,121 @@
 <script src="https://cdn.tailwindcss.com"></script>
 
 <style>
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x:hidden; }
 
-/* ===== GLOBAL ANIMATIONS ===== */
-.fade-up {
-  opacity: 0;
-  transform: translateY(60px);
-  transition: all 1s ease;
+/* ===== INTRO SCREEN ===== */
+#intro {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(135deg,#6366f1,#a78bfa);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+  color:white;
+  font-size:3rem;
+  font-weight:bold;
+  animation: fadeOut 2s ease 2s forwards;
 }
-.fade-up.show {
-  opacity: 1;
-  transform: translateY(0);
+@keyframes fadeOut {
+  to { opacity:0; visibility:hidden; }
 }
 
-.scale-in {
-  opacity: 0;
-  transform: scale(0.8);
-  transition: all 1s ease;
+/* ===== LIQUID BACKGROUND ===== */
+body {
+  background: linear-gradient(270deg,#ffffff,#ddd6fe,#a78bfa,#f472b6);
+  background-size: 800% 800%;
+  animation: gradientMove 15s ease infinite;
 }
-.scale-in.show {
-  opacity: 1;
-  transform: scale(1);
+@keyframes gradientMove {
+  0% {background-position:0% 50%;}
+  50% {background-position:100% 50%;}
+  100% {background-position:0% 50%;}
+}
+
+/* ===== TEXT MORPH ===== */
+.morph {
+  font-size: clamp(3rem,8vw,6rem);
+  font-weight:900;
+  text-align:center;
+}
+
+/* ===== FADE + SCALE ===== */
+.reveal {
+  opacity:0;
+  transform:scale(0.9) translateY(60px);
+  transition:1s;
+}
+.reveal.show {
+  opacity:1;
+  transform:scale(1) translateY(0);
 }
 
 /* ===== NAV ===== */
 nav {
   backdrop-filter: blur(20px);
   background: rgba(255,255,255,0.7);
-  transition: 0.4s;
+  transition:0.4s;
 }
 .nav-scrolled {
   background: rgba(255,255,255,0.95);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
-
-/* ===== BIG TEXT ===== */
-.big-text {
-  font-size: clamp(3rem, 8vw, 6rem);
-  font-weight: 900;
-  text-align: center;
-  opacity: 0.1;
-  transition: 1s;
-}
-.big-text.show { opacity: 1; }
 
 /* ===== GLASS ===== */
 .glass {
-  background: rgba(255,255,255,0.6);
+  background: rgba(255,255,255,0.5);
   backdrop-filter: blur(20px);
-  border-radius: 20px;
+  border-radius:20px;
 }
 
-/* ===== FLOATING ===== */
-.float {
-  animation: float 4s ease-in-out infinite;
-}
-@keyframes float {
-  0%,100% { transform: translateY(0); }
-  50% { transform: translateY(-20px); }
-}
-
-/* ===== GRADIENT ORBS ===== */
-.orb {
-  position: absolute;
-  width: 300px;
-  height: 300px;
-  border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.5;
-  animation: move 10s infinite alternate;
-}
-.orb1 { background: #a78bfa; top: 10%; left: 10%; }
-.orb2 { background: #f472b6; bottom: 10%; right: 10%; }
-
-@keyframes move {
-  from { transform: translate(0,0); }
-  to { transform: translate(100px, -50px); }
-}
-
-/* ===== PARALLAX ===== */
-.parallax {
-  transition: transform 0.2s;
-}
-
-/* ===== BUTTON ===== */
+/* ===== MAGNET BUTTON ===== */
 .btn {
-  padding: 14px 28px;
-  border-radius: 20px;
+  padding:14px 28px;
+  border-radius:20px;
   background: linear-gradient(135deg,#6366f1,#a78bfa);
-  color: white;
-  transition: 0.3s;
+  color:white;
+  display:inline-block;
+  transition:0.2s;
+  position:relative;
 }
 .btn:hover {
-  transform: scale(1.05);
+  transform: scale(1.1);
 }
 
-/* ===== MOUSE GLOW ===== */
+/* ===== CURSOR GLOW ===== */
 .glow {
   position: fixed;
-  width: 300px;
-  height: 300px;
-  border-radius: 50%;
+  width: 250px;
+  height: 250px;
+  border-radius:50%;
   background: radial-gradient(circle, rgba(167,139,250,0.4), transparent);
-  pointer-events: none;
-  transform: translate(-50%, -50%);
-  mix-blend-mode: multiply;
+  pointer-events:none;
+  transform: translate(-50%,-50%);
 }
-</style>
 
+/* ===== PARTICLES ===== */
+.particle {
+  position: fixed;
+  width:5px;
+  height:5px;
+  background:#a78bfa;
+  border-radius:50%;
+  pointer-events:none;
+  opacity:0.6;
+}
+
+</style>
 </head>
 
-<body class="bg-gradient-to-br from-white via-purple-50 to-indigo-100 text-gray-900">
+<body class="text-gray-900">
 
-<div class="orb orb1"></div>
-<div class="orb orb2"></div>
+<div id="intro">YOLO</div>
 <div class="glow" id="glow"></div>
 
 <!-- NAV -->
 <nav class="sticky top-0 z-50 py-4">
   <div class="max-w-7xl mx-auto px-6 flex justify-between">
-    <div class="flex items-center gap-2">
-      <img src="yolo-logo.png" class="w-10">
-      <span class="font-bold text-xl text-indigo-600">YOLO</span>
-    </div>
+    <div class="font-bold text-xl text-indigo-600">YOLO</div>
     <div class="space-x-6">
       <a href="#products">Products</a>
       <a href="#contact">Contact</a>
@@ -141,56 +133,36 @@ nav {
 </nav>
 
 <!-- HERO -->
-<section class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+<section class="h-screen flex flex-col items-center justify-center text-center">
 
-<div class="fade-up">
-<h1 class="text-6xl font-extrabold">
-Write Like Never Before.
-</h1>
-<p class="mt-6 text-gray-600">
-Premium pencils designed for creators.
-</p>
-<div class="mt-8">
-<a href="#products" class="btn">Explore</a>
-</div>
-</div>
+<h1 class="morph" id="morphText">Write.</h1>
 
-<div class="flex justify-center scale-in parallax">
-<div class="w-80 h-80 rounded-full bg-white shadow-2xl flex items-center justify-center float">
-<img src="yolo-logo.png" class="w-52">
-</div>
-</div>
+<p class="mt-6 text-lg">Experience next level writing.</p>
 
-</section>
+<div class="mt-8 btn">Explore</div>
 
-<!-- BIG TEXT -->
-<section class="big-text fade-up">
-Craft. Precision. Flow.
 </section>
 
 <!-- PRODUCTS -->
 <section id="products" class="max-w-7xl mx-auto px-6">
 
-<h2 class="text-4xl font-bold text-center mb-20 fade-up">Products</h2>
+<h2 class="text-4xl text-center mb-20 reveal">Products</h2>
 
 <div class="grid md:grid-cols-3 gap-10">
 
-<div class="glass p-8 text-center fade-up hover:scale-110 transition">
-<img src="maxx.png" class="w-32 mx-auto">
-<h3 class="mt-4 font-semibold">YOLO Maxx</h3>
-<p class="text-gray-600">₹35</p>
+<div class="glass p-8 text-center reveal">
+<h3>YOLO Maxx</h3>
+<p>₹35</p>
 </div>
 
-<div class="glass p-8 text-center fade-up hover:scale-110 transition">
-<img src="lite.png" class="w-32 mx-auto">
-<h3 class="mt-4 font-semibold">YOLO Lite</h3>
-<p class="text-gray-600">₹30</p>
+<div class="glass p-8 text-center reveal">
+<h3>YOLO Lite</h3>
+<p>₹30</p>
 </div>
 
-<div class="glass p-8 text-center fade-up hover:scale-110 transition">
-<img src="custom.png" class="w-32 mx-auto">
-<h3 class="mt-4 font-semibold">Custom Pencil</h3>
-<p class="text-gray-600">₹18</p>
+<div class="glass p-8 text-center reveal">
+<h3>Custom Pencil</h3>
+<p>₹18</p>
 </div>
 
 </div>
@@ -198,54 +170,54 @@ Craft. Precision. Flow.
 </section>
 
 <!-- CONTACT -->
-<section id="contact" class="bg-gradient-to-r from-indigo-600 to-pink-500 text-white text-center">
+<section id="contact" class="text-center py-20">
 
-<h2 class="text-4xl font-bold fade-up">Contact Us</h2>
+<h2 class="text-4xl reveal">Contact</h2>
 
-<form class="max-w-xl mx-auto mt-10 bg-white text-black p-8 rounded-2xl shadow-xl fade-up">
-
+<form class="max-w-xl mx-auto mt-10 glass p-8 reveal">
 <input class="w-full mb-4 p-3 border rounded-xl" placeholder="Name">
 <input class="w-full mb-4 p-3 border rounded-xl" placeholder="Email">
 <textarea class="w-full p-3 border rounded-xl" placeholder="Message"></textarea>
-
 <button class="btn mt-6">Send</button>
-
 </form>
 
 </section>
 
-<footer class="py-10 text-center text-gray-500">
-© 2026 YOLO Pencils
-</footer>
-
 <script>
 
+/* TEXT MORPH */
+const words=["Write.","Create.","Design.","Inspire."];
+let i=0;
+setInterval(()=>{
+  i=(i+1)%words.length;
+  document.getElementById("morphText").innerText=words[i];
+},2000);
+
 /* SCROLL REVEAL */
-const observer = new IntersectionObserver(entries=>{
-entries.forEach(e=>{
-if(e.isIntersecting) e.target.classList.add("show");
+const observer=new IntersectionObserver(e=>{
+e.forEach(x=>{if(x.isIntersecting)x.target.classList.add("show")});
 });
-});
-document.querySelectorAll(".fade-up,.scale-in,.big-text").forEach(el=>observer.observe(el));
+document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
 
-/* NAV EFFECT */
+/* NAV */
 window.addEventListener("scroll",()=>{
-const nav=document.querySelector("nav");
-window.scrollY>50?nav.classList.add("nav-scrolled"):nav.classList.remove("nav-scrolled");
+document.querySelector("nav").classList.toggle("nav-scrolled",window.scrollY>50);
 });
 
-/* PARALLAX */
-window.addEventListener("scroll",()=>{
-document.querySelectorAll(".parallax").forEach(el=>{
-el.style.transform=`translateY(${window.scrollY*0.2}px)`;
-});
-});
-
-/* MOUSE GLOW */
+/* CURSOR GLOW */
 const glow=document.getElementById("glow");
-window.addEventListener("mousemove",(e)=>{
+window.addEventListener("mousemove",e=>{
 glow.style.left=e.clientX+"px";
 glow.style.top=e.clientY+"px";
+
+/* PARTICLES */
+let p=document.createElement("div");
+p.className="particle";
+p.style.left=e.clientX+"px";
+p.style.top=e.clientY+"px";
+document.body.appendChild(p);
+
+setTimeout(()=>p.remove(),500);
 });
 
 </script>
