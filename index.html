@@ -34,7 +34,7 @@ nav {
   z-index: 1000;
 }
 
-/* 🔥 PERFECT LOGO */
+/* 🔥 LOGO (USED EVERYWHERE) */
 .logo-circle {
   width: 50px;
   height: 50px;
@@ -52,16 +52,43 @@ nav {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+/* 🔥 BIG START LOGO */
+.big-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 120px;
+}
+
+.big-logo-circle {
+  width: 180px;
+  height: 180px;
   border-radius: 50%;
+  overflow: hidden;
+  background: radial-gradient(circle, #6366f1, #a78bfa);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 
+    0 20px 60px rgba(99,102,241,0.4),
+    inset 0 0 20px rgba(255,255,255,0.3);
+}
+
+.big-logo-circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 /* HERO */
 .hero {
-  min-height: 90vh;
+  min-height: 80vh;
   display: flex;
   align-items: center;
   justify-content: space-around;
-  padding: 80px 60px 40px;
+  padding: 40px 60px;
 }
 
 .hero-text {
@@ -69,20 +96,19 @@ nav {
 }
 
 .hero h1 {
-  font-size: 72px;
+  font-size: 70px;
   margin: 0;
 }
 
 .hero p {
   color: #4b5563;
-  margin-top: 18px;
+  margin-top: 15px;
   font-size: 18px;
 }
 
 .hero img {
-  width: 380px;
+  width: 320px;
   border-radius: 20px;
-  filter: drop-shadow(0 30px 60px rgba(0,0,0,0.2));
 }
 
 /* FEATURES */
@@ -92,10 +118,6 @@ nav {
   gap: 60px;
   padding: 50px 20px;
   text-align: center;
-}
-
-.feature-box {
-  max-width: 200px;
 }
 
 /* PRODUCTS */
@@ -123,16 +145,10 @@ nav {
 
 .card:hover {
   transform: translateY(-12px) scale(1.04);
-  box-shadow: 0 30px 70px rgba(99,102,241,0.25);
 }
 
 .card img {
   width: 200px;
-}
-
-.features {
-  font-size: 14px;
-  color: #6b7280;
 }
 
 /* BUTTON */
@@ -143,18 +159,6 @@ nav {
   color: white;
   border-radius: 25px;
   cursor: pointer;
-}
-
-/* WHY */
-.why {
-  padding: 100px 40px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-
-.why-text {
-  max-width: 520px;
 }
 
 /* CONTACT */
@@ -169,7 +173,6 @@ nav {
   padding: 60px;
   border-radius: 30px;
   background: rgba(255,255,255,0.75);
-  backdrop-filter: blur(25px);
 }
 
 input, textarea {
@@ -197,7 +200,6 @@ footer {
   background: white;
   padding: 20px;
   transition: 0.4s;
-  box-shadow: -10px 0 30px rgba(0,0,0,0.1);
 }
 .cart.open { right: 0; }
 
@@ -206,14 +208,19 @@ footer {
 
 <body>
 
+<!-- 🔥 BIG LOGO AT START -->
+<div class="big-logo">
+  <div class="big-logo-circle">
+    <img src="./images/yolo-logo.png">
+  </div>
+</div>
+
 <!-- NAV -->
 <nav>
   <div class="logo-circle">
     <img src="./images/yolo-logo.png">
   </div>
-  <div onclick="toggleCart()" style="cursor:pointer;">
-    Cart (<span id="count">0</span>)
-  </div>
+  <div onclick="toggleCart()">Cart (<span id="count">0</span>)</div>
 </nav>
 
 <!-- HERO -->
@@ -223,23 +230,16 @@ footer {
     <p>Designed for precision, comfort, and creativity.</p>
     <div class="btn" onclick="scrollToProducts()">Explore</div>
   </div>
+
+  <!-- SAME IMAGE USED AGAIN -->
   <img src="./images/yolo-logo.png">
 </section>
 
 <!-- FEATURES -->
 <section class="features-strip">
-  <div class="feature-box">
-    <h3>Ultra Smooth</h3>
-    <p>No friction writing</p>
-  </div>
-  <div class="feature-box">
-    <h3>Long Lasting</h3>
-    <p>Extended durability</p>
-  </div>
-  <div class="feature-box">
-    <h3>Premium Grip</h3>
-    <p>Comfort always</p>
-  </div>
+  <div><h3>Ultra Smooth</h3><p>No friction writing</p></div>
+  <div><h3>Long Lasting</h3><p>Extended durability</p></div>
+  <div><h3>Premium Grip</h3><p>Comfort always</p></div>
 </section>
 
 <!-- PRODUCTS -->
@@ -247,39 +247,23 @@ footer {
   <h2>Our Products</h2>
 
   <div class="product-grid">
-
     <div class="card">
       <img src="./images/maxx.png">
       <h3>YOLO Maxx</h3>
-      <div class="features">✔ Bold ink • ✔ Smooth • ✔ Grip</div>
       <div class="btn" onclick="add('Maxx',35)">₹35</div>
     </div>
 
     <div class="card">
       <img src="./images/lite.png">
       <h3>YOLO Lite</h3>
-      <div class="features">✔ Lightweight • ✔ Fast • ✔ Clean</div>
       <div class="btn" onclick="add('Lite',30)">₹30</div>
     </div>
 
     <div class="card">
       <img src="./images/custom.png">
       <h3>Custom Pencil</h3>
-      <div class="features">✔ Handmade • ✔ Unique • ✔ Smooth</div>
       <div class="btn" onclick="add('Custom',18)">₹18</div>
     </div>
-
-  </div>
-</section>
-
-<!-- WHY -->
-<section class="why">
-  <div class="why-text">
-    <h2>Why YOLO?</h2>
-    <p>Premium writing tools built for everyday performance without the premium price.</p>
-  </div>
-  <div class="logo-circle">
-    <img src="./images/yolo-logo.png">
   </div>
 </section>
 
