@@ -1,317 +1,162 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>YOLO Pencils</title>
+  <!-- SEO Title -->
+  <title>YOLO Pencils | Quality Pens & Pencils for Students and Creators</title>
+<script src='https://www.noupe.com/embed/019beb1020a87e669009e2d22f80692045cb.js'></script>
+  <!-- Meta Tags -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="icon" href="./images/yolo-logo.png">
+  <meta name="description" content="YOLO Pencils offers premium pens and pencils designed for students, artists, and professionals. Discover quality stationery built for creativity and everyday writing.">
 
-<style>
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  color: #111827;
-  background: linear-gradient(135deg, #ffffff 0%, #ddd6fe 40%, #a78bfa 100%);
-  overflow-x: hidden;
-  scroll-behavior: smooth;
-}
+  <meta name="keywords" content="YOLO Pencils, pens and pencils, stationery brand, writing tools, drawing pencils, student stationery, artist pencils, premium pens">
 
-/* NAV */
-nav {
-  position: fixed;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 85%;
-  padding: 14px 30px;
-  display: flex;
-  justify-content: space-between;
-  backdrop-filter: blur(20px);
-  background: rgba(255,255,255,0.85);
-  border-radius: 25px;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.08);
-  z-index: 1000;
-}
+  <meta name="author" content="YOLO Group">
 
-/* 🔥 LOGO (USED EVERYWHERE) */
-.logo-circle {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: radial-gradient(circle, #6366f1, #a78bfa);
-  box-shadow: 0 8px 25px rgba(99,102,241,0.4),
-              inset 0 0 10px rgba(255,255,255,0.3);
-}
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
-.logo-circle img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* 🔥 BIG START LOGO */
-.big-logo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-top: 120px;
-}
-
-.big-logo-circle {
-  width: 180px;
-  height: 180px;
-  border-radius: 50%;
-  overflow: hidden;
-  background: radial-gradient(circle, #6366f1, #a78bfa);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 
-    0 20px 60px rgba(99,102,241,0.4),
-    inset 0 0 20px rgba(255,255,255,0.3);
-}
-
-.big-logo-circle img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* HERO */
-.hero {
-  min-height: 80vh;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  padding: 40px 60px;
-}
-
-.hero-text {
-  max-width: 520px;
-}
-
-.hero h1 {
-  font-size: 70px;
-  margin: 0;
-}
-
-.hero p {
-  color: #4b5563;
-  margin-top: 15px;
-  font-size: 18px;
-}
-
-.hero img {
-  width: 320px;
-  border-radius: 20px;
-}
-
-/* FEATURES */
-.features-strip {
-  display: flex;
-  justify-content: center;
-  gap: 60px;
-  padding: 50px 20px;
-  text-align: center;
-}
-
-/* PRODUCTS */
-.product {
-  padding: 100px 20px;
-  text-align: center;
-}
-
-.product-grid {
-  display: flex;
-  justify-content: center;
-  gap: 35px;
-  flex-wrap: wrap;
-}
-
-.card {
-  width: 320px;
-  padding: 30px;
-  border-radius: 25px;
-  background: rgba(255,255,255,0.85);
-  backdrop-filter: blur(20px);
-  box-shadow: 0 20px 50px rgba(0,0,0,0.1);
-  transition: 0.4s;
-}
-
-.card:hover {
-  transform: translateY(-12px) scale(1.04);
-}
-
-.card img {
-  width: 200px;
-}
-
-/* BUTTON */
-.btn {
-  margin-top: 18px;
-  padding: 12px 25px;
-  background: linear-gradient(135deg, #6366f1, #a78bfa);
-  color: white;
-  border-radius: 25px;
-  cursor: pointer;
-}
-
-/* CONTACT */
-.contact {
-  padding: 120px 20px;
-  text-align: center;
-}
-
-.contact-content {
-  max-width: 600px;
-  margin: auto;
-  padding: 60px;
-  border-radius: 30px;
-  background: rgba(255,255,255,0.75);
-}
-
-input, textarea {
-  width: 100%;
-  margin: 10px 0;
-  padding: 14px;
-  border-radius: 12px;
-  border: 1px solid #e5e7eb;
-}
-
-/* FOOTER */
-footer {
-  text-align: center;
-  padding: 50px;
-  color: #6b7280;
-}
-
-/* CART */
-.cart {
-  position: fixed;
-  right: -320px;
-  top: 0;
-  width: 300px;
-  height: 100%;
-  background: white;
-  padding: 20px;
-  transition: 0.4s;
-}
-.cart.open { right: 0; }
-
-</style>
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="styles.css">
 </head>
 
-<body>
+<body class="bg-gradient-to-br from-indigo-50 via-white to-pink-50 text-gray-900">
 
-<!-- 🔥 BIG LOGO AT START -->
-<div class="big-logo">
-  <div class="big-logo-circle">
-    <img src="./images/yolo-logo.png">
-  </div>
-</div>
+  <!-- Navigation -->
+  <nav class="bg-white shadow-md py-4">
+    <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+      <a href="index.html" class="text-2xl font-bold text-indigo-600 flex items-center gap-2">
+        <img src="yolo-logo.png" alt="YOLO Pencils official logo" class="w-10 h-10">
+        YOLO Pencils
+      </a>
+      <div class="space-x-4">
+        <a href="#products" class="text-gray-700 hover:text-indigo-600 transition">Products</a>
+        <a href="#contact" class="text-gray-700 hover:text-indigo-600 transition">Contact</a>
+      </div>
+    </div>
+  </nav>
 
-<!-- NAV -->
-<nav>
-  <div class="logo-circle">
-    <img src="./images/yolo-logo.png">
-  </div>
-  <div onclick="toggleCart()">Cart (<span id="count">0</span>)</div>
-</nav>
+  <!-- Hero Section -->
+  <section class="max-w-7xl mx-auto px-6 py-24 grid md:grid-cols-2 gap-16 items-center">
+    <div>
+      <h1 class="text-5xl md:text-6xl font-extrabold leading-tight">
+        YOLO Pencils – Premium Writing & Drawing Tools
+      </h1>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-text">
-    <h1>YOLO Pencils</h1>
-    <p>Designed for precision, comfort, and creativity.</p>
-    <div class="btn" onclick="scrollToProducts()">Explore</div>
-  </div>
+      <p class="mt-6 text-lg text-gray-600 max-w-xl">
+        Art is life. YOLO Pencils designs premium pens and pencils for students, artists, and creators, delivering reliable stationery tools for everyday writing and creativity.
+      </p>
 
-  <!-- SAME IMAGE USED AGAIN -->
-  <img src="./images/yolo-logo.png">
-</section>
-
-<!-- FEATURES -->
-<section class="features-strip">
-  <div><h3>Ultra Smooth</h3><p>No friction writing</p></div>
-  <div><h3>Long Lasting</h3><p>Extended durability</p></div>
-  <div><h3>Premium Grip</h3><p>Comfort always</p></div>
-</section>
-
-<!-- PRODUCTS -->
-<section class="product" id="products">
-  <h2>Our Products</h2>
-
-  <div class="product-grid">
-    <div class="card">
-      <img src="./images/maxx.png">
-      <h3>YOLO Maxx</h3>
-      <div class="btn" onclick="add('Maxx',35)">₹35</div>
+      <div class="mt-8 flex gap-4">
+        <a href="#products" class="rounded-2xl px-6 py-4 bg-indigo-600 text-white hover:bg-indigo-700 transition">
+          View Products
+        </a>
+        <a href="#contact" class="rounded-2xl px-6 py-4 border border-gray-300 hover:bg-gray-100 transition">
+          Contact Us
+        </a>
+      </div>
     </div>
 
-    <div class="card">
-      <img src="./images/lite.png">
-      <h3>YOLO Lite</h3>
-      <div class="btn" onclick="add('Lite',30)">₹30</div>
+    <div class="flex justify-center">
+      <div class="w-72 h-72 rounded-full bg-white flex items-center justify-center shadow-2xl hover:scale-105 transform transition duration-500">
+        <img src="yolo-logo.png" alt="YOLO Pencils logo symbol" class="w-48 h-48 object-contain">
+      </div>
     </div>
+  </section>
 
-    <div class="card">
-      <img src="./images/custom.png">
-      <h3>Custom Pencil</h3>
-      <div class="btn" onclick="add('Custom',18)">₹18</div>
+  <!-- Products Section -->
+  <section id="products" class="max-w-7xl mx-auto px-6 py-20">
+    <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">
+      Our Products
+    </h2>
+
+    <div class="grid md:grid-cols-3 gap-8">
+
+      <!-- YOLO Maxx -->
+      <div class="rounded-2xl shadow-md p-8 text-center bg-white hover:scale-105 transform transition">
+        <img src="maxx.png" alt="YOLO Maxx pen" class="mx-auto w-32 h-32 object-contain mb-4">
+        <h3 class="font-semibold text-xl mb-2">YOLO Maxx Pens</h3>
+        <p class="text-gray-600 mb-4">
+          Bold, smooth-flow pens designed for durability and professional everyday use.
+        </p>
+        <p class="mt-4 font-semibold">Price: ₹35</p>
+        <p class="text-sm text-gray-500">Minimum order: 3 units</p>
+        <p class="mt-3 text-indigo-600 font-medium">
+          <a href="yolo-maxx.html">Learn More / Purchase</a>
+        </p>
+      </div>
+
+      <!-- YOLO Lite -->
+      <div class="rounded-2xl shadow-md p-8 text-center bg-white hover:scale-105 transform transition">
+        <img src="lite.png" alt="YOLO Lite pen" class="mx-auto w-32 h-32 object-contain mb-4">
+        <h3 class="font-semibold text-xl mb-2">YOLO Lite Pens</h3>
+        <p class="text-gray-600 mb-4">
+          Lightweight, sleek pens made for students and creators who value comfort.
+        </p>
+        <p class="mt-4 font-semibold">Price: ₹30</p>
+        <p class="text-sm text-gray-500">Minimum order: 3 units</p>
+        <p class="mt-3 text-indigo-600 font-medium">
+          <a href="yolo-lite.html">Learn More / Purchase</a>
+        </p>
+      </div>
+
+      <!-- Custom Handmade -->
+      <div class="rounded-2xl shadow-md p-8 text-center bg-white hover:scale-105 transform transition">
+        <img src="custom.png" alt="Custom handmade pencils" class="mx-auto w-32 h-32 object-contain mb-4">
+        <h3 class="font-semibold text-xl mb-2">Custom Handmade Pencils</h3>
+        <p class="text-gray-600 mb-4">
+          Individually crafted pencils using premium materials for artists and collectors.
+        </p>
+        <p class="mt-4 font-semibold">Price: ₹18</p>
+        <p class="text-sm text-gray-500">Minimum order: 3 units</p>
+        <p class="mt-3 text-indigo-600 font-medium">
+          <a href="custom-pencil.html">Learn More / Purchase</a>
+        </p>
+      </div>
+
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- CONTACT -->
-<section class="contact">
-  <div class="contact-content">
-    <h2>Contact Us</h2>
-    <input placeholder="Name">
-    <input placeholder="Email">
-    <textarea placeholder="Message"></textarea>
-    <div class="btn" onclick="alert('Sent 🚀')">Send</div>
-  </div>
-</section>
+  <!-- Contact Section -->
+  <section id="contact" class="bg-gradient-to-r from-indigo-600 to-pink-600 text-white py-20">
+    <div class="max-w-4xl mx-auto px-6">
+      <h2 class="text-3xl md:text-4xl font-bold text-center">
+        Contact Us
+      </h2>
+      <p class="mt-4 text-lg text-indigo-100 text-center mb-12">
+        For orders and enquiries, please send us a message.
+      </p>
 
-<!-- FOOTER -->
-<footer>
-  <div class="logo-circle" style="margin:auto;">
-    <img src="./images/yolo-logo.png">
-  </div>
-  <br>YOLO Pencils © 2026
-</footer>
+      <form action="mailto:yologroupltd@outlook.com" method="POST" enctype="text/plain"
+        class="grid md:grid-cols-2 gap-6 bg-white rounded-2xl p-8 text-gray-900 shadow-xl">
 
-<!-- CART -->
-<div class="cart" id="cartBox">
-  <h3>Your Cart</h3>
-  <ul id="items"></ul>
-</div>
+        <input type="text" name="Name" placeholder="Your Name" required class="border rounded-xl px-4 py-3">
+        <input type="email" name="Email" placeholder="Your Email" required class="border rounded-xl px-4 py-3">
+        <input type="text" name="Subject" placeholder="Subject" class="md:col-span-2 border rounded-xl px-4 py-3">
+        <textarea name="Message" placeholder="Your Message" rows="5" required
+          class="md:col-span-2 border rounded-xl px-4 py-3"></textarea>
 
-<script>
-let cart=[];
+        <div class="md:col-span-2 text-center">
+          <button type="submit"
+            class="rounded-2xl px-10 py-4 bg-indigo-600 text-white hover:bg-indigo-700 transition">
+            Send Message
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
 
-function add(name,price){
-  cart.push({name,price});
-  document.getElementById("count").innerText=cart.length;
-
-  let li=document.createElement("li");
-  li.innerText=name+" - ₹"+price;
-  document.getElementById("items").appendChild(li);
-}
-
-function toggleCart(){
-  document.getElementById("cartBox").classList.toggle("open");
-}
-
-function scrollToProducts(){
-  document.getElementById("products").scrollIntoView({behavior:"smooth"});
-}
-</script>
+  <!-- Footer -->
+  <footer class="py-10 text-center text-sm text-gray-500">
+    <img src="yolo-logo.png" alt="YOLO Pencils logo" class="w-16 h-16 mx-auto mb-2">
+   YOLO Pencils. Art is life.
+  </footer>
 
 </body>
 </html>
+
+
+
+make this website look premium and not plain by using whatever code language is in the code given it should be accesible in github
