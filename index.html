@@ -2,18 +2,17 @@
 <html lang="en">
 <head>
 
-<title>YOLO Pencils | Cinematic Experience</title>
+<title>YOLO Pencils | Premium Experience</title>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <script src="https://cdn.tailwindcss.com"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
 
 <style>
 html { scroll-behavior: smooth; }
 
-/* ANIMATIONS */
+/* ===== GLOBAL ANIMATIONS ===== */
 .fade-up {
   opacity: 0;
   transform: translateY(60px);
@@ -24,10 +23,20 @@ html { scroll-behavior: smooth; }
   transform: translateY(0);
 }
 
-/* NAV */
+.scale-in {
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 1s ease;
+}
+.scale-in.show {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ===== NAV ===== */
 nav {
   backdrop-filter: blur(20px);
-  background: rgba(255,255,255,0.85);
+  background: rgba(255,255,255,0.7);
   transition: 0.4s;
 }
 .nav-scrolled {
@@ -35,39 +44,94 @@ nav {
   box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
 
-/* GLASS */
+/* ===== BIG TEXT ===== */
+.big-text {
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 900;
+  text-align: center;
+  opacity: 0.1;
+  transition: 1s;
+}
+.big-text.show { opacity: 1; }
+
+/* ===== GLASS ===== */
 .glass {
   background: rgba(255,255,255,0.6);
   backdrop-filter: blur(20px);
   border-radius: 20px;
 }
 
-/* BIG TEXT */
-.big-section {
-  font-size: clamp(3rem, 8vw, 6rem);
-  font-weight: 800;
-  text-align: center;
-  opacity: 0.1;
-  transition: 1s;
+/* ===== FLOATING ===== */
+.float {
+  animation: float 4s ease-in-out infinite;
 }
-.big-section.show { opacity: 1; }
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
 
-section {
-  padding-top: 120px;
-  padding-bottom: 120px;
+/* ===== GRADIENT ORBS ===== */
+.orb {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.5;
+  animation: move 10s infinite alternate;
+}
+.orb1 { background: #a78bfa; top: 10%; left: 10%; }
+.orb2 { background: #f472b6; bottom: 10%; right: 10%; }
+
+@keyframes move {
+  from { transform: translate(0,0); }
+  to { transform: translate(100px, -50px); }
+}
+
+/* ===== PARALLAX ===== */
+.parallax {
+  transition: transform 0.2s;
+}
+
+/* ===== BUTTON ===== */
+.btn {
+  padding: 14px 28px;
+  border-radius: 20px;
+  background: linear-gradient(135deg,#6366f1,#a78bfa);
+  color: white;
+  transition: 0.3s;
+}
+.btn:hover {
+  transform: scale(1.05);
+}
+
+/* ===== MOUSE GLOW ===== */
+.glow {
+  position: fixed;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(167,139,250,0.4), transparent);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: multiply;
 }
 </style>
 
 </head>
 
-<body class="bg-gradient-to-br from-indigo-50 via-white to-pink-50 text-gray-900">
+<body class="bg-gradient-to-br from-white via-purple-50 to-indigo-100 text-gray-900">
+
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+<div class="glow" id="glow"></div>
 
 <!-- NAV -->
 <nav class="sticky top-0 z-50 py-4">
-  <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+  <div class="max-w-7xl mx-auto px-6 flex justify-between">
     <div class="flex items-center gap-2">
       <img src="yolo-logo.png" class="w-10">
-      <span class="font-bold text-xl text-indigo-600">YOLO Pencils</span>
+      <span class="font-bold text-xl text-indigo-600">YOLO</span>
     </div>
     <div class="space-x-6">
       <a href="#products">Products</a>
@@ -79,66 +143,54 @@ section {
 <!-- HERO -->
 <section class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
 
-  <div class="fade-up">
-    <h1 class="text-6xl font-extrabold leading-tight">
-      Precision Writing.<br>Redefined.
-    </h1>
+<div class="fade-up">
+<h1 class="text-6xl font-extrabold">
+Write Like Never Before.
+</h1>
+<p class="mt-6 text-gray-600">
+Premium pencils designed for creators.
+</p>
+<div class="mt-8">
+<a href="#products" class="btn">Explore</a>
+</div>
+</div>
 
-    <p class="mt-6 text-lg text-gray-600">
-      Crafted for students, creators, and professionals.
-    </p>
+<div class="flex justify-center scale-in parallax">
+<div class="w-80 h-80 rounded-full bg-white shadow-2xl flex items-center justify-center float">
+<img src="yolo-logo.png" class="w-52">
+</div>
+</div>
 
-    <div class="mt-8">
-      <a href="#products" class="rounded-2xl px-6 py-4 bg-indigo-600 text-white hover:bg-indigo-700 transition">
-        View Products
-      </a>
-    </div>
-  </div>
-
-  <div class="flex justify-center fade-up">
-    <div class="w-80 h-80 rounded-full bg-white flex items-center justify-center shadow-2xl">
-      <img src="yolo-logo.png" class="w-52">
-    </div>
-  </div>
-
-</section>
-
-<!-- 3D PENCIL -->
-<section style="height:100vh; display:flex; align-items:center; justify-content:center;">
-  <div id="pencil3d" style="width:100%; height:500px;"></div>
 </section>
 
 <!-- BIG TEXT -->
-<section class="big-section fade-up">
-  Write Different.
+<section class="big-text fade-up">
+Craft. Precision. Flow.
 </section>
 
 <!-- PRODUCTS -->
 <section id="products" class="max-w-7xl mx-auto px-6">
 
-<h2 class="text-4xl font-bold text-center mb-20 fade-up">Our Products</h2>
+<h2 class="text-4xl font-bold text-center mb-20 fade-up">Products</h2>
 
 <div class="grid md:grid-cols-3 gap-10">
 
-<div class="glass p-8 text-center fade-up hover:scale-105 transition">
-<img src="maxx.png" class="w-32 mx-auto mb-4">
-<h3 class="text-xl font-semibold">YOLO Maxx</h3>
-<p class="text-gray-600 mt-2">Bold smooth writing</p>
-<p class="mt-3 font-semibold">₹35</p>
+<div class="glass p-8 text-center fade-up hover:scale-110 transition">
+<img src="maxx.png" class="w-32 mx-auto">
+<h3 class="mt-4 font-semibold">YOLO Maxx</h3>
+<p class="text-gray-600">₹35</p>
 </div>
 
-<div class="glass p-8 text-center fade-up hover:scale-105 transition">
-<img src="lite.png" class="w-32 mx-auto mb-4">
-<h3 class="text-xl font-semibold">YOLO Lite</h3>
-<p class="text-gray-600 mt-2">Lightweight everyday pen</p>
-<p class="mt-3 font-semibold">₹30</p>
+<div class="glass p-8 text-center fade-up hover:scale-110 transition">
+<img src="lite.png" class="w-32 mx-auto">
+<h3 class="mt-4 font-semibold">YOLO Lite</h3>
+<p class="text-gray-600">₹30</p>
 </div>
 
-<div class="glass p-8 text-center fade-up hover:scale-105 transition">
-<img src="custom.png" class="w-32 mx-auto mb-4">
-<h3 class="text-xl font-semibold">Custom Pencil</h3>
-<p class="text-gray-600 mt-2">Handcrafted precision</p>
-<p class="mt-3 font-semibold">₹18</p>
+<div class="glass p-8 text-center fade-up hover:scale-110 transition">
+<img src="custom.png" class="w-32 mx-auto">
+<h3 class="mt-4 font-semibold">Custom Pencil</h3>
+<p class="text-gray-600">₹18</p>
 </div>
 
 </div>
@@ -146,177 +198,54 @@ section {
 </section>
 
 <!-- CONTACT -->
-<section id="contact" class="bg-gradient-to-r from-indigo-600 to-pink-600 text-white">
+<section id="contact" class="bg-gradient-to-r from-indigo-600 to-pink-500 text-white text-center">
 
-<div class="max-w-4xl mx-auto px-6 text-center fade-up">
+<h2 class="text-4xl font-bold fade-up">Contact Us</h2>
 
-<h2 class="text-4xl font-bold">Contact Us</h2>
+<form class="max-w-xl mx-auto mt-10 bg-white text-black p-8 rounded-2xl shadow-xl fade-up">
 
-<form class="mt-10 bg-white text-black p-8 rounded-2xl shadow-xl">
+<input class="w-full mb-4 p-3 border rounded-xl" placeholder="Name">
+<input class="w-full mb-4 p-3 border rounded-xl" placeholder="Email">
+<textarea class="w-full p-3 border rounded-xl" placeholder="Message"></textarea>
 
-<input placeholder="Name" class="w-full mb-4 p-3 border rounded-xl">
-<input placeholder="Email" class="w-full mb-4 p-3 border rounded-xl">
-<textarea placeholder="Message" class="w-full p-3 border rounded-xl"></textarea>
-
-<button class="mt-6 bg-indigo-600 text-white px-6 py-3 rounded-xl">
-Send Message
-</button>
+<button class="btn mt-6">Send</button>
 
 </form>
 
-</div>
-
 </section>
 
-<!-- FOOTER -->
 <footer class="py-10 text-center text-gray-500">
-<img src="yolo-logo.png" class="w-16 mx-auto mb-2">
 © 2026 YOLO Pencils
 </footer>
 
 <script>
 
-/* SCROLL ANIMATIONS */
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if(entry.isIntersecting){
-      entry.target.classList.add("show");
-    }
-  });
+/* SCROLL REVEAL */
+const observer = new IntersectionObserver(entries=>{
+entries.forEach(e=>{
+if(e.isIntersecting) e.target.classList.add("show");
 });
-document.querySelectorAll(".fade-up, .big-section").forEach(el => observer.observe(el));
+});
+document.querySelectorAll(".fade-up,.scale-in,.big-text").forEach(el=>observer.observe(el));
 
 /* NAV EFFECT */
-window.addEventListener("scroll", () => {
-  const nav = document.querySelector("nav");
-  if(window.scrollY > 50){
-    nav.classList.add("nav-scrolled");
-  } else {
-    nav.classList.remove("nav-scrolled");
-  }
+window.addEventListener("scroll",()=>{
+const nav=document.querySelector("nav");
+window.scrollY>50?nav.classList.add("nav-scrolled"):nav.classList.remove("nav-scrolled");
 });
 
-/* ===== 3D CINEMATIC PENCIL ===== */
-const container = document.getElementById("pencil3d");
-
-const scene = new THREE.Scene();
-
-const camera = new THREE.PerspectiveCamera(60, container.clientWidth / 500, 0.1, 1000);
-camera.position.set(0,1,10);
-
-const renderer = new THREE.WebGLRenderer({ antialias:true, alpha:true });
-renderer.setSize(container.clientWidth, 500);
-renderer.setPixelRatio(window.devicePixelRatio);
-container.appendChild(renderer.domElement);
-
-/* ENV LIGHT */
-const hemi = new THREE.HemisphereLight(0xffffff, 0x444444, 1);
-scene.add(hemi);
-
-const light1 = new THREE.DirectionalLight(0xffffff,1.5);
-light1.position.set(5,5,5);
-scene.add(light1);
-
-const light2 = new THREE.DirectionalLight(0xffffff,1);
-light2.position.set(-5,3,-5);
-scene.add(light2);
-
-/* WOOD TEXTURE */
-function wood(){
-  const c=document.createElement("canvas");
-  c.width=256;c.height=256;
-  const ctx=c.getContext("2d");
-  for(let i=0;i<256;i++){
-    let g=Math.sin(i*0.15)*30;
-    ctx.fillStyle=`rgb(${170+g},${110+g/2},60)`;
-    ctx.fillRect(0,i,256,1);
-  }
-  return new THREE.CanvasTexture(c);
-}
-
-/* MATERIALS */
-const bodyMat=new THREE.MeshStandardMaterial({map:wood(),roughness:0.6});
-const metalMat=new THREE.MeshStandardMaterial({color:0xdcdcdc,metalness:1,roughness:0.1});
-const tipMat=new THREE.MeshStandardMaterial({color:0x222222});
-const eraserMat=new THREE.MeshStandardMaterial({color:0xff6b6b});
-
-/* DISTORT */
-function distort(g){
-  let p=g.attributes.position;
-  for(let i=0;i<p.count;i++){
-    p.setXYZ(i,
-      p.getX(i)+(Math.random()-0.5)*0.04,
-      p.getY(i)+(Math.random()-0.5)*0.04,
-      p.getZ(i)+(Math.random()-0.5)*0.04
-    );
-  }
-  g.computeVertexNormals();
-}
-
-/* MODEL */
-const pencil=new THREE.Group();
-
-const bodyGeo=new THREE.CylinderGeometry(0.15,0.15,4.5,64);
-distort(bodyGeo);
-const body=new THREE.Mesh(bodyGeo,bodyMat);
-pencil.add(body);
-
-const tip=new THREE.Mesh(new THREE.ConeGeometry(0.07,0.3,64),tipMat);
-tip.position.y=-3;
-pencil.add(tip);
-
-const ferrule=new THREE.Mesh(new THREE.CylinderGeometry(0.16,0.16,0.5,64),metalMat);
-ferrule.position.y=2.4;
-pencil.add(ferrule);
-
-const eraser=new THREE.Mesh(new THREE.CylinderGeometry(0.14,0.14,0.6,64),eraserMat);
-eraser.position.y=2.9;
-pencil.add(eraser);
-
-scene.add(pencil);
-
-/* INTERACTION */
-let drag=false,prev=0;
-window.addEventListener("mousedown",e=>{drag=true;prev=e.clientX});
-window.addEventListener("mouseup",()=>drag=false);
-window.addEventListener("mousemove",e=>{
- if(!drag)return;
- let d=e.clientX-prev;
- pencil.rotation.y+=d*0.01;
- prev=e.clientX;
+/* PARALLAX */
+window.addEventListener("scroll",()=>{
+document.querySelectorAll(".parallax").forEach(el=>{
+el.style.transform=`translateY(${window.scrollY*0.2}px)`;
+});
 });
 
-/* SCROLL */
-let scroll=0;
-window.addEventListener("scroll",()=>scroll=window.scrollY/window.innerHeight);
-
-/* INTRO */
-let intro=0;
-
-/* ANIMATE */
-function animate(){
- requestAnimationFrame(animate);
-
- if(intro<1){
-   intro+=0.01;
-   camera.position.z=15-intro*8;
- }
-
- pencil.rotation.y+=0.002;
- camera.position.z=7-scroll*3;
-
- pencil.position.y=Math.sin(Date.now()*0.002)*0.2;
- pencil.rotation.x=Math.sin(Date.now()*0.001)*0.1;
-
- renderer.render(scene,camera);
-}
-animate();
-
-/* RESIZE */
-window.addEventListener("resize",()=>{
- renderer.setSize(container.clientWidth,500);
- camera.aspect=container.clientWidth/500;
- camera.updateProjectionMatrix();
+/* MOUSE GLOW */
+const glow=document.getElementById("glow");
+window.addEventListener("mousemove",(e)=>{
+glow.style.left=e.clientX+"px";
+glow.style.top=e.clientY+"px";
 });
 
 </script>
