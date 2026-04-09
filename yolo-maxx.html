@@ -1,35 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>YOLO Maxx Pens</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+<title>YOLO Maxx</title>
+<meta charset="UTF-8">
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+body {
+  opacity: 0;
+  transform: scale(1.02);
+  filter: blur(10px);
+  transition: all 0.6s ease;
+}
+body.loaded {
+  opacity: 1;
+  transform: scale(1);
+  filter: blur(0);
+}
+</style>
 </head>
-<body class="bg-gray-50 text-gray-900 min-h-screen">
 
-  <header class="bg-indigo-600 text-white py-6 text-center">
-    <h1 class="text-4xl font-bold">YOLO Maxx Pens</h1>
-    <p class="mt-2">Premium pens for professionals</p>
-  </header>
+<body class="text-center p-10">
 
-  <main class="max-w-4xl mx-auto px-6 py-12">
-    <div class="flex flex-col md:flex-row gap-8">
-      <img src="yolo-logo.png" alt="YOLO Maxx Logo" class="w-64 h-64 object-contain rounded-xl shadow-lg">
-      <div>
-        <h2 class="text-2xl font-semibold mb-4">Product Details</h2>
-        <p class="mb-4">Bold, smooth-flow pens designed for durability and professional everyday use.</p>
-        <p class="font-semibold mb-2">Price: ₹35 per pen</p>
-        <p class="text-sm text-gray-500 mb-4">Minimum order: 3 units</p>
-        <p class="mb-6">Contact <strong>yologroupltd@outlook.com</strong> to place your order.</p>
-        <a href="index.html" class="px-6 py-3 rounded-2xl bg-indigo-600 text-white hover:bg-indigo-700 transition">Back to Products</a>
-      </div>
-    </div>
-  </main>
+<a href="index.html">
+<img src="yolo-logo.png" class="w-12 mx-auto mb-6">
+</a>
 
-  <footer class="py-10 text-center text-sm text-gray-500">
-    © 2026 YOLO Pencils. Art is life.
-  </footer>
+<h1 class="text-4xl font-bold">YOLO Maxx</h1>
+<p class="mt-4">Bold smooth writing experience</p>
+<p class="mt-2 text-xl">₹35</p>
+
+<div class="mt-10">
+  <h3 class="text-xl mb-4">Explore More</h3>
+  <a href="yolo-lite.html">YOLO Lite</a> |
+  <a href="custom-pencil.html">Custom Pencil</a>
+</div>
+
+<script>
+window.addEventListener("load", () => {
+  document.body.classList.add("loaded");
+});
+
+document.querySelectorAll("a").forEach(link => {
+  link.addEventListener("click", function(e) {
+    const href = this.getAttribute("href");
+    if (href && !href.startsWith("#")) {
+      e.preventDefault();
+      document.body.classList.remove("loaded");
+      setTimeout(() => {
+        window.location.href = href;
+      }, 500);
+    }
+  });
+});
+</script>
 
 </body>
 </html>
