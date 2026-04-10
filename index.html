@@ -264,17 +264,9 @@ section{padding:120px 8%;}
 <h2 style="font-size:42px;margin-bottom:50px;">Products</h2>
 
 <div class="grid">
-<div class="card reveal" onclick="location.href='yolo-maxx.html'">
-🔥 YOLO Maxx
-</div>
-
-<div class="card reveal" onclick="location.href='yolo-lite.html'">
-⚡ YOLO Lite
-</div>
-
-<div class="card reveal" onclick="location.href='custom-pencils.html'">
-🎨 Custom Pencils
-</div>
+<div class="card reveal" onclick="location.href='yolo-maxx.html'">🔥 YOLO Maxx</div>
+<div class="card reveal" onclick="location.href='yolo-lite.html'">⚡ YOLO Lite</div>
+<div class="card reveal" onclick="location.href='custom-pencils.html'">🎨 Custom Pencils</div>
 </div>
 
 </section>
@@ -335,10 +327,11 @@ Why YOLO?
 
 <h2>Join YOLO Club</h2>
 
-<div class="mail-box">
-<input type="email" id="email" placeholder="Enter email">
-<button onclick="subscribe()">Subscribe</button>
-</div>
+<form action="https://formspree.io/f/xnjokvbg" method="POST" class="mail-box">
+<input type="hidden" name="_subject" value="YOLO Newsletter Signup">
+<input type="email" name="email" placeholder="Enter your email" required>
+<button type="submit">Subscribe</button>
+</form>
 
 </section>
 
@@ -349,12 +342,17 @@ Why YOLO?
 
 <p>Send orders to: <b>yologroupltd@outlook.com</b></p>
 
-<div class="contact-box">
-<input type="text" id="name" placeholder="Name">
-<input type="email" id="contactEmail" placeholder="Email">
-<textarea id="message" placeholder="Message"></textarea>
-<button onclick="sendMessage()">Send</button>
-</div>
+<form action="https://formspree.io/f/xnjokvbg" method="POST" class="contact-box">
+
+<input type="hidden" name="_subject" value="YOLO Contact Form">
+
+<input type="text" name="name" placeholder="Name" required>
+<input type="email" name="email" placeholder="Email" required>
+<textarea name="message" placeholder="Message" required></textarea>
+
+<button type="submit">Send Message</button>
+
+</form>
 
 </section>
 
@@ -378,23 +376,6 @@ window.addEventListener("scroll",()=>{
     }
   });
 });
-
-/* NEWSLETTER */
-function subscribe(){
-let email=document.getElementById("email").value;
-if(!email.includes("@")) return alert("Enter valid email");
-localStorage.setItem("email",email);
-alert("Saved 🚀");
-}
-
-/* CONTACT */
-function sendMessage(){
-let n=document.getElementById("name").value;
-let e=document.getElementById("contactEmail").value;
-let m=document.getElementById("message").value;
-if(!n||!e||!m) return alert("Fill all fields");
-alert("Message saved 🚀");
-}
 
 </script>
 
