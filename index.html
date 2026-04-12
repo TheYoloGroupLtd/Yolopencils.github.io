@@ -54,37 +54,37 @@ justify-content:center;
 padding:0 8%;
 }
 
-/* 🔥 CONTAINER FIX */
 .hero-container{
 display:flex;
-align-items:center; /* THIS FIXES ALIGNMENT */
 justify-content:space-between;
+align-items:flex-start;
 width:100%;
 max-width:1200px;
 gap:80px;
 }
 
 /* TEXT */
-.hero-text{
-display:flex;
-flex-direction:column;
-justify-content:center;
-}
-
-.hero h1{
+.hero-text h1{
 font-size:70px;
 background:linear-gradient(135deg,#6d28d9,#a78bfa);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
+line-height:1.1;
 }
 
-.hero p{
+.hero-text p{
 margin-top:15px;
 font-size:20px;
 color:#4b5563;
 }
 
-/* LOGO */
+/* LOGO ALIGN FIX */
+.logo-wrapper{
+display:flex;
+align-items:center;
+height:100px;
+}
+
 .logo{
 width:260px;
 height:260px;
@@ -96,7 +96,7 @@ justify-content:center;
 box-shadow:0 30px 100px rgba(109,40,217,0.25);
 overflow:hidden;
 border:6px solid #ffffff;
-flex-shrink:0;
+transform:translateY(-40px); /* alignment tweak */
 }
 
 .logo img{
@@ -217,11 +217,16 @@ cursor:pointer;
 @media(max-width:768px){
 .hero-container{
 flex-direction:column;
+align-items:center;
 text-align:center;
 gap:40px;
 }
-.hero h1{font-size:42px;}
-.logo{width:200px;height:200px;}
+.hero-text h1{font-size:42px;}
+.logo{
+transform:none;
+width:200px;
+height:200px;
+}
 input,textarea,button{width:90%;}
 }
 </style>
@@ -250,8 +255,10 @@ input,textarea,button{width:90%;}
 <p>Ultra smooth. Premium build. Write better.</p>
 </div>
 
+<div class="logo-wrapper">
 <div class="logo">
 <img src="yolo-logo.png">
+</div>
 </div>
 
 </div>
