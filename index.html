@@ -49,10 +49,16 @@ font-weight:600;
 .hero{
 min-height:100vh;
 display:flex;
-align-items:center; /* THIS centers vertically */
+align-items:center;
 justify-content:space-between;
 padding:0 8%;
 gap:60px;
+}
+
+.hero-text{
+display:flex;
+flex-direction:column;
+justify-content:center;
 }
 
 .hero h1{
@@ -68,7 +74,7 @@ font-size:20px;
 color:#4b5563;
 }
 
-/* LOGO CIRCLE */
+/* LOGO PERFECT ALIGN */
 .logo{
 width:260px;
 height:260px;
@@ -80,6 +86,7 @@ justify-content:center;
 box-shadow:0 30px 100px rgba(109,40,217,0.25);
 overflow:hidden;
 border:6px solid #ffffff;
+flex-shrink:0;
 }
 
 .logo img{
@@ -202,6 +209,7 @@ cursor:pointer;
 flex-direction:column;
 text-align:center;
 padding-top:120px;
+align-items:center;
 }
 .hero h1{font-size:42px;}
 .logo{width:200px;height:200px;}
@@ -226,7 +234,7 @@ input,textarea,button{width:90%;}
 <!-- HERO -->
 <section class="hero">
 
-<div>
+<div class="hero-text">
 <h1>YOLO Pencils</h1>
 <p>Ultra smooth. Premium build. Write better.</p>
 </div>
