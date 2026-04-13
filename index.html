@@ -2,10 +2,21 @@
 <html lang="en">
 <head>
 
-<title>YOLO Pencils</title>
+<title>YOLO Pencils – Premium Writing & Drawing Tools</title>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- SEO -->
+<meta name="description" content="YOLO Pencils offers premium pens and pencils for students, artists, and creators. Smooth writing, high quality, and custom designs.">
+
+<!-- FAVICON -->
+<link rel="icon" type="image/png" href="yolo-logo.png">
+
+<!-- SOCIAL PREVIEW -->
+<meta property="og:title" content="YOLO Pencils">
+<meta property="og:description" content="Premium writing tools for creators.">
+<meta property="og:image" content="yolo-logo.png">
 
 <script src='https://www.noupe.com/embed/019beb1020a87e669009e2d22f80692045cb.js'></script>
 
@@ -78,7 +89,7 @@ font-size:20px;
 color:#4b5563;
 }
 
-/* LOGO ALIGN FIX */
+/* LOGO FULLY VISIBLE */
 .logo-wrapper{
 display:flex;
 align-items:center;
@@ -96,14 +107,14 @@ justify-content:center;
 box-shadow:0 30px 100px rgba(109,40,217,0.25);
 overflow:hidden;
 border:6px solid #ffffff;
-transform:translateY(-40px); /* alignment tweak */
+transform:translateY(-40px);
+padding:20px; /* space so logo not cropped */
 }
 
 .logo img{
-width:85%;
+width:100%;
 height:auto;
-object-fit:contain; /* 🔥 THIS FIXES IT */
-border-radius:50%;
+object-fit:contain; /* FULLY visible */
 }
 
 /* PRODUCTS */
