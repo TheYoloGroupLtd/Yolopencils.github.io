@@ -23,14 +23,19 @@ border:3px solid black;
 
 <h1>YOLO Maxx 🔥 (₹35)</h1>
 
-<!-- COLOR OPTIONS -->
-<div id="colors">
+<h3>Choose Body Color:</h3>
+<div id="bodyColors">
+<div class="color-box" style="background:yellow" onclick="selectBody(this,'Yellow')"></div>
+<div class="color-box" style="background:blue" onclick="selectBody(this,'Blue')"></div>
+<div class="color-box" style="background:green" onclick="selectBody(this,'Green')"></div>
+<div class="color-box" style="background:black" onclick="selectBody(this,'Black')"></div>
+</div>
 
-<div class="color-box" style="background:red" onclick="selectColor(this,'#ff0000')"></div>
-<div class="color-box" style="background:blue" onclick="selectColor(this,'#0000ff')"></div>
-<div class="color-box" style="background:green" onclick="selectColor(this,'#00ff00')"></div>
-<div class="color-box" style="background:black" onclick="selectColor(this,'#000000')"></div>
-
+<h3>Choose Text Color:</h3>
+<div id="textColors">
+<div class="color-box" style="background:black" onclick="selectText(this,'Black')"></div>
+<div class="color-box" style="background:red" onclick="selectText(this,'Red')"></div>
+<div class="color-box" style="background:white" onclick="selectText(this,'White')"></div>
 </div>
 
 <br>
@@ -39,18 +44,18 @@ border:3px solid black;
 
 <script>
 
-let selectedColor = "#ff0000"; // default
+let bodyColor = "Yellow";
+let textColor = "Black";
 
-function selectColor(el,color){
+function selectBody(el,color){
+bodyColor = color;
+document.querySelectorAll("#bodyColors .color-box").forEach(b=>b.classList.remove("selected"));
+el.classList.add("selected");
+}
 
-selectedColor = color;
-
-// remove previous selection
-document.querySelectorAll(".color-box").forEach(box=>{
-box.classList.remove("selected");
-});
-
-// highlight selected
+function selectText(el,color){
+textColor = color;
+document.querySelectorAll("#textColors .color-box").forEach(b=>b.classList.remove("selected"));
 el.classList.add("selected");
 }
 
@@ -61,7 +66,8 @@ let cart = JSON.parse(localStorage.getItem("cart")) || [];
 cart.push({
 name: "YOLO Maxx",
 price: 35,
-color: selectedColor   // ✅ correct
+bodyColor: bodyColor,
+textColor: textColor
 });
 
 localStorage.setItem("cart", JSON.stringify(cart));
