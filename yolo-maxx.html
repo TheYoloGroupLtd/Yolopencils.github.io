@@ -2,51 +2,31 @@
 <html>
 <head>
 <title>YOLO Maxx</title>
-<style>
-body{font-family:Poppins;background:#f5f3ff;text-align:center;margin-top:100px;}
-button{background:#7c3aed;color:white;border:none;padding:10px 20px;border-radius:10px;}
-</style>
 </head>
-
 <body>
 
 <h1>YOLO Maxx 🔥 (₹35)</h1>
 
-<input type="color" id="color" value="#ff0000"><br><br>
+<input type="color" id="color" value="#ff0000">
+<br><br>
+
 <button onclick="addToCart()">Add to Cart</button>
 
 <script>
 function addToCart(){
+
+let color = document.getElementById("color").value;
+
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
-cart.push({name:"YOLO Maxx",price:35,color:document.getElementById("color").value});
-localStorage.setItem("cart",JSON.stringify(cart));
-alert("Added!");
-}
-</script>
 
-</body>
-</html><!DOCTYPE html>
-<html>
-<head>
-<title>YOLO Maxx</title>
-<style>
-body{font-family:Poppins;background:#f5f3ff;text-align:center;margin-top:100px;}
-button{background:#7c3aed;color:white;border:none;padding:10px 20px;border-radius:10px;}
-</style>
-</head>
+cart.push({
+name: "YOLO Maxx",
+price: 35,
+color: color   // ✅ FIX
+});
 
-<body>
+localStorage.setItem("cart", JSON.stringify(cart));
 
-<h1>YOLO Maxx 🔥 (₹35)</h1>
-
-<input type="color" id="color" value="#ff0000"><br><br>
-<button onclick="addToCart()">Add to Cart</button>
-
-<script>
-function addToCart(){
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
-cart.push({name:"YOLO Maxx",price:35,color:document.getElementById("color").value});
-localStorage.setItem("cart",JSON.stringify(cart));
 alert("Added!");
 }
 </script>
