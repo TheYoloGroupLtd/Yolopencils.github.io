@@ -101,10 +101,6 @@ Total: ₹<span id="total">0</span>
 
 <input type="hidden" name="formType" value="order">
 
-<!-- CLEAN ORDER FIELDS -->
-<input type="hidden" name="products" id="products">
-<input type="hidden" name="totalAmount" id="totalField">
-
 <input name="name" placeholder="Full Name" required>
 <input name="phone" placeholder="Phone Number" required>
 <textarea name="address" placeholder="Full Address" required></textarea>
@@ -119,44 +115,85 @@ Total: ₹<span id="total">0</span>
 
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
+// COLOR CONVERTER
+function getColorName(hex){
+const colors = {
+"#ff0000":"Red",
+"#00ff00":"Green",
+"#0000ff":"Blue",
+"#ffff00":"Yellow",
+"#ffa500":"Orange",
+"#800080":"Purple",
+"#000000":"Black",
+"#ffffff":"White",
+"#808080":"Gray",
+"#ffc0cb":"Pink"
+};
+
+hex = hex.toLowerCase();
+return colors[hex] || hex;
+}
+
+// CREATE HIDDEN FIELD
+function createHiddenField(name,value){
+let input = document.createElement("input");
+input.type = "hidden";
+input.name = name;
+input.value = value;
+input.classList.add("dynamic-field");
+document.querySelector("form").appendChild(input);
+}
+
+// RENDER CART
 function renderCart(){
 
 let container = document.getElementById("cartContainer");
 let total = 0;
-let formattedOrder = "";
 
 container.innerHTML = "";
+
+// remove old fields
+document.querySelectorAll(".dynamic-field").forEach(e => e.remove());
 
 cart.forEach((item,index)=>{
 
 total += item.price;
 
-// build clean order text
-formattedOrder += item.name + " - ₹" + item.price + "\\n";
+// extract color
+let match = item.name.match(/\((.*?)\)/);
+let colorHex = match ? match[1] : "";
+let colorName = getColorName(colorHex);
 
+// clean name
+let cleanName = item.name.replace(/\(.*?\)/, "").trim();
+
+// UI
 container.innerHTML += `
 <div class="order-item">
-<span>${item.name} - ₹${item.price}</span>
+<span>${cleanName} (${colorName}) - ₹${item.price}</span>
 <button class="remove-btn" onclick="removeItem(${index})">X</button>
 </div>
 `;
 
+// FORM FIELDS
+createHiddenField(`product_${index+1}`, cleanName);
+createHiddenField(`color_${index+1}`, colorName);
+createHiddenField(`price_${index+1}`, item.price);
+
 });
 
 document.getElementById("total").innerText = total;
-
-// send clean data to Formbold
-document.getElementById("products").value = formattedOrder;
-document.getElementById("totalField").value = total;
+createHiddenField("totalAmount", total);
 }
 
+// REMOVE ITEM
 function removeItem(index){
 cart.splice(index,1);
 localStorage.setItem("cart", JSON.stringify(cart));
 renderCart();
 }
 
-// initial load
+// INIT
 renderCart();
 
 </script>
