@@ -16,43 +16,23 @@ margin:0;
 background:linear-gradient(135deg,#ede9fe,#f5f3ff);
 }
 
-/* NAVBAR */
+/* NAV */
 nav{
 display:flex;
 justify-content:space-between;
 align-items:center;
 padding:20px 8%;
-background:rgba(255,255,255,0.8);
+background:rgba(255,255,255,0.7);
 backdrop-filter:blur(10px);
 }
 
-.logo{
-font-size:22px;
-font-weight:600;
-}
-
-.cart-btn{
-background:#7c3aed;
-color:white;
-padding:8px 16px;
-border-radius:10px;
-text-decoration:none;
-}
+.logo{font-size:22px;font-weight:600;}
+.cart{background:#7c3aed;color:white;padding:8px 16px;border-radius:10px;text-decoration:none;}
 
 /* HERO */
-.hero{
-text-align:center;
-margin-top:60px;
-}
-
-.hero h1{
-font-size:40px;
-margin-bottom:10px;
-}
-
-.hero p{
-color:#666;
-}
+.hero{text-align:center;margin:60px 20px 30px;}
+.hero h1{font-size:38px;margin:0;}
+.hero p{color:#666;margin-top:10px;}
 
 /* PRODUCTS */
 .products{
@@ -60,47 +40,69 @@ display:flex;
 justify-content:center;
 gap:30px;
 flex-wrap:wrap;
-margin:50px 8%;
+padding:20px;
 }
 
 .card{
 background:white;
 padding:25px;
 border-radius:20px;
-width:240px;
+width:250px;
 text-align:center;
-box-shadow:0 10px 25px rgba(0,0,0,0.08);
+box-shadow:0 10px 30px rgba(0,0,0,0.08);
 transition:0.3s;
 }
 
-.card:hover{
-transform:translateY(-5px);
-}
-
-.card h3{
-margin:10px 0;
-}
-
-.price{
-font-weight:600;
-margin-bottom:15px;
-}
+.card:hover{transform:translateY(-6px);}
 
 .btn{
 background:#7c3aed;
 color:white;
 border:none;
-padding:10px 15px;
+padding:10px 16px;
 border-radius:10px;
+cursor:pointer;
+}
+
+/* SECTION */
+.section{
+margin:60px 20px;
+text-align:center;
+}
+
+.section h2{margin-bottom:10px;}
+.section p{color:#555;}
+
+/* FORM */
+form{
+max-width:500px;
+margin:20px auto;
+}
+
+input,textarea{
+width:100%;
+padding:10px;
+margin-top:10px;
+border-radius:8px;
+border:1px solid #ccc;
+}
+
+.submit{
+margin-top:15px;
+background:#7c3aed;
+color:white;
+border:none;
+padding:12px;
+border-radius:10px;
+width:100%;
 cursor:pointer;
 }
 
 /* FOOTER */
 .footer{
 text-align:center;
-margin:40px 0;
+margin:40px;
 color:#777;
-font-size:14px;
 }
 </style>
 
@@ -108,56 +110,78 @@ font-size:14px;
 
 <body>
 
-<!-- NAVBAR -->
+<!-- NAV -->
 <nav>
 <div class="logo">YOLO ✏️</div>
-<a href="checkout.html" class="cart-btn">Cart 🛒</a>
+<a href="checkout.html" class="cart">Cart 🛒</a>
 </nav>
 
 <!-- HERO -->
 <div class="hero">
 <h1>YOLO Pencils</h1>
-<p>Create your own custom pencils with style 🎨</p>
+<p>Create your own custom pencils 🎨</p>
 </div>
 
 <!-- PRODUCTS -->
 <div class="products">
 
-<!-- MAXX -->
 <div class="card">
 <h2>🔥</h2>
 <h3>YOLO Maxx</h3>
-<p class="price">₹35</p>
-<button class="btn" onclick="location.href='yolo-maxx.html'">
-Customize
-</button>
+<p>₹35</p>
+<button class="btn" onclick="location.href='yolo-maxx.html'">Customize</button>
 </div>
 
-<!-- LITE -->
 <div class="card">
 <h2>⚡</h2>
 <h3>YOLO Lite</h3>
-<p class="price">₹30</p>
-<button class="btn" onclick="location.href='yolo-lite.html'">
-Customize
-</button>
+<p>₹30</p>
+<button class="btn" onclick="location.href='yolo-lite.html'">Customize</button>
 </div>
 
-<!-- CUSTOM -->
 <div class="card">
 <h2>🎨</h2>
 <h3>Custom Pencil</h3>
-<p class="price">₹20</p>
-<button class="btn" onclick="location.href='custom-pencil.html'">
-Customize
-</button>
+<p>₹20</p>
+<button class="btn" onclick="location.href='custom-pencil.html'">Customize</button>
 </div>
 
+</div>
+
+<!-- YOLO CLUB -->
+<div class="section">
+<h2>YOLO Club 🎉</h2>
+<p>Join YOLO Club for early access, discounts, and exclusive drops.</p>
+
+<form action="https://formbold.com/s/6vKbe" method="POST">
+<input type="hidden" name="formType" value="club">
+
+<input name="name" placeholder="Your Name" required>
+<input name="email" placeholder="Your Email" required>
+
+<button class="submit">Join YOLO Club</button>
+</form>
+</div>
+
+<!-- CONTACT -->
+<div class="section">
+<h2>Contact Us 📩</h2>
+<p>Have questions or bulk orders? Reach out.</p>
+
+<form action="https://formbold.com/s/6vKbe" method="POST">
+<input type="hidden" name="formType" value="contact">
+
+<input name="name" placeholder="Your Name" required>
+<input name="email" placeholder="Your Email" required>
+<textarea name="message" placeholder="Your Message" required></textarea>
+
+<button class="submit">Send Message</button>
+</form>
 </div>
 
 <!-- FOOTER -->
 <div class="footer">
-© 2026 YOLO Pencils • Made with style 😎
+© YOLO Pencils • Built for customization
 </div>
 
 </body>
