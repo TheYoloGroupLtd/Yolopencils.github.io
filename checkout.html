@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<title>Checkout | YOLO</title>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+body{
+font-family:'Poppins',sans-serif;
+margin:0;
+background:linear-gradient(135deg,#ede9fe,#f5f3ff);
+}
+
+nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 8%;
+background:rgba(255,255,255,0.7);
+backdrop-filter:blur(10px);
+}
+
+.container{
+max-width:600px;
+margin:50px auto;
+background:white;
+padding:30px;
+border-radius:20px;
+box-shadow:0 10px 30px rgba(0,0,0,0.08);
+}
+
+h1{
+margin-top:0;
+}
+
+.order-box{
+background:#f5f3ff;
+padding:15px;
+border-radius:12px;
+margin-bottom:20px;
+}
+
+input, textarea{
+width:100%;
+padding:12px;
+border-radius:10px;
+border:1px solid #ccc;
+margin-top:10px;
+}
+
+button{
+margin-top:20px;
+background:#7c3aed;
+color:white;
+border:none;
+padding:12px;
+border-radius:12px;
+cursor:pointer;
+width:100%;
+}
+
+.total{
+font-weight:600;
+margin-top:10px;
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- NAV -->
+<nav>
+<h2>YOLO ✏️</h2>
+<a href="index.html">Back</a>
+</nav>
+
+<div class="container">
+
+<h1>Checkout</h1>
+
+<div class="order-box">
+<h3>Your Order</h3>
+<div id="items"></div>
+<div class="total">Total: ₹<span id="total">0</span></div>
+</div>
+
+<form action="https://formbold.com/s/6vKbe" method="POST">
+
+<input type="hidden" name="formType" value="order">
+
+<input name="name" placeholder="Full Name" required>
+<input name="phone" placeholder="Phone Number" required>
+<textarea name="address" placeholder="Full Address" required></textarea>
+
+<input type="hidden" name="order" id="orderData">
+
+<button type="submit">Place Order</button>
+
+</form>
+
+</div>
+
+<script>
+
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+let itemsDiv = document.getElementById("items");
+let total = 0;
+
+cart.forEach(item => {
+total += item.price;
+itemsDiv.innerHTML += `<p>${item.name} - ₹${item.price}</p>`;
+});
+
+document.getElementById("total").innerText = total;
+
+// Send full cart data
+document.getElementById("orderData").value = JSON.stringify(cart);
+
+</script>
+
+</body>
+</html>
