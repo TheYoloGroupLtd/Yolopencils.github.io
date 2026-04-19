@@ -34,15 +34,23 @@ border-radius:20px;
 box-shadow:0 10px 30px rgba(0,0,0,0.08);
 }
 
-h1{
-margin-top:0;
+.order-item{
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:#f5f3ff;
+padding:10px;
+border-radius:10px;
+margin-bottom:10px;
 }
 
-.order-box{
-background:#f5f3ff;
-padding:15px;
-border-radius:12px;
-margin-bottom:20px;
+.remove-btn{
+background:#ef4444;
+color:white;
+border:none;
+padding:6px 10px;
+border-radius:8px;
+cursor:pointer;
 }
 
 input, textarea{
@@ -53,7 +61,7 @@ border:1px solid #ccc;
 margin-top:10px;
 }
 
-button{
+button.submit{
 margin-top:20px;
 background:#7c3aed;
 color:white;
@@ -66,7 +74,7 @@ width:100%;
 
 .total{
 font-weight:600;
-margin-top:10px;
+margin-top:15px;
 }
 </style>
 
@@ -74,7 +82,6 @@ margin-top:10px;
 
 <body>
 
-<!-- NAV -->
 <nav>
 <h2>YOLO ✏️</h2>
 <a href="index.html">Back</a>
@@ -84,23 +91,22 @@ margin-top:10px;
 
 <h1>Checkout</h1>
 
-<div class="order-box">
-<h3>Your Order</h3>
-<div id="items"></div>
-<div class="total">Total: ₹<span id="total">0</span></div>
+<div id="cartContainer"></div>
+
+<div class="total">
+Total: ₹<span id="total">0</span>
 </div>
 
 <form action="https://formbold.com/s/6vKbe" method="POST">
 
 <input type="hidden" name="formType" value="order">
+<input type="hidden" name="order" id="orderData">
 
 <input name="name" placeholder="Full Name" required>
 <input name="phone" placeholder="Phone Number" required>
 <textarea name="address" placeholder="Full Address" required></textarea>
 
-<input type="hidden" name="order" id="orderData">
-
-<button type="submit">Place Order</button>
+<button class="submit" type="submit">Place Order</button>
 
 </form>
 
@@ -110,18 +116,39 @@ margin-top:10px;
 
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-let itemsDiv = document.getElementById("items");
+function renderCart(){
+
+let container = document.getElementById("cartContainer");
 let total = 0;
 
-cart.forEach(item => {
+container.innerHTML = "";
+
+cart.forEach((item,index)=>{
 total += item.price;
-itemsDiv.innerHTML += `<p>${item.name} - ₹${item.price}</p>`;
+
+container.innerHTML += `
+<div class="order-item">
+<span>${item.name} - ₹${item.price}</span>
+<button class="remove-btn" onclick="removeItem(${index})">X</button>
+</div>
+`;
 });
 
 document.getElementById("total").innerText = total;
 
-// Send full cart data
+// update hidden field
 document.getElementById("orderData").value = JSON.stringify(cart);
+}
+
+// remove item
+function removeItem(index){
+cart.splice(index,1);
+localStorage.setItem("cart", JSON.stringify(cart));
+renderCart();
+}
+
+// initial render
+renderCart();
 
 </script>
 
