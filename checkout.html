@@ -100,7 +100,10 @@ Total: ₹<span id="total">0</span>
 <form action="https://formbold.com/s/6vKbe" method="POST">
 
 <input type="hidden" name="formType" value="order">
-<input type="hidden" name="order" id="orderData">
+
+<!-- CLEAN ORDER FIELDS -->
+<input type="hidden" name="products" id="products">
+<input type="hidden" name="totalAmount" id="totalField">
 
 <input name="name" placeholder="Full Name" required>
 <input name="phone" placeholder="Phone Number" required>
@@ -120,11 +123,16 @@ function renderCart(){
 
 let container = document.getElementById("cartContainer");
 let total = 0;
+let formattedOrder = "";
 
 container.innerHTML = "";
 
 cart.forEach((item,index)=>{
+
 total += item.price;
+
+// build clean order text
+formattedOrder += item.name + " - ₹" + item.price + "\\n";
 
 container.innerHTML += `
 <div class="order-item">
@@ -132,22 +140,23 @@ container.innerHTML += `
 <button class="remove-btn" onclick="removeItem(${index})">X</button>
 </div>
 `;
+
 });
 
 document.getElementById("total").innerText = total;
 
-// update hidden field
-document.getElementById("orderData").value = JSON.stringify(cart);
+// send clean data to Formbold
+document.getElementById("products").value = formattedOrder;
+document.getElementById("totalField").value = total;
 }
 
-// remove item
 function removeItem(index){
 cart.splice(index,1);
 localStorage.setItem("cart", JSON.stringify(cart));
 renderCart();
 }
 
-// initial render
+// initial load
 renderCart();
 
 </script>
