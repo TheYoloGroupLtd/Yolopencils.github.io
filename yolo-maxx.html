@@ -2,33 +2,73 @@
 <html>
 <head>
 <title>YOLO Maxx</title>
+
+<style>
+.color-box{
+width:40px;
+height:25px;
+border:2px solid #555;
+display:inline-block;
+cursor:pointer;
+margin:5px;
+}
+
+.selected{
+border:3px solid black;
+}
+</style>
+
 </head>
 <body>
 
 <h1>YOLO Maxx 🔥 (₹35)</h1>
 
-<input type="color" id="color" value="#ff0000">
-<br><br>
+<!-- COLOR OPTIONS -->
+<div id="colors">
+
+<div class="color-box" style="background:red" onclick="selectColor(this,'#ff0000')"></div>
+<div class="color-box" style="background:blue" onclick="selectColor(this,'#0000ff')"></div>
+<div class="color-box" style="background:green" onclick="selectColor(this,'#00ff00')"></div>
+<div class="color-box" style="background:black" onclick="selectColor(this,'#000000')"></div>
+
+</div>
+
+<br>
 
 <button onclick="addToCart()">Add to Cart</button>
 
 <script>
-function addToCart(){
 
-let color = document.getElementById("color").value;
+let selectedColor = "#ff0000"; // default
+
+function selectColor(el,color){
+
+selectedColor = color;
+
+// remove previous selection
+document.querySelectorAll(".color-box").forEach(box=>{
+box.classList.remove("selected");
+});
+
+// highlight selected
+el.classList.add("selected");
+}
+
+function addToCart(){
 
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 cart.push({
 name: "YOLO Maxx",
 price: 35,
-color: color   // ✅ FIX
+color: selectedColor   // ✅ correct
 });
 
 localStorage.setItem("cart", JSON.stringify(cart));
 
 alert("Added!");
 }
+
 </script>
 
 </body>
