@@ -10,47 +10,96 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
-body{font-family:'Poppins';margin:0;background:linear-gradient(135deg,#ede9fe,#f5f3ff);}
-nav{display:flex;justify-content:space-between;padding:20px 8%;background:rgba(255,255,255,0.7);}
-.container{max-width:650px;margin:50px auto;background:white;padding:30px;border-radius:20px;}
-.order-item{display:flex;justify-content:space-between;align-items:center;background:#f5f3ff;padding:10px;border-radius:10px;margin-bottom:10px;}
-.remove-btn{background:#ef4444;color:white;border:none;padding:6px 10px;border-radius:8px;cursor:pointer;}
-input,textarea{width:100%;padding:12px;margin-top:10px;border-radius:10px;border:1px solid #ccc;}
-button.submit{margin-top:20px;background:#7c3aed;color:white;border:none;padding:12px;border-radius:12px;width:100%;}
-.total{font-weight:600;margin-top:10px;}
+body{
+font-family:Poppins;
+margin:0;
+background:linear-gradient(135deg,#ede9fe,#f5f3ff);
+}
+
+.container{
+max-width:600px;
+margin:50px auto;
+background:white;
+padding:25px;
+border-radius:20px;
+box-shadow:0 10px 25px rgba(0,0,0,0.1);
+}
+
+h2{
+margin-top:0;
+}
+
+.item{
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:#f3f4f6;
+padding:10px;
+margin-bottom:10px;
+border-radius:10px;
+}
+
+.remove-btn{
+background:#ef4444;
+color:white;
+border:none;
+padding:5px 10px;
+border-radius:6px;
+cursor:pointer;
+}
+
+.total{
+font-weight:600;
+margin-top:10px;
+}
+
+input, textarea{
+width:100%;
+padding:10px;
+margin-top:10px;
+border-radius:8px;
+border:1px solid #ccc;
+}
+
+button.submit{
+margin-top:15px;
+background:#7c3aed;
+color:white;
+border:none;
+padding:12px;
+border-radius:10px;
+width:100%;
+cursor:pointer;
+}
+
+.empty{
+text-align:center;
+color:#777;
+}
 </style>
 
 </head>
 
 <body>
 
-<nav>
-<h2>YOLO ✏️</h2>
-<a href="index.html">Back</a>
-</nav>
-
 <div class="container">
 
-<h1>Checkout</h1>
+<h2>Checkout</h2>
 
-<div id="cartContainer"></div>
-<div class="total">Total: ₹<span id="total">0</span></div>
+<div id="cart"></div>
 
-<form id="orderForm" action="https://formbold.com/s/6vKbe" method="POST">
+<div class="total">
+Total: ₹<span id="total">0</span>
+</div>
+
+<form id="form" action="https://formbold.com/s/6vKbe" method="POST">
 
 <input type="hidden" name="formType" value="order">
-
-<!-- PRO DASHBOARD FIELD -->
-<input type="hidden" name="order_summary" id="orderSummary">
-
-<!-- EXTRA META -->
-<input type="hidden" name="order_id" id="orderId">
-<input type="hidden" name="order_time" id="orderTime">
-<input type="hidden" name="totalAmount" id="totalField">
+<input type="hidden" name="order_summary" id="summary">
 
 <input name="name" placeholder="Full Name" required>
 <input name="phone" placeholder="Phone Number" required>
-<textarea name="address" placeholder="Address" required></textarea>
+<textarea name="address" placeholder="Full Address" required></textarea>
 
 <button class="submit" id="submitBtn">Place Order</button>
 
@@ -60,100 +109,81 @@ button.submit{margin-top:20px;background:#7c3aed;color:white;border:none;padding
 
 <script>
 
+// GET CART
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-// COLOR MAP
+// COLOR NAME FUNCTION
 function getColorName(hex){
-const map={
-"#ff0000":"Red","#00ff00":"Green","#0000ff":"Blue",
-"#ffff00":"Yellow","#ffa500":"Orange","#800080":"Purple",
-"#000000":"Black","#ffffff":"White","#808080":"Gray","#ffc0cb":"Pink"
+const map = {
+"#ff0000":"Red",
+"#00ff00":"Green",
+"#0000ff":"Blue",
+"#ffff00":"Yellow",
+"#000000":"Black",
+"#ffffff":"White"
 };
 return map[hex?.toLowerCase()] || hex;
-}
-
-// CREATE FIELD
-function createField(name,value){
-let input=document.createElement("input");
-input.type="hidden";
-input.name=name;
-input.value=value;
-input.classList.add("dyn");
-document.getElementById("orderForm").appendChild(input);
 }
 
 // RENDER CART
 function render(){
 
-let container=document.getElementById("cartContainer");
-let total=0;
-let summary="";
+let cartDiv = document.getElementById("cart");
+let total = 0;
+let summary = "";
 
-container.innerHTML="";
-document.querySelectorAll(".dyn").forEach(e=>e.remove());
+cartDiv.innerHTML = "";
 
-if(cart.length===0){
-container.innerHTML="<p>Cart is empty</p>";
-document.getElementById("submitBtn").disabled=true;
+// EMPTY CART
+if(cart.length === 0){
+cartDiv.innerHTML = "<p class='empty'>Your cart is empty</p>";
+document.getElementById("submitBtn").disabled = true;
 return;
 }
 
-cart.forEach((item,i)=>{
+cart.forEach((item, index) => {
 
-let colorName=getColorName(item.color || "");
+let colorName = getColorName(item.color);
 
-total+=item.price;
+total += item.price;
 
 // UI
-container.innerHTML+=`
-<div class="order-item">
+cartDiv.innerHTML += `
+<div class="item">
 <span>${item.name} (${colorName}) - ₹${item.price}</span>
-<button class="remove-btn" onclick="removeItem(${i})">X</button>
+<button class="remove-btn" onclick="removeItem(${index})">X</button>
 </div>
 `;
 
-// SUMMARY (MAIN DASHBOARD VIEW)
-summary += `Item ${i+1}\n`;
-summary += `Product: ${item.name}\n`;
+// SUMMARY (for dashboard)
+summary += `Item ${index+1}: ${item.name}\n`;
 summary += `Color: ${colorName}\n`;
 summary += `Price: ₹${item.price}\n\n`;
 
-// STRUCTURED FIELDS (BACKGROUND USE)
-createField(`product_${i+1}`,item.name);
-createField(`color_${i+1}`,colorName);
-createField(`price_${i+1}`,item.price);
-
 });
+
+// TOTAL
+document.getElementById("total").innerText = total;
 
 // FINAL SUMMARY
 summary += `Total: ₹${total}`;
-
-// SET VALUES
-document.getElementById("total").innerText=total;
-document.getElementById("orderSummary").value=summary;
-document.getElementById("totalField").value=total;
-
-// ORDER META
-let orderId="YOLO-"+Math.floor(Math.random()*1000000);
-document.getElementById("orderId").value=orderId;
-
-let time=new Date().toLocaleString();
-document.getElementById("orderTime").value=time;
+document.getElementById("summary").value = summary;
 
 }
 
 // REMOVE ITEM
-function removeItem(i){
-cart.splice(i,1);
-localStorage.setItem("cart",JSON.stringify(cart));
+function removeItem(index){
+cart.splice(index,1);
+localStorage.setItem("cart", JSON.stringify(cart));
 render();
 }
 
 // CLEAR CART AFTER ORDER
-document.getElementById("orderForm").addEventListener("submit",()=>{
+document.getElementById("form").addEventListener("submit", () => {
 localStorage.removeItem("cart");
 });
 
+// INIT
 render();
 
 </script>
