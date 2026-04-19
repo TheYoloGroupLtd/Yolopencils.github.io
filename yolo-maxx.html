@@ -1,47 +1,64 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+
 <title>YOLO Maxx</title>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+body{font-family:'Poppins';margin:0;background:linear-gradient(135deg,#ede9fe,#f5f3ff);}
+nav{display:flex;justify-content:space-between;padding:20px 8%;background:white;}
+.container{display:flex;flex-wrap:wrap;gap:50px;padding:80px 8%;align-items:center;}
+.preview{width:320px;height:70px;border-radius:40px;background:#6d28d9;}
+button{background:#7c3aed;color:white;border:none;padding:12px;border-radius:12px;width:100%;margin-top:20px;}
+</style>
+
 </head>
+
 <body>
 
-<h1>YOLO Maxx 🔥 (₹35)</h1>
+<nav>
+<h2>YOLO ✏️</h2>
+<a href="index.html">Back</a>
+</nav>
 
-<!-- BODY COLOR -->
-<p>Body Color:</p>
-<input type="color" id="bodyColor" value="#ffff00">
+<div class="container">
 
-<br><br>
+<div class="preview" id="preview"></div>
 
-<!-- TEXT COLOR -->
-<p>Text Color:</p>
-<input type="color" id="textColor" value="#000000">
+<div>
 
-<br><br>
+<h1>YOLO Maxx 🔥</h1>
+<p>₹199</p>
+
+<label>Choose Color</label>
+<input type="color" id="color" value="#6d28d9" onchange="updatePreview()">
 
 <button onclick="addToCart()">Add to Cart</button>
 
+</div>
+
+</div>
+
 <script>
-
-function addToCart(){
-
-let bodyColor = document.getElementById("bodyColor").value;
-let textColor = document.getElementById("textColor").value;
-
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-cart.push({
-name: "YOLO Maxx",
-price: 35,
-bodyColor: bodyColor,
-textColor: textColor
-});
-
-localStorage.setItem("cart", JSON.stringify(cart));
-
-alert("Added!");
+function updatePreview(){
+document.getElementById("preview").style.background =
+document.getElementById("color").value;
 }
 
+function addToCart(){
+let color=document.getElementById("color").value;
+let cart=JSON.parse(localStorage.getItem("cart"))||[];
+
+cart.push({name:`YOLO Maxx (${color})`,price:199});
+
+localStorage.setItem("cart",JSON.stringify(cart));
+alert("Added to cart!");
+}
 </script>
 
 </body>
