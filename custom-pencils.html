@@ -1,92 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-
-<title>Custom Pencil | YOLO</title>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<title>Custom Pencil</title>
 <style>
-body{font-family:-apple-system;margin:0;background:#f5f3ff;}
-nav{display:flex;justify-content:space-between;padding:15px 30px;background:white;}
-.container{display:flex;flex-wrap:wrap;gap:40px;padding:60px;}
-#preview{width:300px;height:60px;border-radius:30px;background:#6d28d9;color:white;
-display:flex;align-items:center;justify-content:center;font-weight:bold;}
-input,select{width:100%;padding:10px;margin:10px 0;}
-button{background:#6d28d9;color:white;border:none;padding:10px;border-radius:10px;cursor:pointer;}
+body{font-family:Poppins;background:#f5f3ff;text-align:center;margin-top:100px;}
+button{background:#7c3aed;color:white;border:none;padding:10px 20px;border-radius:10px;}
 </style>
-
 </head>
 
 <body>
 
-<nav>
-<h2>YOLO Pencils</h2>
-<a href="index.html">Back</a>
-</nav>
+<h1>Custom Pencil 🎨 (₹20)</h1>
 
-<div class="container">
-
-<div id="preview">YOLO</div>
-
-<div>
-
-<h2>Customize Your Product ✏️</h2>
-
-<select id="type" onchange="updatePreview()">
-<option value="pencil">Pencil</option>
-<option value="pen">Pen</option>
-</select>
-
-<input id="text" placeholder="Enter text" oninput="updatePreview()">
-
-<label>Body Color</label>
-<input type="color" id="color" value="#6d28d9" onchange="updatePreview()">
-
-<label>Text Color</label>
-<input type="color" id="textColor" value="#ffffff" onchange="updatePreview()">
-
-<button onclick="addCustom()">Add to Cart</button>
-
-</div>
-
-</div>
+<input type="color" id="color" value="#0000ff"><br><br>
+<button onclick="addToCart()">Add to Cart</button>
 
 <script>
-
-function updatePreview(){
-let type=document.getElementById("type").value;
-let text=document.getElementById("text").value||"YOLO";
-let color=document.getElementById("color").value;
-let textColor=document.getElementById("textColor").value;
-
-let p=document.getElementById("preview");
-p.innerText=text;
-p.style.background=color;
-p.style.color=textColor;
-
-if(type==="pen"){p.style.height="20px";}
-else{p.style.height="60px";}
-}
-
-function addCustom(){
-let type=document.getElementById("type").value;
-let text=document.getElementById("text").value||"YOLO";
-let price=type==="pen"?149:129;
-
-let cart=JSON.parse(localStorage.getItem("cart"))||[];
-
-cart.push({
-name:`Custom ${type} (${text})`,
-price:price
-});
-
+function addToCart(){
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+cart.push({name:"Custom Pencil",price:20,color:document.getElementById("color").value});
 localStorage.setItem("cart",JSON.stringify(cart));
-
-alert("Added to cart!");
+alert("Added!");
 }
-
 </script>
 
 </body>
