@@ -2,64 +2,31 @@
 <html>
 <head>
 <title>YOLO Maxx</title>
-
-<style>
-.color-box{
-width:40px;
-height:25px;
-border:2px solid #555;
-display:inline-block;
-cursor:pointer;
-margin:5px;
-}
-
-.selected{
-border:3px solid black;
-}
-</style>
-
 </head>
 <body>
 
 <h1>YOLO Maxx 🔥 (₹35)</h1>
 
-<h3>Choose Body Color:</h3>
-<div id="bodyColors">
-<div class="color-box" style="background:yellow" onclick="selectBody(this,'Yellow')"></div>
-<div class="color-box" style="background:blue" onclick="selectBody(this,'Blue')"></div>
-<div class="color-box" style="background:green" onclick="selectBody(this,'Green')"></div>
-<div class="color-box" style="background:black" onclick="selectBody(this,'Black')"></div>
-</div>
+<!-- BODY COLOR -->
+<p>Body Color:</p>
+<input type="color" id="bodyColor" value="#ffff00">
 
-<h3>Choose Text Color:</h3>
-<div id="textColors">
-<div class="color-box" style="background:black" onclick="selectText(this,'Black')"></div>
-<div class="color-box" style="background:red" onclick="selectText(this,'Red')"></div>
-<div class="color-box" style="background:white" onclick="selectText(this,'White')"></div>
-</div>
+<br><br>
 
-<br>
+<!-- TEXT COLOR -->
+<p>Text Color:</p>
+<input type="color" id="textColor" value="#000000">
+
+<br><br>
 
 <button onclick="addToCart()">Add to Cart</button>
 
 <script>
 
-let bodyColor = "Yellow";
-let textColor = "Black";
-
-function selectBody(el,color){
-bodyColor = color;
-document.querySelectorAll("#bodyColors .color-box").forEach(b=>b.classList.remove("selected"));
-el.classList.add("selected");
-}
-
-function selectText(el,color){
-textColor = color;
-document.querySelectorAll("#textColors .color-box").forEach(b=>b.classList.remove("selected"));
-el.classList.add("selected");
-}
-
 function addToCart(){
+
+let bodyColor = document.getElementById("bodyColor").value;
+let textColor = document.getElementById("textColor").value;
 
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
