@@ -54,7 +54,7 @@ function addToCart(){
 let color=document.getElementById("color").value;
 let cart=JSON.parse(localStorage.getItem("cart"))||[];
 
-cart.push({name:`Custom Pencil (${color})`,price:129});
+cart.push({name:`Custom Pencil (${color})`,price:20});
 
 localStorage.setItem("cart",JSON.stringify(cart));
 alert("Added to cart!");
