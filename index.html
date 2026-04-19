@@ -2,362 +2,93 @@
 <html lang="en">
 <head>
 
-<title>YOLO Pencils – Premium Writing & Drawing Tools</title>
+<title>YOLO Pencils</title>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- SEO -->
-<meta name="description" content="YOLO Pencils offers premium pens and pencils for students, artists, and creators. Smooth writing, high quality, and custom designs.">
-
-<!-- FAVICON -->
-<link rel="icon" type="image/png" href="yolo-logo.png">
-
-<!-- SOCIAL PREVIEW -->
-<meta property="og:title" content="YOLO Pencils">
-<meta property="og:description" content="Premium writing tools for creators.">
-<meta property="og:image" content="yolo-logo.png">
-
-<script src='https://www.noupe.com/embed/019beb1020a87e669009e2d22f80692045cb.js'></script>
-
 <style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:-apple-system;
-}
-
-body{
-background:linear-gradient(135deg,#ffffff,#f5f3ff,#ede9fe);
-color:#1f2937;
-}
-
-/* NAV */
-nav{
-position:fixed;
-top:20px;
-left:50%;
-transform:translateX(-50%);
-width:92%;
-padding:14px 20px;
-background:rgba(255,255,255,0.6);
-backdrop-filter:blur(20px);
-border-radius:30px;
-display:flex;
-justify-content:space-between;
-z-index:1000;
-}
-
-nav a{
-text-decoration:none;
-color:#6d28d9;
-margin-left:15px;
-font-weight:600;
-}
-
-/* HERO */
-.hero{
-min-height:100vh;
-display:flex;
-align-items:center;
-justify-content:center;
-padding:0 8%;
-}
-
-.hero-container{
-display:flex;
-justify-content:space-between;
-align-items:flex-start;
-width:100%;
-max-width:1200px;
-gap:80px;
-}
-
-/* TEXT */
-.hero-text h1{
-font-size:70px;
-background:linear-gradient(135deg,#6d28d9,#a78bfa);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-line-height:1.1;
-}
-
-.hero-text p{
-margin-top:15px;
-font-size:20px;
-color:#4b5563;
-}
-
-/* LOGO FULLY VISIBLE */
-.logo-wrapper{
-display:flex;
-align-items:center;
-height:100px;
-}
-
-.logo{
-width:260px;
-height:260px;
-border-radius:50%;
-background:linear-gradient(135deg,#ddd6fe,#c4b5fd);
-display:flex;
-align-items:center;
-justify-content:center;
-box-shadow:0 30px 100px rgba(109,40,217,0.25);
-overflow:hidden;
-border:6px solid #ffffff;
-transform:translateY(-40px);
-padding:20px; /* space so logo not cropped */
-}
-
-.logo img{
-width:100%;
-height:auto;
-object-fit:contain; /* FULLY visible */
-}
-
-/* PRODUCTS */
-.products{
-padding:100px 8%;
-text-align:center;
-}
-
-.products h2{
-font-size:36px;
-}
-
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-gap:30px;
-margin-top:40px;
-}
-
-.card{
-background:rgba(255,255,255,0.7);
-padding:30px;
-border-radius:25px;
-transition:0.3s;
-box-shadow:0 10px 30px rgba(0,0,0,0.05);
-}
-
-.card:hover{
-transform:translateY(-8px);
-}
-
-.card h3{
-color:#6d28d9;
-margin-bottom:10px;
-font-size:22px;
-}
-
-.card a{
-display:inline-block;
-margin-top:10px;
-padding:10px 18px;
-border-radius:20px;
-background:#6d28d9;
-color:white;
-text-decoration:none;
-}
-
-/* WHY */
-.why{
-padding:100px 8%;
-text-align:center;
-}
-
-.why-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:30px;
-margin-top:40px;
-}
-
-.why-box{
-background:rgba(255,255,255,0.6);
-padding:40px;
-border-radius:25px;
-}
-
-/* CLUB */
-.club{
-padding:80px 8%;
-text-align:center;
-background:linear-gradient(135deg,#ede9fe,#ddd6fe);
-border-radius:40px;
-margin:40px;
-}
-
-/* CONTACT */
-.contact{
-padding:80px 8%;
-text-align:center;
-background:linear-gradient(135deg,#fff,#ede9fe,#ddd6fe);
-border-radius:40px;
-margin:40px;
-}
-
-/* FORM */
-form{
-display:flex;
-flex-direction:column;
-align-items:center;
-gap:12px;
-margin-top:20px;
-}
-
-input,textarea{
-width:320px;
-padding:14px;
-border-radius:20px;
-border:1px solid #ddd;
-}
-
-button{
-padding:14px 20px;
-border:none;
-border-radius:20px;
-background:#6d28d9;
-color:white;
-cursor:pointer;
-}
-
-/* MOBILE */
-@media(max-width:768px){
-.hero-container{
-flex-direction:column;
-align-items:center;
-text-align:center;
-gap:40px;
-}
-.hero-text h1{font-size:42px;}
-.logo{
-transform:none;
-width:200px;
-height:200px;
-}
-input,textarea,button{width:90%;}
-}
+body{font-family:-apple-system;margin:0;background:#f5f3ff;}
+nav{display:flex;justify-content:space-between;padding:15px 30px;background:white;}
+button{background:#6d28d9;color:white;border:none;padding:10px 15px;border-radius:10px;}
+.products{padding:50px;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;}
+.card{background:white;padding:20px;border-radius:20px;}
+.cart{position:fixed;right:0;top:0;width:320px;height:100%;background:white;padding:20px;overflow:auto;}
+.hidden{display:none;}
 </style>
 
 </head>
 
 <body>
 
-<!-- NAV -->
 <nav>
-<div><strong>YOLO</strong></div>
-<div>
-<a href="#products">Products</a>
-<a href="#club">YOLO Club</a>
-<a href="#contact">Contact</a>
-</div>
+<h2>YOLO Pencils</h2>
+<button onclick="toggleCart()">Cart (<span id="count">0</span>)</button>
 </nav>
 
-<!-- HERO -->
-<section class="hero">
-
-<div class="hero-container">
-
-<div class="hero-text">
-<h1>YOLO Pencils</h1>
-<p>Ultra smooth. Premium build. Write better.</p>
-</div>
-
-<div class="logo-wrapper">
-<div class="logo">
-<img src="yolo-logo.png">
-</div>
-</div>
-
-</div>
-
-</section>
-
-<!-- PRODUCTS -->
-<section class="products" id="products">
-
-<h2>Our Products</h2>
-
-<div class="grid">
+<div class="products">
 
 <div class="card">
-<h3>🔥 YOLO Maxx</h3>
-<p>Premium smooth-flow pen</p>
-<a href="yolo-maxx.html">View</a>
+<h3>YOLO Maxx 🔥</h3>
+<p>₹199</p>
+<button onclick="addToCart('YOLO Maxx',199)">Add</button>
 </div>
 
 <div class="card">
-<h3>⚡ YOLO Lite</h3>
-<p>Lightweight everyday pen</p>
-<a href="yolo-lite.html">View</a>
+<h3>YOLO Lite ⚡</h3>
+<p>₹99</p>
+<button onclick="addToCart('YOLO Lite',99)">Add</button>
 </div>
 
 <div class="card">
-<h3>🎨 Custom Pencils</h3>
-<p>Personalized designs</p>
-<a href="custom-pencils.html">View</a>
+<h3>Custom Pencil 🎨</h3>
+<p>From ₹129</p>
+<button onclick="location.href='custom.html'">Customize</button>
 </div>
 
 </div>
 
-</section>
-
-<!-- WHY -->
-<section class="why">
-
-<h2>Why YOLO?</h2>
-
-<div class="why-grid">
-
-<div class="why-box">Ultra Smooth Writing</div>
-<div class="why-box">Premium Build Quality</div>
-<div class="why-box">Designed for Students & Creators</div>
-
+<div id="cart" class="cart hidden">
+<h2>Your Cart</h2>
+<div id="items"></div>
+<h3>Total: ₹<span id="total">0</span></h3>
+<button onclick="checkout()">Place Order</button>
 </div>
 
-</section>
+<script>
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-<!-- YOLO CLUB -->
-<section class="club" id="club">
+function saveCart(){
+localStorage.setItem("cart", JSON.stringify(cart));
+}
 
-<h2>Join YOLO Club</h2>
-<p>Get exclusive drops, offers & early access 👀</p>
+function addToCart(name,price){
+cart.push({name,price});
+saveCart();
+updateCart();
+}
 
-<form action="https://formbold.com/s/6vKbe" method="POST">
+function updateCart(){
+let items=document.getElementById("items");
+let total=0;
+items.innerHTML="";
+cart.forEach(item=>{
+total+=item.price;
+items.innerHTML+=`<p>${item.name} - ₹${item.price}</p>`;
+});
+document.getElementById("total").innerText=total;
+document.getElementById("count").innerText=cart.length;
+}
+updateCart();
 
-<input type="text" name="name" placeholder="Name">
-<input type="email" name="email" placeholder="Email" required>
+function toggleCart(){
+document.getElementById("cart").classList.toggle("hidden");
+}
 
-<button type="submit">Join Now</button>
-
-</form>
-
-</section>
-
-<!-- CONTACT -->
-<section class="contact" id="contact">
-
-<h2>Contact Us</h2>
-
-<form action="https://formbold.com/s/6vKbe" method="POST">
-
-<input type="text" name="name" placeholder="Name" required>
-<input type="email" name="email" placeholder="Email" required>
-
-<textarea name="message" placeholder="Your message"></textarea>
-
-<button type="submit">Send Message</button>
-
-</form>
-
-<p style="margin-top:20px;">
-Or email: <b>yologroupltd@outlook.com</b>
-</p>
-
-</section>
+function checkout(){
+window.location.href="checkout.html";
+}
+</script>
 
 </body>
 </html>
