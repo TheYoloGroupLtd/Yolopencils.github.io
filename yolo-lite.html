@@ -33,7 +33,7 @@ button{background:#7c3aed;color:white;border:none;padding:12px;border-radius:12p
 <div>
 
 <h1>YOLO Lite ⚡</h1>
-<p>₹99</p>
+<p>₹25</p>
 
 <label>Choose Color</label>
 <input type="color" id="color" value="#6d28d9" onchange="updatePreview()">
@@ -54,7 +54,7 @@ function addToCart(){
 let color=document.getElementById("color").value;
 let cart=JSON.parse(localStorage.getItem("cart"))||[];
 
-cart.push({name:`YOLO Lite (${color})`,price:99});
+cart.push({name:`YOLO Lite (${color})`,price:25});
 
 localStorage.setItem("cart",JSON.stringify(cart));
 alert("Added to cart!");
