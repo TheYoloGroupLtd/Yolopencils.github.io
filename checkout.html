@@ -11,70 +11,62 @@
 
 <style>
 body{
-font-family:Poppins;
+font-family:'Poppins',sans-serif;
 margin:0;
 background:linear-gradient(135deg,#ede9fe,#f5f3ff);
+}
+
+nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 8%;
+background:rgba(255,255,255,0.7);
+backdrop-filter:blur(10px);
 }
 
 .container{
 max-width:600px;
 margin:50px auto;
 background:white;
-padding:25px;
+padding:30px;
 border-radius:20px;
-box-shadow:0 10px 25px rgba(0,0,0,0.1);
+box-shadow:0 10px 30px rgba(0,0,0,0.08);
 }
 
-h2{
+h1{
 margin-top:0;
 }
 
-.item{
-display:flex;
-justify-content:space-between;
-align-items:center;
-background:#f3f4f6;
-padding:10px;
-margin-bottom:10px;
-border-radius:10px;
+.order-box{
+background:#f5f3ff;
+padding:15px;
+border-radius:12px;
+margin-bottom:20px;
 }
 
-.remove-btn{
-background:#ef4444;
+input, textarea{
+width:100%;
+padding:12px;
+border-radius:10px;
+border:1px solid #ccc;
+margin-top:10px;
+}
+
+button{
+margin-top:20px;
+background:#7c3aed;
 color:white;
 border:none;
-padding:5px 10px;
-border-radius:6px;
+padding:12px;
+border-radius:12px;
 cursor:pointer;
+width:100%;
 }
 
 .total{
 font-weight:600;
 margin-top:10px;
-}
-
-input, textarea{
-width:100%;
-padding:10px;
-margin-top:10px;
-border-radius:8px;
-border:1px solid #ccc;
-}
-
-button.submit{
-margin-top:15px;
-background:#7c3aed;
-color:white;
-border:none;
-padding:12px;
-border-radius:10px;
-width:100%;
-cursor:pointer;
-}
-
-.empty{
-text-align:center;
-color:#777;
 }
 </style>
 
@@ -82,26 +74,33 @@ color:#777;
 
 <body>
 
+<!-- NAV -->
+<nav>
+<h2>YOLO ✏️</h2>
+<a href="index.html">Back</a>
+</nav>
+
 <div class="container">
 
-<h2>Checkout</h2>
+<h1>Checkout</h1>
 
-<div id="cart"></div>
-
-<div class="total">
-Total: ₹<span id="total">0</span>
+<div class="order-box">
+<h3>Your Order</h3>
+<div id="items"></div>
+<div class="total">Total: ₹<span id="total">0</span></div>
 </div>
 
-<form id="form" action="https://formbold.com/s/6vKbe" method="POST">
+<form action="https://formbold.com/s/6vKbe" method="POST">
 
 <input type="hidden" name="formType" value="order">
-<input type="hidden" name="order_summary" id="summary">
 
 <input name="name" placeholder="Full Name" required>
 <input name="phone" placeholder="Phone Number" required>
 <textarea name="address" placeholder="Full Address" required></textarea>
 
-<button class="submit" id="submitBtn">Place Order</button>
+<input type="hidden" name="order" id="orderData">
+
+<button type="submit">Place Order</button>
 
 </form>
 
@@ -109,82 +108,20 @@ Total: ₹<span id="total">0</span>
 
 <script>
 
-// GET CART
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-// COLOR NAME FUNCTION
-function getColorName(hex){
-const map = {
-"#ff0000":"Red",
-"#00ff00":"Green",
-"#0000ff":"Blue",
-"#ffff00":"Yellow",
-"#000000":"Black",
-"#ffffff":"White"
-};
-return map[hex?.toLowerCase()] || hex;
-}
-
-// RENDER CART
-function render(){
-
-let cartDiv = document.getElementById("cart");
+let itemsDiv = document.getElementById("items");
 let total = 0;
-let summary = "";
 
-cartDiv.innerHTML = "";
-
-// EMPTY CART
-if(cart.length === 0){
-cartDiv.innerHTML = "<p class='empty'>Your cart is empty</p>";
-document.getElementById("submitBtn").disabled = true;
-return;
-}
-
-cart.forEach((item, index) => {
-
-let colorName = getColorName(item.color);
-
+cart.forEach(item => {
 total += item.price;
-
-// UI
-cartDiv.innerHTML += `
-<div class="item">
-<span>${item.name} (${colorName}) - ₹${item.price}</span>
-<button class="remove-btn" onclick="removeItem(${index})">X</button>
-</div>
-`;
-
-// SUMMARY (for dashboard)
-summary += `Item ${index+1}: ${item.name}\n`;
-summary += `Color: ${colorName}\n`;
-summary += `Price: ₹${item.price}\n\n`;
-
+itemsDiv.innerHTML += `<p>${item.name} - ₹${item.price}</p>`;
 });
 
-// TOTAL
 document.getElementById("total").innerText = total;
 
-// FINAL SUMMARY
-summary += `Total: ₹${total}`;
-document.getElementById("summary").value = summary;
-
-}
-
-// REMOVE ITEM
-function removeItem(index){
-cart.splice(index,1);
-localStorage.setItem("cart", JSON.stringify(cart));
-render();
-}
-
-// CLEAR CART AFTER ORDER
-document.getElementById("form").addEventListener("submit", () => {
-localStorage.removeItem("cart");
-});
-
-// INIT
-render();
+// Send full cart data
+document.getElementById("orderData").value = JSON.stringify(cart);
 
 </script>
 
