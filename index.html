@@ -14,7 +14,6 @@ body{
 font-family:'Poppins',sans-serif;
 margin:0;
 background:linear-gradient(135deg,#ede9fe,#f5f3ff);
-color:#111;
 }
 
 nav{
@@ -24,13 +23,21 @@ align-items:center;
 padding:20px 8%;
 background:rgba(255,255,255,0.7);
 backdrop-filter:blur(10px);
-position:sticky;
-top:0;
 }
 
 .logo{
+display:flex;
+align-items:center;
+gap:10px;
 font-weight:600;
 font-size:20px;
+}
+
+.logo img{
+width:40px;
+height:40px;
+border-radius:50%;
+object-fit:cover;
 }
 
 button{
@@ -40,25 +47,11 @@ border:none;
 padding:10px 18px;
 border-radius:12px;
 cursor:pointer;
-transition:0.3s;
-}
-
-button:hover{
-background:#6d28d9;
 }
 
 .hero{
 padding:100px 8%;
 text-align:center;
-}
-
-.hero h1{
-font-size:42px;
-margin-bottom:10px;
-}
-
-.hero p{
-opacity:0.7;
 }
 
 .products{
@@ -73,15 +66,6 @@ background:white;
 padding:25px;
 border-radius:20px;
 box-shadow:0 10px 30px rgba(0,0,0,0.08);
-transition:0.3s;
-}
-
-.card:hover{
-transform:translateY(-5px);
-}
-
-.card h3{
-margin-top:0;
 }
 
 .section{
@@ -102,6 +86,20 @@ padding:20px;
 border-radius:15px;
 }
 
+form{
+max-width:400px;
+margin:30px auto;
+display:flex;
+flex-direction:column;
+gap:10px;
+}
+
+input, textarea{
+padding:12px;
+border-radius:10px;
+border:1px solid #ccc;
+}
+
 .cart{
 position:fixed;
 right:0;
@@ -118,7 +116,6 @@ transition:0.3s;
 .cart.open{
 transform:translateX(0);
 }
-
 </style>
 
 </head>
@@ -127,14 +124,17 @@ transform:translateX(0);
 
 <!-- NAV -->
 <nav>
-<div class="logo">YOLO ✏️</div>
+<div class="logo">
+<img src="logo.png">
+YOLO
+</div>
 <button onclick="toggleCart()">Cart (<span id="count">0</span>)</button>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
 <h1>Write Your Story with YOLO</h1>
-<p>Premium pencils built for students who want style + performance</p>
+<p>Premium pencils built for students</p>
 </section>
 
 <!-- PRODUCTS -->
@@ -143,19 +143,19 @@ transform:translateX(0);
 <div class="card">
 <h3>YOLO Maxx 🔥</h3>
 <p>₹199</p>
-<button onclick="addToCart('YOLO Maxx',199)">Add to Cart</button>
+<button onclick="location.href='custom-pencils.html?product=Maxx&price=199'">Customize</button>
 </div>
 
 <div class="card">
 <h3>YOLO Lite ⚡</h3>
 <p>₹99</p>
-<button onclick="addToCart('YOLO Lite',99)">Add to Cart</button>
+<button onclick="location.href='custom-pencils.html?product=Lite&price=99'">Customize</button>
 </div>
 
 <div class="card">
 <h3>Custom Pencil 🎨</h3>
-<p>From ₹129</p>
-<button onclick="location.href='custom-pencils.html'">Customize</button>
+<p>₹129</p>
+<button onclick="location.href='custom-pencils.html?product=Custom&price=129'">Customize</button>
 </div>
 
 </div>
@@ -163,25 +163,52 @@ transform:translateX(0);
 <!-- YOLO CLUB -->
 <section class="section">
 <h2>YOLO Club 🎉</h2>
-<p>Join the club and unlock exclusive perks</p>
+<p>Join and get exclusive benefits</p>
 
 <div class="features">
-<div class="feature">🎁 Freebies on orders</div>
-<div class="feature">⚡ Early product access</div>
-<div class="feature">💸 Special discounts</div>
+<div class="feature">🎁 Freebies</div>
+<div class="feature">⚡ Early access</div>
+<div class="feature">💸 Discounts</div>
 </div>
+
+<form action="https://formbold.com/s/6vKbe" method="POST">
+<input type="hidden" name="formType" value="club">
+
+<input name="name" placeholder="Your Name" required>
+<input name="email" placeholder="Your Email" required>
+
+<button type="submit">Join YOLO Club</button>
+</form>
+
 </section>
 
 <!-- BENEFITS -->
 <section class="section">
 <h2>Why YOLO?</h2>
-
 <div class="features">
 <div class="feature">✨ Smooth writing</div>
-<div class="feature">💪 Strong graphite</div>
-<div class="feature">🎨 Custom designs</div>
+<div class="feature">💪 Strong build</div>
+<div class="feature">🎨 Custom colors</div>
 <div class="feature">🚀 Fast delivery</div>
 </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section">
+<h2>Contact Us 📩</h2>
+
+<form action="https://formbold.com/s/6vKbe" method="POST">
+
+<input type="hidden" name="formType" value="contact">
+
+<input name="name" placeholder="Your Name" required>
+<input name="email" placeholder="Your Email" required>
+<textarea name="message" placeholder="Your Message" required></textarea>
+
+<button type="submit">Send Message</button>
+
+</form>
+
 </section>
 
 <!-- CART -->
@@ -200,26 +227,17 @@ function saveCart(){
 localStorage.setItem("cart", JSON.stringify(cart));
 }
 
-function addToCart(name,price){
-cart.push({name,price});
-saveCart();
-updateCart();
-}
-
 function updateCart(){
 let items=document.getElementById("items");
 let total=0;
 items.innerHTML="";
-
 cart.forEach(item=>{
 total+=item.price;
 items.innerHTML+=`<p>${item.name} - ₹${item.price}</p>`;
 });
-
 document.getElementById("total").innerText=total;
 document.getElementById("count").innerText=cart.length;
 }
-
 updateCart();
 
 function toggleCart(){
