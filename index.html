@@ -7,13 +7,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- SEO -->
-<meta name="description" content="YOLO Pencils offers premium pens and pencils for students, artists, and creators. Smooth writing, high quality, and custom designs.">
+<meta name="description" content="YOLO Pencils offers premium pens and pencils for students, artists, and creators.">
 
-<!-- FAVICON -->
 <link rel="icon" type="image/png" href="yolo-logo.png">
 
-<!-- SOCIAL PREVIEW -->
 <meta property="og:title" content="YOLO Pencils">
 <meta property="og:description" content="Premium writing tools for creators.">
 <meta property="og:image" content="yolo-logo.png">
@@ -21,12 +18,7 @@
 <script src='https://www.noupe.com/embed/019beb1020a87e669009e2d22f80692045cb.js'></script>
 
 <style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:-apple-system;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system;}
 
 body{
 background:linear-gradient(135deg,#ffffff,#f5f3ff,#ede9fe);
@@ -56,6 +48,14 @@ margin-left:15px;
 font-weight:600;
 }
 
+/* CART BUTTON */
+#cartBtn{
+background:#6d28d9;
+color:white;
+padding:6px 14px;
+border-radius:20px;
+}
+
 /* HERO */
 .hero{
 min-height:100vh;
@@ -74,7 +74,6 @@ max-width:1200px;
 gap:80px;
 }
 
-/* TEXT */
 .hero-text h1{
 font-size:70px;
 background:linear-gradient(135deg,#6d28d9,#a78bfa);
@@ -89,7 +88,7 @@ font-size:20px;
 color:#4b5563;
 }
 
-/* LOGO FULLY VISIBLE */
+/* LOGO */
 .logo-wrapper{
 display:flex;
 align-items:center;
@@ -108,13 +107,13 @@ box-shadow:0 30px 100px rgba(109,40,217,0.25);
 overflow:hidden;
 border:6px solid #ffffff;
 transform:translateY(-40px);
-padding:20px; /* space so logo not cropped */
+padding:20px;
 }
 
 .logo img{
 width:100%;
 height:auto;
-object-fit:contain; /* FULLY visible */
+object-fit:contain;
 }
 
 /* PRODUCTS */
@@ -253,14 +252,13 @@ input,textarea,button{width:90%;}
 <a href="#products">Products</a>
 <a href="#club">YOLO Club</a>
 <a href="#contact">Contact</a>
+<a href="checkout.html" id="cartBtn">Cart 🛒 (<span id="cartCount">0</span>)</a>
 </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-
 <div class="hero-container">
-
 <div class="hero-text">
 <h1>YOLO Pencils</h1>
 <p>Ultra smooth. Premium build. Write better.</p>
@@ -273,7 +271,6 @@ input,textarea,button{width:90%;}
 </div>
 
 </div>
-
 </section>
 
 <!-- PRODUCTS -->
@@ -298,7 +295,7 @@ input,textarea,button{width:90%;}
 <div class="card">
 <h3>🎨 Custom Pencils</h3>
 <p>Personalized designs</p>
-<a href="custom-pencils.html">View</a>
+<a href="custom-pencil.html">View</a>
 </div>
 
 </div>
@@ -307,57 +304,47 @@ input,textarea,button{width:90%;}
 
 <!-- WHY -->
 <section class="why">
-
 <h2>Why YOLO?</h2>
-
 <div class="why-grid">
-
 <div class="why-box">Ultra Smooth Writing</div>
 <div class="why-box">Premium Build Quality</div>
 <div class="why-box">Designed for Students & Creators</div>
-
 </div>
-
 </section>
 
 <!-- YOLO CLUB -->
 <section class="club" id="club">
-
 <h2>Join YOLO Club</h2>
 <p>Get exclusive drops, offers & early access 👀</p>
-
 <form action="https://formbold.com/s/6vKbe" method="POST">
-
 <input type="text" name="name" placeholder="Name">
 <input type="email" name="email" placeholder="Email" required>
-
 <button type="submit">Join Now</button>
-
 </form>
-
 </section>
 
 <!-- CONTACT -->
 <section class="contact" id="contact">
-
 <h2>Contact Us</h2>
-
 <form action="https://formbold.com/s/6vKbe" method="POST">
-
 <input type="text" name="name" placeholder="Name" required>
 <input type="email" name="email" placeholder="Email" required>
-
 <textarea name="message" placeholder="Your message"></textarea>
-
 <button type="submit">Send Message</button>
-
 </form>
-
 <p style="margin-top:20px;">
 Or email: <b>yologroupltd@outlook.com</b>
 </p>
-
 </section>
+
+<!-- SCRIPT -->
+<script>
+function updateCartCount(){
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+document.getElementById("cartCount").innerText = cart.length;
+}
+updateCartCount();
+</script>
 
 </body>
 </html>
