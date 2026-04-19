@@ -1,48 +1,163 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <title>YOLO Pencils</title>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
-body{font-family:Poppins;margin:0;background:linear-gradient(135deg,#ede9fe,#f5f3ff);}
-nav{display:flex;justify-content:space-between;padding:20px;background:white;}
-.products{display:flex;gap:20px;justify-content:center;margin-top:60px;flex-wrap:wrap;}
-.card{background:white;padding:20px;border-radius:15px;width:220px;text-align:center;box-shadow:0 10px 20px rgba(0,0,0,0.08);}
-button{background:#7c3aed;color:white;border:none;padding:10px;border-radius:10px;cursor:pointer;}
+body{
+font-family:'Poppins',sans-serif;
+margin:0;
+background:linear-gradient(135deg,#ede9fe,#f5f3ff);
+}
+
+/* NAVBAR */
+nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 8%;
+background:rgba(255,255,255,0.8);
+backdrop-filter:blur(10px);
+}
+
+.logo{
+font-size:22px;
+font-weight:600;
+}
+
+.cart-btn{
+background:#7c3aed;
+color:white;
+padding:8px 16px;
+border-radius:10px;
+text-decoration:none;
+}
+
+/* HERO */
+.hero{
+text-align:center;
+margin-top:60px;
+}
+
+.hero h1{
+font-size:40px;
+margin-bottom:10px;
+}
+
+.hero p{
+color:#666;
+}
+
+/* PRODUCTS */
+.products{
+display:flex;
+justify-content:center;
+gap:30px;
+flex-wrap:wrap;
+margin:50px 8%;
+}
+
+.card{
+background:white;
+padding:25px;
+border-radius:20px;
+width:240px;
+text-align:center;
+box-shadow:0 10px 25px rgba(0,0,0,0.08);
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-5px);
+}
+
+.card h3{
+margin:10px 0;
+}
+
+.price{
+font-weight:600;
+margin-bottom:15px;
+}
+
+.btn{
+background:#7c3aed;
+color:white;
+border:none;
+padding:10px 15px;
+border-radius:10px;
+cursor:pointer;
+}
+
+/* FOOTER */
+.footer{
+text-align:center;
+margin:40px 0;
+color:#777;
+font-size:14px;
+}
 </style>
+
 </head>
 
 <body>
 
+<!-- NAVBAR -->
 <nav>
-<h2>YOLO ✏️</h2>
-<a href="checkout.html">Cart 🛒</a>
+<div class="logo">YOLO ✏️</div>
+<a href="checkout.html" class="cart-btn">Cart 🛒</a>
 </nav>
 
+<!-- HERO -->
+<div class="hero">
+<h1>YOLO Pencils</h1>
+<p>Create your own custom pencils with style 🎨</p>
+</div>
+
+<!-- PRODUCTS -->
 <div class="products">
 
+<!-- MAXX -->
 <div class="card">
-<h3>YOLO Maxx 🔥</h3>
-<p>₹35</p>
-<button onclick="location.href='yolo-maxx.html'">Customize</button>
+<h2>🔥</h2>
+<h3>YOLO Maxx</h3>
+<p class="price">₹35</p>
+<button class="btn" onclick="location.href='yolo-maxx.html'">
+Customize
+</button>
 </div>
 
+<!-- LITE -->
 <div class="card">
-<h3>YOLO Lite ⚡</h3>
-<p>₹30</p>
-<button onclick="location.href='yolo-lite.html'">Customize</button>
+<h2>⚡</h2>
+<h3>YOLO Lite</h3>
+<p class="price">₹30</p>
+<button class="btn" onclick="location.href='yolo-lite.html'">
+Customize
+</button>
 </div>
 
+<!-- CUSTOM -->
 <div class="card">
-<h3>Custom Pencil 🎨</h3>
-<p>₹20</p>
-<button onclick="location.href='custom-pencil.html'">Customize</button>
+<h2>🎨</h2>
+<h3>Custom Pencil</h3>
+<p class="price">₹20</p>
+<button class="btn" onclick="location.href='custom-pencil.html'">
+Customize
+</button>
 </div>
 
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+© 2026 YOLO Pencils • Made with style 😎
 </div>
 
 </body>
