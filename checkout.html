@@ -74,7 +74,6 @@ margin-top:10px;
 
 <body>
 
-<!-- NAV -->
 <nav>
 <h2>YOLO ✏️</h2>
 <a href="index.html">Back</a>
@@ -98,7 +97,11 @@ margin-top:10px;
 <input name="phone" placeholder="Phone Number" required>
 <textarea name="address" placeholder="Full Address" required></textarea>
 
+<!-- FULL CART DATA -->
 <input type="hidden" name="order" id="orderData">
+
+<!-- COLOR DATA (NEW FIX) -->
+<input type="hidden" name="color_data" id="colorData">
 
 <button type="submit">Place Order</button>
 
@@ -113,15 +116,29 @@ let cart = JSON.parse(localStorage.getItem("cart")) || [];
 let itemsDiv = document.getElementById("items");
 let total = 0;
 
-cart.forEach(item => {
+let colorSummary = "";
+let summary = "";
+
+cart.forEach((item, i) => {
 total += item.price;
+
 itemsDiv.innerHTML += `<p>${item.name} - ₹${item.price}</p>`;
+
+// full summary
+summary += `${item.name} (${item.color}) - ₹${item.price}\n`;
+
+// color only summary
+colorSummary += `${item.name}: ${item.color}\n`;
 });
 
+// display total
 document.getElementById("total").innerText = total;
 
-// Send full cart data
+// send full cart JSON
 document.getElementById("orderData").value = JSON.stringify(cart);
+
+// send color summary
+document.getElementById("colorData").value = colorSummary;
 
 </script>
 
