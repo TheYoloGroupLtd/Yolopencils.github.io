@@ -1,72 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-
-<title>Checkout | YOLO</title>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<title>Checkout</title>
 
 <style>
 body{
-font-family:'Poppins',sans-serif;
-margin:0;
-background:linear-gradient(135deg,#ede9fe,#f5f3ff);
-}
-
-nav{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:20px 8%;
-background:rgba(255,255,255,0.7);
-backdrop-filter:blur(10px);
+font-family:Arial;
+background:#f5f3ff;
 }
 
 .container{
 max-width:600px;
-margin:50px auto;
+margin:auto;
 background:white;
-padding:30px;
-border-radius:20px;
-box-shadow:0 10px 30px rgba(0,0,0,0.08);
+padding:20px;
+border-radius:15px;
 }
 
-h1{
-margin-top:0;
-}
-
-.order-box{
-background:#f5f3ff;
-padding:15px;
-border-radius:12px;
-margin-bottom:20px;
-}
-
-input, textarea{
-width:100%;
-padding:12px;
-border-radius:10px;
-border:1px solid #ccc;
-margin-top:10px;
+.item{
+display:flex;
+justify-content:space-between;
+background:#eee;
+padding:10px;
+margin:5px 0;
 }
 
 button{
-margin-top:20px;
-background:#7c3aed;
-color:white;
-border:none;
-padding:12px;
-border-radius:12px;
 cursor:pointer;
-width:100%;
-}
-
-.total{
-font-weight:600;
-margin-top:10px;
 }
 </style>
 
@@ -74,34 +34,20 @@ margin-top:10px;
 
 <body>
 
-<nav>
-<h2>YOLO ✏️</h2>
-<a href="index.html">Back</a>
-</nav>
-
 <div class="container">
 
-<h1>Checkout</h1>
+<h2>Checkout</h2>
 
-<div class="order-box">
-<h3>Your Order</h3>
-<div id="items"></div>
-<div class="total">Total: ₹<span id="total">0</span></div>
-</div>
+<div id="cart"></div>
+<h3>Total: ₹<span id="total">0</span></h3>
 
-<form action="https://formbold.com/s/6vKbe" method="POST">
+<form id="form" action="https://formbold.com/s/6vKbe" method="POST">
 
-<input type="hidden" name="formType" value="order">
+<input type="hidden" name="order_summary" id="summary">
 
-<input name="name" placeholder="Full Name" required>
-<input name="phone" placeholder="Phone Number" required>
-<textarea name="address" placeholder="Full Address" required></textarea>
-
-<!-- FULL CART DATA -->
-<input type="hidden" name="order" id="orderData">
-
-<!-- COLOR DATA (NEW FIX) -->
-<input type="hidden" name="color_data" id="colorData">
+<input name="name" placeholder="Name" required><br><br>
+<input name="phone" placeholder="Phone" required><br><br>
+<textarea name="address" placeholder="Address" required></textarea><br><br>
 
 <button type="submit">Place Order</button>
 
@@ -111,36 +57,75 @@ margin-top:10px;
 
 <script>
 
+// ALWAYS START CLEAN IF DATA IS BROKEN
+// (run once manually if needed)
+// localStorage.clear();
+
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-let itemsDiv = document.getElementById("items");
 let total = 0;
 
-let colorSummary = "";
-let summary = "";
+// RENDER CART
+function render(){
 
-cart.forEach((item, i) => {
+document.getElementById("cart").innerHTML = "";
+total = 0;
+
+if(cart.length === 0){
+document.getElementById("cart").innerHTML = "Cart is empty";
+document.getElementById("total").innerText = 0;
+return;
+}
+
+cart.forEach((item,i)=>{
+
 total += item.price;
 
-itemsDiv.innerHTML += `<p>${item.name} - ₹${item.price}</p>`;
+document.getElementById("cart").innerHTML += `
+<div class="item">
+<div>
+${item.name} (${item.color}) - ₹${item.price}
+</div>
+<button onclick="removeItem(${i})">X</button>
+</div>
+`;
 
-// full summary
-summary += `${item.name} (${item.color}) - ₹${item.price}\n`;
-
-// color only summary
-colorSummary += `${item.name}: ${item.color}\n`;
 });
 
-// display total
 document.getElementById("total").innerText = total;
 
-// send full cart JSON
-document.getElementById("orderData").value = JSON.stringify(cart);
+}
 
-// send color summary
-document.getElementById("colorData").value = colorSummary;
+// DELETE ITEM
+function removeItem(i){
+cart.splice(i,1);
+localStorage.setItem("cart", JSON.stringify(cart));
+render();
+}
+
+// SUBMIT FORM (CRITICAL FIX)
+document.getElementById("form").addEventListener("submit", function(){
+
+let finalSummary = "";
+
+cart.forEach((item,i)=>{
+finalSummary += item.name + " (" + item.color + ") - ₹" + item.price + "\n";
+});
+
+finalSummary += "\nTotal: ₹" + total;
+
+// SEND TO FORMBOLD
+document.getElementById("summary").value = finalSummary;
+
+// CLEAR CART AFTER ORDER
+localStorage.removeItem("cart");
+
+});
+
+// INITIAL LOAD
+render();
 
 </script>
 
 </body>
-</html> razorpay integration in the checkout
+</html>
