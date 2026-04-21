@@ -1,55 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Simple Delete Button</title>
+  <title>Cart with Quantity</title>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <style>
-    body {
-      font-family: Arial;
-      padding: 20px;
-      background: #f5f5f5;
-    }
-
-    .item {
-      background: white;
-      padding: 10px;
-      margin: 10px 0;
-      border-radius: 8px;
-      display: flex;
-      justify-content: space-between;
-    }
-
-    button {
-      background: red;
-      color: white;
-      border: none;
-      padding: 5px 10px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
+    body { font-family: Arial; padding: 20px; }
+    .item { margin: 10px 0; }
+    button { margin: 0 5px; }
   </style>
 </head>
-
 <body>
 
-<h2>🛒 Cart Items</h2>
+<h2>Products</h2>
+<button onclick="addItem('YOLO Maxx')">Add YOLO Maxx</button>
 
-<div class="item">
-  <span>YOLO Maxx - ₹35</span>
-  <button onclick="this.parentElement.remove()">Delete</button>
-</div>
+<h2>Cart</h2>
+<div id="cart"></div>
 
-<div class="item">
-  <span>YOLO Lite - ₹30</span>
-  <button onclick="this.parentElement.remove()">Delete</button>
-</div>
+<script>
+let cart = {};
 
-<div class="item">
-  <span>Custom Pencil - ₹20</span>
-  <button onclick="this.parentElement.remove()">Delete</button>
-</div>
+function addItem(name) {
+  if (!cart[name]) {
+    cart[name] = 1;
+  } else {
+    cart[name]++;
+  }
+  renderCart();
+}
+
+function increase(name) {
+  cart[name]++;
+  renderCart();
+}
+
+function decrease(name) {
+  cart[name]--;
+  if (cart[name] <= 0) {
+    delete cart[name]; // removes item completely
+  }
+  renderCart();
+}
+
+function renderCart() {
+  let html = "";
+
+  for (let item in cart) {
+    html += `
+      <div class="item">
+        ${item} (Qty: ${cart[item]})
+        <button onclick="decrease('${item}')">-</button>
+        <button onclick="increase('${item}')">+</button>
+      </div>
+    `;
+  }
+
+  document.getElementById("cart").innerHTML = html;
+}
+</script>
 
 </body>
 </html>
