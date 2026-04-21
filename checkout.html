@@ -1,62 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Cart with Quantity</title>
+  <title>Swiggy Style Cart</title>
   <meta charset="UTF-8">
   <style>
     body { font-family: Arial; padding: 20px; }
-    .item { margin: 10px 0; }
-    button { margin: 0 5px; }
+
+    .product {
+      margin: 15px 0;
+    }
+
+    .btn {
+      padding: 5px 12px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .add-btn {
+      background: green;
+      color: white;
+    }
+
+    .qty-box {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .qty-box button {
+      background: white;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .qty {
+      padding: 0 10px;
+      min-width: 20px;
+      text-align: center;
+    }
   </style>
 </head>
+
 <body>
 
 <h2>Products</h2>
-<button onclick="addItem('YOLO Maxx')">Add YOLO Maxx</button>
 
-<h2>Cart</h2>
-<div id="cart"></div>
+<div class="product" id="YOLO Maxx">
+  <span>YOLO Maxx - ₹35</span>
+  <div class="action"></div>
+</div>
+
+<div class="product" id="YOLO Lite">
+  <span>YOLO Lite - ₹30</span>
+  <div class="action"></div>
+</div>
 
 <script>
 let cart = {};
 
-function addItem(name) {
-  if (!cart[name]) {
-    cart[name] = 1;
+function render(product) {
+  const container = document.querySelector(`#${CSS.escape(product)} .action`);
+  const qty = cart[product] || 0;
+
+  if (qty === 0) {
+    container.innerHTML = `
+      <button class="btn add-btn" onclick="add('${product}')">ADD</button>
+    `;
   } else {
-    cart[name]++;
-  }
-  renderCart();
-}
-
-function increase(name) {
-  cart[name]++;
-  renderCart();
-}
-
-function decrease(name) {
-  cart[name]--;
-  if (cart[name] <= 0) {
-    delete cart[name]; // removes item completely
-  }
-  renderCart();
-}
-
-function renderCart() {
-  let html = "";
-
-  for (let item in cart) {
-    html += `
-      <div class="item">
-        ${item} (Qty: ${cart[item]})
-        <button onclick="decrease('${item}')">-</button>
-        <button onclick="increase('${item}')">+</button>
+    container.innerHTML = `
+      <div class="qty-box">
+        <button onclick="decrease('${product}')">-</button>
+        <div class="qty">${qty}</div>
+        <button onclick="increase('${product}')">+</button>
       </div>
     `;
   }
-
-  document.getElementById("cart").innerHTML = html;
 }
+
+function add(product) {
+  cart[product] = 1;
+  render(product);
+}
+
+function increase(product) {
+  cart[product]++;
+  render(product);
+}
+
+function decrease(product) {
+  cart[product]--;
+  if (cart[product] <= 0) delete cart[product];
+  render(product);
+}
+
+// Initial render
+render("YOLO Maxx");
+render("YOLO Lite");
 </script>
 
 </body>
