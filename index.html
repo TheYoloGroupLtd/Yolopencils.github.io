@@ -2,23 +2,15 @@
 <html lang="en">
 <head>
 
-<title>YOLO Pencils – Premium Writing & Drawing Tools</title>
+<title>YOLO Pencils – Premium Writing Tools</title>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="description" content="YOLO Pencils offers premium pens and pencils for students, artists, and creators.">
-
-<link rel="icon" type="image/png" href="yolo-logo.png">
-
-<meta property="og:title" content="YOLO Pencils">
-<meta property="og:description" content="Premium writing tools for creators.">
-<meta property="og:image" content="yolo-logo.png">
-
-<script src='https://www.noupe.com/embed/019beb1020a87e669009e2d22f80692045cb.js'></script>
+<link rel="icon" href="yolo-logo.png">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system;}
+*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system;scroll-behavior:smooth;}
 
 body{
 background:linear-gradient(135deg,#ffffff,#f5f3ff,#ede9fe);
@@ -48,7 +40,6 @@ margin-left:15px;
 font-weight:600;
 }
 
-/* CART BUTTON */
 #cartBtn{
 background:#6d28d9;
 color:white;
@@ -62,70 +53,38 @@ min-height:100vh;
 display:flex;
 align-items:center;
 justify-content:center;
+text-align:center;
 padding:0 8%;
 }
 
-.hero-container{
-display:flex;
-justify-content:space-between;
-align-items:flex-start;
-width:100%;
-max-width:1200px;
-gap:80px;
-}
-
-.hero-text h1{
+.hero h1{
 font-size:70px;
-background:linear-gradient(135deg,#6d28d9,#a78bfa);
+background:linear-gradient(270deg,#6d28d9,#a78bfa,#6d28d9);
+background-size:400% 400%;
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
-line-height:1.1;
+animation:gradientMove 6s infinite;
 }
 
-.hero-text p{
+@keyframes gradientMove{
+0%{background-position:0%}
+50%{background-position:100%}
+100%{background-position:0%}
+}
+
+.hero p{
 margin-top:15px;
 font-size:20px;
-color:#4b5563;
+color:#555;
 }
 
-/* LOGO */
-.logo-wrapper{
-display:flex;
-align-items:center;
-height:100px;
-}
-
-.logo{
-width:260px;
-height:260px;
-border-radius:50%;
-background:linear-gradient(135deg,#ddd6fe,#c4b5fd);
-display:flex;
-align-items:center;
-justify-content:center;
-box-shadow:0 30px 100px rgba(109,40,217,0.25);
-overflow:hidden;
-border:6px solid #ffffff;
-transform:translateY(-40px);
-padding:20px;
-}
-
-.logo img{
-width:100%;
-height:auto;
-object-fit:contain;
-}
-
-/* PRODUCTS */
-.products{
+/* SECTION */
+section{
 padding:100px 8%;
 text-align:center;
 }
 
-.products h2{
-font-size:36px;
-}
-
+/* GRID */
 .grid{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
@@ -133,22 +92,18 @@ gap:30px;
 margin-top:40px;
 }
 
+/* CARD */
 .card{
-background:rgba(255,255,255,0.7);
+background:white;
 padding:30px;
 border-radius:25px;
-transition:0.3s;
 box-shadow:0 10px 30px rgba(0,0,0,0.05);
+transition:0.3s;
 }
 
 .card:hover{
-transform:translateY(-8px);
-}
-
-.card h3{
-color:#6d28d9;
-margin-bottom:10px;
-font-size:22px;
+transform:translateY(-10px) scale(1.02);
+box-shadow:0 20px 50px rgba(109,40,217,0.2);
 }
 
 .card a{
@@ -161,83 +116,50 @@ color:white;
 text-decoration:none;
 }
 
-/* WHY */
-.why{
-padding:100px 8%;
-text-align:center;
+/* IMAGE STRIP */
+.strip img{
+width:180px;
+margin:20px;
+transition:0.3s;
+}
+.strip img:hover{
+transform:scale(1.1);
 }
 
-.why-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:30px;
-margin-top:40px;
-}
-
-.why-box{
-background:rgba(255,255,255,0.6);
-padding:40px;
-border-radius:25px;
-}
-
-/* CLUB */
-.club{
-padding:80px 8%;
-text-align:center;
-background:linear-gradient(135deg,#ede9fe,#ddd6fe);
-border-radius:40px;
-margin:40px;
-}
-
-/* CONTACT */
-.contact{
-padding:80px 8%;
-text-align:center;
-background:linear-gradient(135deg,#fff,#ede9fe,#ddd6fe);
-border-radius:40px;
-margin:40px;
-}
-
-/* FORM */
-form{
-display:flex;
-flex-direction:column;
-align-items:center;
-gap:12px;
-margin-top:20px;
-}
-
-input,textarea{
-width:320px;
-padding:14px;
-border-radius:20px;
-border:1px solid #ddd;
-}
-
-button{
-padding:14px 20px;
-border:none;
-border-radius:20px;
-background:#6d28d9;
-color:white;
+/* FAQ */
+.faq-item{
+max-width:600px;
+margin:10px auto;
+text-align:left;
+background:white;
+padding:15px;
+border-radius:15px;
 cursor:pointer;
 }
 
-/* MOBILE */
-@media(max-width:768px){
-.hero-container{
-flex-direction:column;
-align-items:center;
+.faq-answer{
+display:none;
+margin-top:10px;
+color:#555;
+}
+
+/* FOOTER */
+footer{
+padding:40px;
 text-align:center;
-gap:40px;
+background:#6d28d9;
+color:white;
 }
-.hero-text h1{font-size:42px;}
-.logo{
-transform:none;
-width:200px;
-height:200px;
+
+/* ANIMATION */
+.fade{
+opacity:0;
+transform:translateY(40px);
+transition:1s;
 }
-input,textarea,button{width:90%;}
+.fade.show{
+opacity:1;
+transform:translateY(0);
 }
 </style>
 
@@ -250,100 +172,142 @@ input,textarea,button{width:90%;}
 <div><strong>YOLO</strong></div>
 <div>
 <a href="#products">Products</a>
-<a href="#club">YOLO Club</a>
+<a href="#club">Club</a>
 <a href="#contact">Contact</a>
 <a href="checkout.html" id="cartBtn">Cart 🛒 (<span id="cartCount">0</span>)</a>
 </div>
 </nav>
 
 <!-- HERO -->
-<section class="hero">
-<div class="hero-container">
-<div class="hero-text">
+<section class="hero fade">
+<div>
 <h1>YOLO Pencils</h1>
-<p>Ultra smooth. Premium build. Write better.</p>
-</div>
-
-<div class="logo-wrapper">
-<div class="logo">
-<img src="yolo-logo.png">
-</div>
-</div>
-
+<p>Write better. Think sharper. Create more.</p>
 </div>
 </section>
 
 <!-- PRODUCTS -->
-<section class="products" id="products">
-
+<section id="products" class="fade">
 <h2>Our Products</h2>
 
 <div class="grid">
 
 <div class="card">
-<h3>🔥 YOLO Maxx</h3>
-<p>Premium smooth-flow pen</p>
+<h3>YOLO Maxx</h3>
+<p>₹35</p>
 <a href="yolo-maxx.html">View</a>
 </div>
 
 <div class="card">
-<h3>⚡ YOLO Lite</h3>
-<p>Lightweight everyday pen</p>
+<h3>YOLO Lite</h3>
+<p>₹30</p>
 <a href="yolo-lite.html">View</a>
 </div>
 
 <div class="card">
-<h3>🎨 Custom Pencils</h3>
-<p>Personalized designs</p>
+<h3>Custom Pencil</h3>
+<p>₹20</p>
 <a href="custom-pencil.html">View</a>
 </div>
 
 </div>
-
 </section>
 
-<!-- WHY -->
-<section class="why">
-<h2>Why YOLO?</h2>
-<div class="why-grid">
-<div class="why-box">Ultra Smooth Writing</div>
-<div class="why-box">Premium Build Quality</div>
-<div class="why-box">Designed for Students & Creators</div>
+<!-- SHOWCASE -->
+<section class="fade">
+<h2>Experience YOLO</h2>
+<div class="strip">
+<img src="Yolo-maxx.png">
+<img src="Yolo-lite.png">
 </div>
 </section>
 
-<!-- YOLO CLUB -->
-<section class="club" id="club">
+<!-- REVIEWS -->
+<section class="fade" style="background:#f9f9ff;">
+<h2>What People Say</h2>
+
+<div class="grid">
+<div class="card">⭐️⭐️⭐️⭐️⭐️<p>Amazing smooth writing</p></div>
+<div class="card">⭐️⭐️⭐️⭐️⭐️<p>Best for exams</p></div>
+<div class="card">⭐️⭐️⭐️⭐️⭐️<p>Looks premium</p></div>
+</div>
+
+</section>
+
+<!-- FAQ -->
+<section class="fade">
+<h2>FAQs</h2>
+
+<div class="faq-item" onclick="toggleFAQ(this)">
+<b>Do you ship across India?</b>
+<div class="faq-answer">Yes, we deliver nationwide.</div>
+</div>
+
+<div class="faq-item" onclick="toggleFAQ(this)">
+<b>Can I customize colors?</b>
+<div class="faq-answer">Yes using custom pencils.</div>
+</div>
+
+</section>
+
+<!-- CLUB -->
+<section id="club" class="fade">
 <h2>Join YOLO Club</h2>
-<p>Get exclusive drops, offers & early access 👀</p>
+
 <form action="https://formbold.com/s/6vKbe" method="POST">
-<input type="text" name="name" placeholder="Name">
-<input type="email" name="email" placeholder="Email" required>
-<button type="submit">Join Now</button>
+<input type="text" name="name" placeholder="Name"><br><br>
+<input type="email" name="email" placeholder="Email"><br><br>
+<button>Join</button>
 </form>
+
 </section>
 
 <!-- CONTACT -->
-<section class="contact" id="contact">
-<h2>Contact Us</h2>
+<section id="contact" class="fade">
+<h2>Contact</h2>
+
 <form action="https://formbold.com/s/6vKbe" method="POST">
-<input type="text" name="name" placeholder="Name" required>
-<input type="email" name="email" placeholder="Email" required>
-<textarea name="message" placeholder="Your message"></textarea>
-<button type="submit">Send Message</button>
+<input name="name" placeholder="Name"><br><br>
+<input name="email" placeholder="Email"><br><br>
+<textarea name="message" placeholder="Message"></textarea><br><br>
+<button>Send</button>
 </form>
-<p style="margin-top:20px;">
-Or email: <b>yologroupltd@outlook.com</b>
-</p>
+
 </section>
+
+<!-- FOOTER -->
+<footer>
+<p>© YOLO Pencils</p>
+</footer>
 
 <!-- SCRIPT -->
 <script>
+
+// CART COUNT
 function updateCartCount(){
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 document.getElementById("cartCount").innerText = cart.length;
 }
 updateCartCount();
+
+// FAQ
+function toggleFAQ(el){
+let ans = el.querySelector(".faq-answer");
+ans.style.display = ans.style.display === "block" ? "none" : "block";
+}
+
+// SCROLL ANIMATION
+let fades = document.querySelectorAll(".fade");
+
+window.addEventListener("scroll", ()=>{
+fades.forEach(el=>{
+let top = el.getBoundingClientRect().top;
+if(top < window.innerHeight - 100){
+el.classList.add("show");
+}
+});
+});
+
 </script>
 
 </body>
