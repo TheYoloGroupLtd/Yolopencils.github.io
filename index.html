@@ -10,7 +10,13 @@
 <link rel="icon" href="yolo-logo.png">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system;scroll-behavior:smooth;}
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:-apple-system;
+scroll-behavior:smooth;
+}
 
 body{
 background:linear-gradient(135deg,#ffffff,#f5f3ff,#ede9fe);
@@ -143,6 +149,38 @@ margin-top:10px;
 color:#555;
 }
 
+/* CLUB */
+.club-box{
+background:linear-gradient(135deg,#6d28d9,#a78bfa);
+padding:60px;
+border-radius:40px;
+color:white;
+max-width:900px;
+margin:auto;
+box-shadow:0 30px 100px rgba(109,40,217,0.4);
+position:relative;
+overflow:hidden;
+}
+
+.club-box input{
+padding:14px;
+border-radius:20px;
+border:none;
+margin:5px;
+width:250px;
+}
+
+.club-box button{
+margin-top:15px;
+padding:14px 30px;
+border:none;
+border-radius:30px;
+background:white;
+color:#6d28d9;
+font-weight:bold;
+cursor:pointer;
+}
+
 /* FOOTER */
 footer{
 padding:40px;
@@ -169,7 +207,11 @@ transform:translateY(0);
 
 <!-- NAV -->
 <nav>
-<div><strong>YOLO</strong></div>
+<div style="display:flex;align-items:center;gap:10px;">
+<img src="yolo-logo.png" style="width:40px;height:40px;border-radius:50%;">
+<strong style="color:#6d28d9;">YOLO</strong>
+</div>
+
 <div>
 <a href="#products">Products</a>
 <a href="#club">Club</a>
@@ -180,9 +222,17 @@ transform:translateY(0);
 
 <!-- HERO -->
 <section class="hero fade">
-<div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:20px;">
+
+<img src="yolo-logo.png" style="
+width:120px;
+border-radius:50%;
+box-shadow:0 20px 60px rgba(109,40,217,0.3);
+">
+
 <h1>YOLO Pencils</h1>
 <p>Write better. Think sharper. Create more.</p>
+
 </div>
 </section>
 
@@ -225,13 +275,11 @@ transform:translateY(0);
 <!-- REVIEWS -->
 <section class="fade" style="background:#f9f9ff;">
 <h2>What People Say</h2>
-
 <div class="grid">
 <div class="card">⭐️⭐️⭐️⭐️⭐️<p>Amazing smooth writing</p></div>
 <div class="card">⭐️⭐️⭐️⭐️⭐️<p>Best for exams</p></div>
 <div class="card">⭐️⭐️⭐️⭐️⭐️<p>Looks premium</p></div>
 </div>
-
 </section>
 
 <!-- FAQ -->
@@ -240,26 +288,35 @@ transform:translateY(0);
 
 <div class="faq-item" onclick="toggleFAQ(this)">
 <b>Do you ship across India?</b>
-<div class="faq-answer">Yes, we deliver nationwide.</div>
+<div class="faq-answer">Yes,nationwide and international deliveries are availible.</div>
 </div>
 
 <div class="faq-item" onclick="toggleFAQ(this)">
-<b>Can I customize colors?</b>
-<div class="faq-answer">Yes using custom pencils.</div>
+<b>Can I customize?</b>
+<div class="faq-answer">You can customize pencils across our product fleet.</div>
 </div>
 
 </section>
 
-<!-- CLUB -->
+<!-- YOLO CLUB -->
 <section id="club" class="fade">
-<h2>Join YOLO Club</h2>
+<div class="club-box">
+
+<h2 style="font-size:40px;">YOLO Club</h2>
+<p style="margin-top:10px;">Exclusive drops. Early access. Member-only deals.</p>
+
+<div style="margin-top:20px;">
+🚀 Early Access • 🎁 Discounts • 🔥 Drops
+</div>
 
 <form action="https://formbold.com/s/6vKbe" method="POST">
-<input type="text" name="name" placeholder="Name"><br><br>
-<input type="email" name="email" placeholder="Email"><br><br>
-<button>Join</button>
+<input type="text" name="name" placeholder="Name" required>
+<input type="email" name="email" placeholder="Email" required>
+<br>
+<button>Join YOLO Club</button>
 </form>
 
+</div>
 </section>
 
 <!-- CONTACT -->
@@ -283,20 +340,18 @@ transform:translateY(0);
 <!-- SCRIPT -->
 <script>
 
-// CART COUNT
 function updateCartCount(){
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 document.getElementById("cartCount").innerText = cart.length;
 }
 updateCartCount();
 
-// FAQ
 function toggleFAQ(el){
 let ans = el.querySelector(".faq-answer");
 ans.style.display = ans.style.display === "block" ? "none" : "block";
 }
 
-// SCROLL ANIMATION
+// scroll animation
 let fades = document.querySelectorAll(".fade");
 
 window.addEventListener("scroll", ()=>{
