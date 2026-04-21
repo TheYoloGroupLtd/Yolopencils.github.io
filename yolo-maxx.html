@@ -2,21 +2,93 @@
 <html>
 <head>
 <title>YOLO Maxx</title>
+
+<style>
+body{
+margin:0;
+font-family:-apple-system;
+background:linear-gradient(135deg,#ffffff,#f5f3ff,#ede9fe);
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+
+.card{
+background:white;
+padding:40px;
+border-radius:25px;
+box-shadow:0 20px 60px rgba(0,0,0,0.1);
+text-align:center;
+width:320px;
+}
+
+h1{
+color:#6d28d9;
+margin-bottom:10px;
+}
+
+.price{
+color:#444;
+margin-bottom:20px;
+}
+
+img{
+width:180px;
+margin:20px 0;
+transition:0.3s;
+}
+
+img:hover{
+transform:scale(1.05);
+}
+
+input[type="color"]{
+width:80px;
+height:40px;
+border:none;
+cursor:pointer;
+margin:15px 0;
+}
+
+button{
+margin-top:15px;
+padding:12px 20px;
+border:none;
+border-radius:20px;
+background:#6d28d9;
+color:white;
+font-size:16px;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+background:#5b21b6;
+transform:scale(1.05);
+}
+
+</style>
+
 </head>
+
 <body>
 
-<h1>YOLO Maxx 🔥 (₹35)</h1>
+<div class="card">
 
-<!-- IMAGE -->
-<div style="text-align:center;">
-<img src="Yolo-maxx.png" alt="YOLO Maxx" style="width:200px;margin:20px 0;">
-</div>
+<h1>YOLO Maxx 🔥</h1>
+<p class="price">₹35</p>
 
-<!-- COLOR PICKER -->
+<img src="Yolo-maxx.png">
+
+<p>Choose Color</p>
 <input type="color" id="color" value="#ff0000">
-<br><br>
+
+<br>
 
 <button onclick="addToCart()">Add to Cart</button>
+
+</div>
 
 <script>
 function addToCart(){
@@ -33,7 +105,7 @@ color: color
 
 localStorage.setItem("cart", JSON.stringify(cart));
 
-alert("Added!");
+alert("Added to Cart!");
 }
 </script>
 
