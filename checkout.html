@@ -1,145 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <title>YOLO Cart</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Checkout | YOLO</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: #f5f5f5;
+      padding: 20px;
+    }
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    h1 {
+      text-align: center;
+    }
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    .products, .cart {
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
 
-<style>
-body{
-font-family:'Poppins',sans-serif;
-margin:0;
-background:linear-gradient(135deg,#ede9fe,#f5f3ff);
-}
+    .item {
+      display: flex;
+      justify-content: space-between;
+      margin: 10px 0;
+    }
 
-nav{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:20px 8%;
-background:rgba(255,255,255,0.7);
-backdrop-filter:blur(10px);
-}
+    button {
+      padding: 6px 12px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
 
-.container{
-max-width:600px;
-margin:50px auto;
-background:white;
-padding:30px;
-border-radius:20px;
-box-shadow:0 10px 30px rgba(0,0,0,0.08);
-}
+    .add-btn {
+      background: green;
+      color: white;
+    }
 
-h1{
-margin-top:0;
-}
+    .delete-btn {
+      background: red;
+      color: white;
+    }
 
-.order-box{
-background:#f5f3ff;
-padding:15px;
-border-radius:12px;
-margin-bottom:20px;
-}
-
-input, textarea{
-width:100%;
-padding:12px;
-border-radius:10px;
-border:1px solid #ccc;
-margin-top:10px;
-}
-
-button{
-margin-top:20px;
-background:#7c3aed;
-color:white;
-border:none;
-padding:12px;
-border-radius:12px;
-cursor:pointer;
-width:100%;
-}
-
-.total{
-font-weight:600;
-margin-top:10px;
-}
-</style>
-
+    .total {
+      font-size: 18px;
+      font-weight: bold;
+      text-align: right;
+      margin-top: 10px;
+    }
+  </style>
 </head>
 
 <body>
 
-<nav>
-<h2>YOLO ✏️</h2>
-<a href="index.html">Back</a>
-</nav>
+<h1>🛒 YOLO Cart</h1>
 
-<div class="container">
+<div class="products">
+  <h2>Products</h2>
 
-<h1>Checkout</h1>
+  <div class="item">
+    <span>YOLO Maxx - ₹35</span>
+    <button class="add-btn" onclick="addToCart('YOLO Maxx', 35)">Add</button>
+  </div>
 
-<div class="order-box">
-<h3>Your Order</h3>
-<div id="items"></div>
-<div class="total">Total: ₹<span id="total">0</span></div>
+  <div class="item">
+    <span>YOLO Lite - ₹30</span>
+    <button class="add-btn" onclick="addToCart('YOLO Lite', 30)">Add</button>
+  </div>
+
+  <div class="item">
+    <span>Custom Pencil - ₹20</span>
+    <button class="add-btn" onclick="addToCart('Custom Pencil', 20)">Add</button>
+  </div>
+
 </div>
 
-<form action="https://formbold.com/s/6vKbe" method="POST">
-
-<input type="hidden" name="formType" value="order">
-
-<input name="name" placeholder="Full Name" required>
-<input name="phone" placeholder="Phone Number" required>
-<textarea name="address" placeholder="Full Address" required></textarea>
-
-<!-- FULL CART DATA -->
-<input type="hidden" name="order" id="orderData">
-
-<!-- COLOR DATA (NEW FIX) -->
-<input type="hidden" name="color_data" id="colorData">
-
-<button type="submit">Place Order</button>
-
-</form>
-
+<div class="cart">
+  <h2>Your Cart</h2>
+  <div id="cart-items"></div>
+  <div class="total">Total: ₹<span id="total">0</span></div>
 </div>
 
 <script>
-
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-let itemsDiv = document.getElementById("items");
+let cart = [];
 let total = 0;
 
-let colorSummary = "";
-let summary = "";
+function addToCart(name, price) {
+  cart.push({ name, price });
+  total += price;
+  renderCart();
+}
 
-cart.forEach((item, i) => {
-total += item.price;
+function deleteItem(index) {
+  total -= cart[index].price;
+  cart.splice(index, 1);
+  renderCart();
+}
 
-itemsDiv.innerHTML += `<p>${item.name} - ₹${item.price}</p>`;
+function renderCart() {
+  let cartHTML = "";
 
-// full summary
-summary += `${item.name} (${item.color}) - ₹${item.price}\n`;
+  cart.forEach((item, index) => {
+    cartHTML += `
+      <div class="item">
+        <span>${item.name} - ₹${item.price}</span>
+        <button class="delete-btn" onclick="deleteItem(${index})">Delete</button>
+      </div>
+    `;
+  });
 
-// color only summary
-colorSummary += `${item.name}: ${item.color}\n`;
-});
-
-// display total
-document.getElementById("total").innerText = total;
-
-// send full cart JSON
-document.getElementById("orderData").value = JSON.stringify(cart);
-
-// send color summary
-document.getElementById("colorData").value = colorSummary;
-
+  document.getElementById("cart-items").innerHTML = cartHTML;
+  document.getElementById("total").innerText = total;
+}
 </script>
 
 </body>
