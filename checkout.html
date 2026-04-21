@@ -1,122 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>YOLO Cart</title>
+  <title>Simple Delete Button</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
     body {
       font-family: Arial;
-      background: #f5f5f5;
       padding: 20px;
-    }
-
-    h1 {
-      text-align: center;
-    }
-
-    .products, .cart {
-      background: white;
-      padding: 15px;
-      border-radius: 10px;
-      margin-bottom: 20px;
+      background: #f5f5f5;
     }
 
     .item {
+      background: white;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 8px;
       display: flex;
       justify-content: space-between;
-      margin: 10px 0;
     }
 
     button {
-      padding: 6px 12px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-
-    .add-btn {
-      background: green;
-      color: white;
-    }
-
-    .delete-btn {
       background: red;
       color: white;
-    }
-
-    .total {
-      font-size: 18px;
-      font-weight: bold;
-      text-align: right;
-      margin-top: 10px;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
     }
   </style>
 </head>
 
 <body>
 
-<h1>🛒 YOLO Cart</h1>
+<h2>🛒 Cart Items</h2>
 
-<div class="products">
-  <h2>Products</h2>
-
-  <div class="item">
-    <span>YOLO Maxx - ₹35</span>
-    <button class="add-btn" onclick="addToCart('YOLO Maxx', 35)">Add</button>
-  </div>
-
-  <div class="item">
-    <span>YOLO Lite - ₹30</span>
-    <button class="add-btn" onclick="addToCart('YOLO Lite', 30)">Add</button>
-  </div>
-
-  <div class="item">
-    <span>Custom Pencil - ₹20</span>
-    <button class="add-btn" onclick="addToCart('Custom Pencil', 20)">Add</button>
-  </div>
-
+<div class="item">
+  <span>YOLO Maxx - ₹35</span>
+  <button onclick="this.parentElement.remove()">Delete</button>
 </div>
 
-<div class="cart">
-  <h2>Your Cart</h2>
-  <div id="cart-items"></div>
-  <div class="total">Total: ₹<span id="total">0</span></div>
+<div class="item">
+  <span>YOLO Lite - ₹30</span>
+  <button onclick="this.parentElement.remove()">Delete</button>
 </div>
 
-<script>
-let cart = [];
-let total = 0;
-
-function addToCart(name, price) {
-  cart.push({ name, price });
-  total += price;
-  renderCart();
-}
-
-function deleteItem(index) {
-  total -= cart[index].price;
-  cart.splice(index, 1);
-  renderCart();
-}
-
-function renderCart() {
-  let cartHTML = "";
-
-  cart.forEach((item, index) => {
-    cartHTML += `
-      <div class="item">
-        <span>${item.name} - ₹${item.price}</span>
-        <button class="delete-btn" onclick="deleteItem(${index})">Delete</button>
-      </div>
-    `;
-  });
-
-  document.getElementById("cart-items").innerHTML = cartHTML;
-  document.getElementById("total").innerText = total;
-}
-</script>
+<div class="item">
+  <span>Custom Pencil - ₹20</span>
+  <button onclick="this.parentElement.remove()">Delete</button>
+</div>
 
 </body>
 </html>
