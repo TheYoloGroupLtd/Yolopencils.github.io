@@ -1,215 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>YOLO Premium Cart</title>
-  <meta charset="UTF-8">
 
-  <!-- Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<title>Checkout | YOLO</title>
 
-  <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: #f7f7f7;
-      margin: 0;
-      padding: 20px;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    h2 {
-      font-weight: 600;
-    }
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
-    .product {
-      background: white;
-      padding: 15px;
-      border-radius: 15px;
-      margin: 15px 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-      transition: 0.2s;
-    }
+<style>
+body{
+font-family:'Poppins',sans-serif;
+margin:0;
+background:linear-gradient(135deg,#ede9fe,#f5f3ff);
+}
 
-    .product:hover {
-      transform: translateY(-3px);
-    }
+nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 8%;
+background:rgba(255,255,255,0.7);
+backdrop-filter:blur(10px);
+}
 
-    .info {
-      display: flex;
-      flex-direction: column;
-    }
+.container{
+max-width:600px;
+margin:50px auto;
+background:white;
+padding:30px;
+border-radius:20px;
+box-shadow:0 10px 30px rgba(0,0,0,0.08);
+}
 
-    .name {
-      font-weight: 600;
-    }
+h1{
+margin-top:0;
+}
 
-    .price {
-      color: gray;
-      font-size: 14px;
-    }
+.order-box{
+background:#f5f3ff;
+padding:15px;
+border-radius:12px;
+margin-bottom:20px;
+}
 
-    .add-btn {
-      background: linear-gradient(135deg, #00c853, #00e676);
-      color: white;
-      border: none;
-      padding: 8px 18px;
-      border-radius: 20px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: 0.2s;
-    }
+input, textarea{
+width:100%;
+padding:12px;
+border-radius:10px;
+border:1px solid #ccc;
+margin-top:10px;
+}
 
-    .add-btn:hover {
-      transform: scale(1.05);
-    }
+button{
+margin-top:20px;
+background:#7c3aed;
+color:white;
+border:none;
+padding:12px;
+border-radius:12px;
+cursor:pointer;
+width:100%;
+}
 
-    .qty-box {
-      display: flex;
-      align-items: center;
-      border-radius: 20px;
-      background: #f1f1f1;
-      overflow: hidden;
-    }
+.total{
+font-weight:600;
+margin-top:10px;
+}
+</style>
 
-    .qty-box button {
-      border: none;
-      background: transparent;
-      padding: 6px 12px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-
-    .qty-box button:hover {
-      background: #ddd;
-    }
-
-    .qty {
-      padding: 0 12px;
-      font-weight: 600;
-    }
-
-    /* Checkout Bar */
-    .checkout-bar {
-      position: fixed;
-      bottom: 15px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 90%;
-      max-width: 500px;
-      background: black;
-      color: white;
-      padding: 15px 20px;
-      border-radius: 50px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-    }
-
-    .checkout-btn {
-      background: #00c853;
-      border: none;
-      color: white;
-      padding: 8px 16px;
-      border-radius: 20px;
-      font-weight: 600;
-      cursor: pointer;
-    }
-
-  </style>
 </head>
 
 <body>
 
-<h2>YOLO Store</h2>
+<nav>
+<h2>YOLO ✏️</h2>
+<a href="index.html">Back</a>
+</nav>
 
-<div class="product" id="maxx">
-  <div class="info">
-    <div class="name">YOLO Maxx</div>
-    <div class="price">₹35</div>
-  </div>
-  <div class="action"></div>
+<div class="container">
+
+<h1>Checkout</h1>
+
+<div class="order-box">
+<h3>Your Order</h3>
+<div id="items"></div>
+<div class="total">Total: ₹<span id="total">0</span></div>
 </div>
 
-<div class="product" id="lite">
-  <div class="info">
-    <div class="name">YOLO Lite</div>
-    <div class="price">₹30</div>
-  </div>
-  <div class="action"></div>
-</div>
+<form action="https://formbold.com/s/6vKbe" method="POST">
 
-<div class="product" id="custom">
-  <div class="info">
-    <div class="name">Custom Pencil</div>
-    <div class="price">₹20</div>
-  </div>
-  <div class="action"></div>
-</div>
+<input type="hidden" name="formType" value="order">
 
-<div class="checkout-bar">
-  <span>Total: ₹<span id="total">0</span></span>
-  <button class="checkout-btn">Checkout</button>
+<input name="name" placeholder="Full Name" required>
+<input name="phone" placeholder="Phone Number" required>
+<textarea name="address" placeholder="Full Address" required></textarea>
+
+<!-- FULL CART DATA -->
+<input type="hidden" name="order" id="orderData">
+
+<!-- COLOR DATA (NEW FIX) -->
+<input type="hidden" name="color_data" id="colorData">
+
+<button type="submit">Place Order</button>
+
+</form>
+
 </div>
 
 <script>
-let cart = {};
-let prices = {
-  maxx: 35,
-  lite: 30,
-  custom: 20
-};
 
-function render(id) {
-  const el = document.querySelector(`#${id} .action`);
-  const qty = cart[id] || 0;
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-  if (qty === 0) {
-    el.innerHTML = `<button class="add-btn" onclick="add('${id}')">ADD</button>`;
-  } else {
-    el.innerHTML = `
-      <div class="qty-box">
-        <button onclick="decrease('${id}')">−</button>
-        <div class="qty">${qty}</div>
-        <button onclick="increase('${id}')">+</button>
-      </div>
-    `;
-  }
-}
+let itemsDiv = document.getElementById("items");
+let total = 0;
 
-function add(id) {
-  cart[id] = 1;
-  update();
-}
+let colorSummary = "";
+let summary = "";
 
-function increase(id) {
-  cart[id]++;
-  update();
-}
+cart.forEach((item, i) => {
+total += item.price;
 
-function decrease(id) {
-  cart[id]--;
-  if (cart[id] <= 0) delete cart[id];
-  update();
-}
+itemsDiv.innerHTML += `<p>${item.name} - ₹${item.price}</p>`;
 
-function update() {
-  let total = 0;
+// full summary
+summary += `${item.name} (${item.color}) - ₹${item.price}\n`;
 
-  for (let id in prices) {
-    if (cart[id]) {
-      total += cart[id] * prices[id];
-    }
-    render(id);
-  }
+// color only summary
+colorSummary += `${item.name}: ${item.color}\n`;
+});
 
-  document.getElementById("total").innerText = total;
-}
+// display total
+document.getElementById("total").innerText = total;
 
-Object.keys(prices).forEach(render);
+// send full cart JSON
+document.getElementById("orderData").value = JSON.stringify(cart);
+
+// send color summary
+document.getElementById("colorData").value = colorSummary;
+
 </script>
 
 </body>
-</html>
+</html> razorpay integration in the checkout
