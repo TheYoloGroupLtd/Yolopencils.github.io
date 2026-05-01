@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>YOLO Newsletter</title>
+<title>YOLO Pencils</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
 
 <style>
 :root{
@@ -16,113 +16,201 @@
 
 body{
   margin:0;
-  font-family:Montserrat, sans-serif;
+  font-family:Montserrat;
   background:var(--bg);
   color:white;
 }
 
+/* NAV */
+nav{
+position:fixed;
+top:0;
+width:100%;
+display:flex;
+justify-content:space-between;
+padding:15px 25px;
+background:rgba(0,0,0,0.6);
+backdrop-filter:blur(15px);
+z-index:1000;
+}
+
+.logo{
+font-weight:800;
+color:var(--accent);
+}
+
+nav a{
+color:white;
+margin-left:15px;
+text-decoration:none;
+opacity:0.7;
+cursor:pointer;
+}
+
+nav a:hover{color:var(--accent);opacity:1;}
+
 /* LOGIN BUTTON */
 #loginBtn{
-  position:fixed;
-  top:15px;
-  right:20px;
-  background:var(--accent);
-  border:none;
-  padding:8px 14px;
-  cursor:pointer;
-  font-weight:600;
-  z-index:1000;
+background:var(--accent);
+border:none;
+padding:6px 12px;
+cursor:pointer;
+}
+
+/* HERO */
+.hero{
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+}
+
+.hero h1{
+font-size:50px;
+color:var(--accent);
+}
+
+.hero p{
+opacity:0.7;
+}
+
+/* SECTION */
+.section{
+padding:80px 20px;
+text-align:center;
+}
+
+.card{
+background:var(--panel);
+padding:20px;
+margin:10px;
+border-radius:10px;
+display:inline-block;
+width:250px;
+}
+
+/* NEWSLETTER */
+.newsletter{
+max-width:400px;
+margin:auto;
 }
 
 /* MODAL */
 #authModal{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.8);
-  align-items:center;
-  justify-content:center;
-  z-index:2000;
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,0.8);
+align-items:center;
+justify-content:center;
+z-index:2000;
 }
 
 .modal{
-  background:var(--panel);
-  padding:25px;
-  width:300px;
-  border-radius:10px;
-  text-align:center;
+background:#111;
+padding:25px;
+width:300px;
+border-radius:10px;
+text-align:center;
 }
 
 input{
-  width:100%;
-  padding:10px;
-  margin:6px 0;
-  background:#000;
-  border:1px solid #333;
-  color:white;
+width:100%;
+padding:10px;
+margin:6px 0;
+background:#000;
+border:1px solid #333;
+color:white;
 }
 
 button{
-  width:100%;
-  margin-top:6px;
-  padding:10px;
-  background:var(--accent);
-  border:none;
-  cursor:pointer;
-  color:black;
-  font-weight:600;
+width:100%;
+margin-top:6px;
+padding:10px;
+background:var(--accent);
+border:none;
+cursor:pointer;
+color:black;
+font-weight:600;
 }
 
 .secondary{
-  background:#333;
-  color:white;
-}
-
-/* NEWSLETTER */
-.container{
-  max-width:400px;
-  margin:120px auto;
-  text-align:center;
+background:#333;
+color:white;
 }
 </style>
 </head>
 
 <body>
 
-<!-- LOGIN BUTTON -->
+<!-- NAV -->
+<nav>
+<div class="logo">YOLO</div>
+<div>
+<a href="#">Home</a>
+<a href="#">Products</a>
+<a href="#">Contact</a>
 <button id="loginBtn" onclick="openAuth()">Login</button>
+</div>
+</nav>
 
-<!-- AUTH MODAL -->
-<div id="authModal">
-  <div class="modal">
+<!-- HERO -->
+<div class="hero">
+<h1>YOLO PENCILS</h1>
+<p>Future of writing starts here</p>
+</div>
 
-    <h3 style="color:#ff2a2a">Account</h3>
+<!-- PRODUCTS -->
+<div class="section">
+<h2 style="color:#ff2a2a">Our Products</h2>
 
-    <input id="email" placeholder="Email">
-    <input id="password" type="password" placeholder="Password">
+<div class="card">
+<h3>YOLO MAXX</h3>
+<p>₹35</p>
+</div>
 
-    <button onclick="signup()">Sign Up</button>
-    <button onclick="login()">Login</button>
-    <button onclick="logout()">Logout</button>
+<div class="card">
+<h3>YOLO LITE</h3>
+<p>₹30</p>
+</div>
 
-    <p id="status"></p>
-
-    <button class="secondary" onclick="closeAuth()">Close</button>
-
-  </div>
+<div class="card">
+<h3>Custom Pencil</h3>
+<p>₹20</p>
+</div>
 </div>
 
 <!-- NEWSLETTER -->
-<div class="container">
+<div class="section">
+<h2 style="color:#ff2a2a">Join Newsletter</h2>
 
-  <h2 style="color:#ff2a2a">Join Newsletter</h2>
-  <p style="opacity:0.7">Get updates, offers and product drops</p>
+<div class="newsletter">
+<input id="newsletterEmail" placeholder="Enter your email">
+<button onclick="subscribe()">Subscribe</button>
+<p id="newsletterStatus"></p>
+</div>
+</div>
 
-  <input id="newsletterEmail" type="email" placeholder="Enter your email">
-  <button onclick="subscribe()">Subscribe</button>
+<!-- AUTH MODAL -->
+<div id="authModal">
+<div class="modal">
 
-  <p id="newsletterStatus"></p>
+<h3 style="color:#ff2a2a">Account</h3>
 
+<input id="email" placeholder="Email">
+<input id="password" type="password" placeholder="Password">
+
+<button onclick="signup()">Sign Up</button>
+<button onclick="login()">Login</button>
+<button onclick="logout()">Logout</button>
+
+<p id="status"></p>
+
+<button class="secondary" onclick="closeAuth()">Close</button>
+
+</div>
 </div>
 
 <!-- SUPABASE -->
@@ -130,86 +218,84 @@ button{
 
 <script>
 const supabaseClient = supabase.createClient(
-  "https://iuvvufrfjrhcnrxdlqbt.supabase.co",
-  "sb_publishable_5m1Eq0Qf8cDqqoZj4G3b_g_caSnvb0c"
+"https://iuvvufrfjrhcnrxdlqbt.supabase.co",
+"sb_publishable_5m1Eq0Qf8cDqqoZj4G3b_g_caSnvb0c"
 );
 
 let currentUser = null;
 
 /* MODAL */
 function openAuth(){
-  document.getElementById("authModal").style.display="flex";
+document.getElementById("authModal").style.display="flex";
 }
 function closeAuth(){
-  document.getElementById("authModal").style.display="none";
+document.getElementById("authModal").style.display="none";
 }
 
 /* AUTH */
 async function signup(){
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
+let email=emailInput().value;
+let password=passwordInput().value;
 
-  const { error } = await supabaseClient.auth.signUp({ email, password });
+let { error } = await supabaseClient.auth.signUp({ email, password });
 
-  document.getElementById("status").innerText =
-    error ? error.message : "Account created!";
+status().innerText = error ? error.message : "Account created!";
 }
 
 async function login(){
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
+let email=emailInput().value;
+let password=passwordInput().value;
 
-  const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
+let { error } = await supabaseClient.auth.signInWithPassword({ email, password });
 
-  document.getElementById("status").innerText =
-    error ? error.message : "Logged in!";
+status().innerText = error ? error.message : "Logged in!";
 }
 
 async function logout(){
-  await supabaseClient.auth.signOut();
-  document.getElementById("status").innerText = "Logged out";
+await supabaseClient.auth.signOut();
+status().innerText = "Logged out";
 }
+
+/* HELPERS */
+function emailInput(){return document.getElementById("email")}
+function passwordInput(){return document.getElementById("password")}
+function status(){return document.getElementById("status")}
 
 /* SESSION */
 supabaseClient.auth.onAuthStateChange((event, session) => {
-  currentUser = session?.user || null;
+currentUser = session?.user || null;
 
-  if(currentUser){
-    document.getElementById("loginBtn").innerText = "Account";
-    document.getElementById("status").innerText =
-      "Logged in as " + currentUser.email;
-  } else {
-    document.getElementById("loginBtn").innerText = "Login";
-  }
+if(currentUser){
+document.getElementById("loginBtn").innerText="Account";
+status().innerText="Logged in as "+currentUser.email;
+}else{
+document.getElementById("loginBtn").innerText="Login";
+}
 });
 
 /* NEWSLETTER */
 async function subscribe(){
+let email=document.getElementById("newsletterEmail").value;
+let box=document.getElementById("newsletterStatus");
 
-  const email = document.getElementById("newsletterEmail").value;
-  const statusBox = document.getElementById("newsletterStatus");
+if(!email.includes("@")){
+box.innerText="Enter valid email";
+return;
+}
 
-  if(!email || !email.includes("@")){
-    statusBox.innerText = "Enter valid email";
-    return;
-  }
+box.innerText="Subscribing...";
 
-  statusBox.innerText = "Subscribing...";
+let { error } = await supabaseClient
+.from("newsletter")
+.insert([{ email }]);
 
-  const { error } = await supabaseClient
-    .from("newsletter")
-    .insert([{ email }]);
-
-  if(error){
-    if(error.message.includes("duplicate")){
-      statusBox.innerText = "Already subscribed!";
-    }else{
-      statusBox.innerText = error.message;
-    }
-  } else {
-    statusBox.innerText = "Subscribed successfully!";
-    document.getElementById("newsletterEmail").value = "";
-  }
+if(error){
+box.innerText = error.message.includes("duplicate")
+? "Already subscribed!"
+: error.message;
+}else{
+box.innerText="Subscribed!";
+}
 }
 </script>
 
