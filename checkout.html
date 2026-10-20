@@ -1,132 +1,93 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Checkout</title>
+<title>Checkout - YOLO Pens</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="yolo-logo.png">
 
 <style>
-body{
-font-family:Arial;
-background:#f5f3ff;
-}
-
-.container{
-max-width:600px;
-margin:auto;
-background:white;
-padding:20px;
-border-radius:15px;
-}
-
-.item{
-display:flex;
-justify-content:space-between;
-background:#eee;
-padding:10px;
-margin:5px 0;
-}
-
-button{
-cursor:pointer;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;}
+body{background:linear-gradient(135deg,#ffffff,#f5f3ff,#ede9fe);color:#1f2937;min-height:100vh;}
+nav{position:fixed;top:15px;left:50%;transform:translateX(-50%);width:92%;max-width:1200px;padding:12px 24px;background:rgba(255,255,255,0.8);backdrop-filter:blur(20px);border-radius:25px;display:flex;justify-content:space-between;align-items:center;z-index:1000;box-shadow:0 10px 30px rgba(109,40,217,0.08);}
+nav a{text-decoration:none;color:#6d28d9;font-weight:600;font-size:14px;}
+.container{max-width:900px;margin:120px auto 60px auto;padding:0 20px;}
+.checkout-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px;}
+@media(max-width:768px){.checkout-grid{grid-template-columns:1fr;}}
+.box{background:white;padding:30px;border-radius:24px;box-shadow:0 10px 30px rgba(0,0,0,0.04);border:1px solid rgba(109,40,217,0.05);}
+h2{font-size:24px;color:#2e1065;margin-bottom:20px;}
+.form-group{margin-bottom:15px;}
+.form-group label{display:block;font-size:13px;font-weight:600;color:#4b5563;margin-bottom:6px;}
+.form-group input, .form-group textarea{width:100%;padding:12px 14px;border-radius:12px;border:1px solid #d1d5db;font-size:14px;outline:none;}
+.order-summary-item{display:flex;justify-content:space-between;font-size:14px;padding:10px 0;border-bottom:1px solid #f3f4f6;}
+.btn-primary{width:100%;padding:14px;background:#6d28d9;color:white;border:none;border-radius:16px;font-weight:bold;font-size:16px;cursor:pointer;margin-top:20px;box-shadow:0 4px 15px rgba(109,40,217,0.3);}
+footer{padding:30px;text-align:center;background:#6d28d9;color:white;font-size:14px;margin-top:60px;}
 </style>
-
 </head>
 
 <body>
+<nav>
+<div style="display:flex;align-items:center;gap:10px;"><img src="yolo-logo.png" style="width:34px;height:34px;border-radius:50%;object-fit:cover;"><strong style="color:#6d28d9;font-size:18px;">YOLO</strong></div>
+<a href="index.html">← Return to Store</a>
+</nav>
 
 <div class="container">
-
-<h2>Checkout</h2>
-
-<div id="cart"></div>
-<h3>Total: ₹<span id="total">0</span></h3>
-
-<form id="form" action="https://formbold.com/s/6vKbe" method="POST">
-
-<input type="hidden" name="order_summary" id="summary">
-
-<input name="name" placeholder="Name" required><br><br>
-<input name="phone" placeholder="Phone" required><br><br>
-<textarea name="address" placeholder="Address" required></textarea><br><br>
- 
-
-<button type="submit">Place Order</button>
-
+<div class="checkout-grid">
+<div class="box">
+<h2>Shipping Information</h2>
+<form action="https://formbold.com/s/6vKbe" method="POST" id="checkoutForm" onsubmit="handleCheckoutSubmit(event)">
+<div class="form-group"><label>Full Name</label><input name="name" required placeholder="Hanish Subramanya"></div>
+<div class="form-group"><label>Email Address</label><input type="email" name="email" required placeholder="your@email.com"></div>
+<div class="form-group"><label>Shipping Address</label><textarea name="address" required placeholder="House number, street, city, pincode..."></textarea></div>
+<input type="hidden" name="order_details" id="orderSummaryInput">
+<button type="submit" class="btn-primary">Complete Secure Order</button>
 </form>
-
 </div>
+
+<div class="box">
+<h2>Order Summary</h2>
+<div id="checkoutItemsList" style="max-height:250px;overflow-y:auto;margin-bottom:15px;"></div>
+<div style="display:flex;justify-content:space-between;font-weight:bold;font-size:18px;border-top:2px solid #f3f4f6;padding-top:15px;">
+<span>Total Amount:</span>
+<span id="checkoutTotalPrice" style="color:#6d28d9;">₹0</span>
+</div>
+</div>
+</div>
+</div>
+
+<footer>© 2026 YOLO Pens. All rights reserved.</footer>
 
 <script>
-
-// ALWAYS START CLEAN IF DATA IS BROKEN
-// (run once manually if needed)
-// localStorage.clear();
-
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-let total = 0;
-
-// RENDER CART
-function render(){
-
-document.getElementById("cart").innerHTML = "";
-total = 0;
-
-if(cart.length === 0){
-document.getElementById("cart").innerHTML = "Cart is empty";
-document.getElementById("total").innerText = 0;
+function loadCheckoutSummary() {
+let cart = JSON.parse(localStorage.getItem("yolo_cart")) || [];
+let container = document.getElementById("checkoutItemsList");
+container.innerHTML = "";
+if(cart.length === 0) {
+container.innerHTML = `<p style="color:#6b7280;font-size:14px;">Your cart is empty. <a href="index.html">Go shop</a></p>`;
+document.getElementById("checkoutTotalPrice").innerText = "₹0";
 return;
 }
-
-cart.forEach((item,i)=>{
-
-total += item.price;
-
-document.getElementById("cart").innerHTML += `
-<div class="item">
-<div>
-${item.name} (${item.color}) - ₹${item.price}
-</div>
-<button onclick="removeItem(${i})">X</button>
-</div>
-`;
-
+let total = 0;
+let summaryText = "";
+cart.forEach(item => {
+let itemTotal = item.price * (item.qty || 1);
+total += itemTotal;
+summaryText += `${item.name} (Qty: ${item.qty || 1}) - ₹${itemTotal}; `;
+let div = document.createElement("div");
+div.className = "order-summary-item";
+div.innerHTML = `<span>${item.name} × ${item.qty || 1}</span><span style="font-weight:600;">₹${itemTotal}</span>`;
+container.appendChild(div);
 });
-
-document.getElementById("total").innerText = total;
-
+document.getElementById("checkoutTotalPrice").innerText = "₹" + total;
+document.getElementById("orderSummaryInput").value = summaryText + ` | Total: ₹${total}`;
 }
+loadCheckoutSummary();
 
-// DELETE ITEM
-function removeItem(i){
-cart.splice(i,1);
-localStorage.setItem("cart", JSON.stringify(cart));
-render();
+function handleCheckoutSubmit(e) {
+// FormBold submission will process automatically, clear cart after submit
+localStorage.removeItem("yolo_cart");
+alert("Order placed successfully! Thank you for choosing YOLO Pens.");
 }
-
-// SUBMIT FORM (CRITICAL FIX)
-document.getElementById("form").addEventListener("submit", function(){
-
-let finalSummary = "";
-
-cart.forEach((item,i)=>{
-finalSummary += item.name + " (" + item.color + ") - ₹" + item.price + "\n";
-});
-
-finalSummary += "\nTotal: ₹" + total;
-
-// SEND TO FORMBOLD
-document.getElementById("summary").value = finalSummary;
-
-// CLEAR CART AFTER ORDER
-localStorage.removeItem("cart");
-
-});
-
-// INITIAL LOAD
-render();
-
 </script>
-
 </body>
 </html>
