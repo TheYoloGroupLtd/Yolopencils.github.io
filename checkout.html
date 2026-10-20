@@ -1,3 +1,8 @@
+Here is the updated **`checkout.html`** file, featuring Swiggy-style quantity controls (`+` / `−` buttons directly in the summary list) and a better-aligned logo layout in the navigation bar.
+
+### Updated `checkout.html`
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,7 +24,9 @@ h2{font-size:24px;color:#2e1065;margin-bottom:20px;}
 .form-group{margin-bottom:15px;}
 .form-group label{display:block;font-size:13px;font-weight:600;color:#4b5563;margin-bottom:6px;}
 .form-group input, .form-group textarea{width:100%;padding:12px 14px;border-radius:12px;border:1px solid #d1d5db;font-size:14px;outline:none;}
-.order-summary-item{display:flex;justify-content:space-between;font-size:14px;padding:10px 0;border-bottom:1px solid #f3f4f6;}
+.order-summary-item{display:flex;justify-content:space-between;align-items:center;font-size:14px;padding:12px 0;border-bottom:1px solid #f3f4f6;}
+.qty-control{display:flex;align-items:center;gap:8px;background:#f3f4f6;padding:4px 8px;border-radius:12px;}
+.qty-btn{background:white;border:none;width:24px;height:24px;border-radius:50%;font-weight:bold;cursor:pointer;color:#6d28d9;box-shadow:0 2px 5px rgba(0,0,0,0.05);display:flex;align-items:center;justify-content:center;}
 .btn-primary{width:100%;padding:14px;background:#6d28d9;color:white;border:none;border-radius:16px;font-weight:bold;font-size:16px;cursor:pointer;margin-top:20px;box-shadow:0 4px 15px rgba(109,40,217,0.3);}
 footer{padding:30px;text-align:center;background:#6d28d9;color:white;font-size:14px;margin-top:60px;}
 </style>
@@ -27,7 +34,10 @@ footer{padding:30px;text-align:center;background:#6d28d9;color:white;font-size:1
 
 <body>
 <nav>
-<div style="display:flex;align-items:center;gap:10px;"><img src="yolo-logo.png" style="width:34px;height:34px;border-radius:50%;object-fit:cover;"><strong style="color:#6d28d9;font-size:18px;">YOLO</strong></div>
+<div style="display:flex;align-items:center;gap:10px;">
+<img src="yolo-logo.png" style="width:34px;height:34px;border-radius:50%;object-fit:cover;display:block;" alt="Logo">
+<strong style="color:#6d28d9;font-size:18px;line-height:1;">YOLO</strong>
+</div>
 <a href="index.html">← Return to Store</a>
 </nav>
 
@@ -46,7 +56,7 @@ footer{padding:30px;text-align:center;background:#6d28d9;color:white;font-size:1
 
 <div class="box">
 <h2>Order Summary</h2>
-<div id="checkoutItemsList" style="max-height:250px;overflow-y:auto;margin-bottom:15px;"></div>
+<div id="checkoutItemsList" style="max-height:280px;overflow-y:auto;margin-bottom:15px;"></div>
 <div style="display:flex;justify-content:space-between;font-weight:bold;font-size:18px;border-top:2px solid #f3f4f6;padding-top:15px;">
 <span>Total Amount:</span>
 <span id="checkoutTotalPrice" style="color:#6d28d9;">₹0</span>
@@ -62,32 +72,66 @@ function loadCheckoutSummary() {
 let cart = JSON.parse(localStorage.getItem("yolo_cart")) || [];
 let container = document.getElementById("checkoutItemsList");
 container.innerHTML = "";
+
 if(cart.length === 0) {
-container.innerHTML = `<p style="color:#6b7280;font-size:14px;">Your cart is empty. <a href="index.html">Go shop</a></p>`;
+container.innerHTML = `<p style="color:#6b7280;font-size:14px;text-align:center;padding:20px 0;">Your cart is empty. <a href="index.html">Go shop</a></p>`;
 document.getElementById("checkoutTotalPrice").innerText = "₹0";
+document.getElementById("orderSummaryInput").value = "Empty Cart";
 return;
 }
+
 let total = 0;
 let summaryText = "";
-cart.forEach(item => {
-let itemTotal = item.price * (item.qty || 1);
+
+cart.forEach((item, index) => {
+let qty = item.qty || 1;
+let itemTotal = item.price * qty;
 total += itemTotal;
-summaryText += `${item.name} (Qty: ${item.qty || 1}) - ₹${itemTotal}; `;
+summaryText += `${item.name} (Qty: ${qty}) - ₹${itemTotal}; `;
+
 let div = document.createElement("div");
 div.className = "order-summary-item";
-div.innerHTML = `<span>${item.name} × ${item.qty || 1}</span><span style="font-weight:600;">₹${itemTotal}</span>`;
+div.innerHTML = `
+<div style="max-width:55%;">
+<div style="font-weight:600;color:#1f2937;">${item.name}</div>
+<div style="color:#6d28d9;font-size:12px;">₹${item.price} each</div>
+</div>
+<div style="display:flex;align-items:center;gap:12px;">
+<div class="qty-control">
+<button type="button" class="qty-btn" onclick="updateQty(${index}, -1)">−</button>
+<span style="font-weight:600;min-width:16px;text-align:center;">${qty}</span>
+<button type="button" class="qty-btn" onclick="updateQty(${index}, 1)">+</button>
+</div>
+<span style="font-weight:600;min-width:40px;text-align:right;">₹${itemTotal}</span>
+</div>
+`;
 container.appendChild(div);
 });
+
 document.getElementById("checkoutTotalPrice").innerText = "₹" + total;
 document.getElementById("orderSummaryInput").value = summaryText + ` | Total: ₹${total}`;
 }
+
+function updateQty(index, change) {
+let cart = JSON.parse(localStorage.getItem("yolo_cart")) || [];
+if(cart[index]) {
+cart[index].qty = (cart[index].qty || 1) + change;
+if(cart[index].qty <= 0) {
+cart.splice(index, 1);
+}
+localStorage.setItem("yolo_cart", JSON.stringify(cart));
+loadCheckoutSummary();
+}
+}
+
 loadCheckoutSummary();
 
 function handleCheckoutSubmit(e) {
-// FormBold submission will process automatically, clear cart after submit
 localStorage.removeItem("yolo_cart");
 alert("Order placed successfully! Thank you for choosing YOLO Pens.");
 }
 </script>
 </body>
 </html>
+
+```
