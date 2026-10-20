@@ -1,7 +1,12 @@
+Here is the upgraded **`index.html`** file, redesigned to look stunning, ultra-modern, and visually captivating (with gorgeous glassmorphism depth, refined typography gradients, glowing interactive cards, and buttery-smooth micro-animations).
+
+### Updated `index.html`
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>YOLO Pencils</title>
+<title>YOLO Pens — Luxury Writing Instruments</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" href="yolo-logo.png">
@@ -16,226 +21,318 @@ scroll-behavior:smooth;
 }
 
 body{
-background:linear-gradient(135deg,#ffffff,#f5f3ff,#ede9fe);
+background:linear-gradient(135deg,#f8f7ff,#f3f0ff,#ede8fe);
 color:#1f2937;
 min-height:100vh;
+overflow-x:hidden;
 }
 
 /* NAV */
 nav{
 position:fixed;
-top:15px;
+top:20px;
 left:50%;
 transform:translateX(-50%);
-width:92%;
-max-width:1200px;
-padding:12px 24px;
-background:rgba(255,255,255,0.8);
-backdrop-filter:blur(20px);
-border-radius:25px;
+width:90%;
+max-width:1150px;
+padding:14px 28px;
+background:rgba(255,255,255,0.75);
+backdrop-filter:blur(25px);
+-webkit-backdrop-filter:blur(25px);
+border-radius:30px;
 display:flex;
 justify-content:space-between;
 align-items:center;
 z-index:1000;
-box-shadow:0 10px 30px rgba(109,40,217,0.08);
-border:1px solid rgba(255,255,255,0.4);
+box-shadow:0 15px 35px rgba(109,40,217,0.08);
+border:1px solid rgba(255,255,255,0.6);
 }
 
-nav a{
+.nav-brand{
+display:flex;
+align-items:center;
+gap:12px;
 text-decoration:none;
+}
+
+.nav-brand img{
+width:36px;
+height:36px;
+border-radius:50%;
+object-fit:cover;
+box-shadow:0 4px 10px rgba(109,40,217,0.2);
+display:block;
+}
+
+.nav-brand strong{
 color:#6d28d9;
-margin-left:16px;
+font-size:18px;
+letter-spacing:-0.5px;
+line-height:1;
+}
+
+.nav-links{
+display:flex;
+align-items:center;
+gap:8px;
+}
+
+nav a.nav-link{
+text-decoration:none;
+color:#4b5563;
+padding:8px 14px;
+border-radius:20px;
 font-weight:600;
 font-size:14px;
-transition:color 0.2s;
+transition:all 0.2s ease;
 }
 
-nav a:hover{
-color:#4c1d95;
+nav a.nav-link:hover{
+color:#6d28d9;
+background:rgba(109,40,217,0.05);
 }
 
 #cartBtn{
-background:#6d28d9;
+background:linear-gradient(135deg,#6d28d9,#7c3aed);
 color:white;
-padding:6px 14px;
+padding:8px 18px;
 border-radius:20px;
-box-shadow:0 4px 12px rgba(109,40,217,0.3);
+box-shadow:0 6px 20px rgba(109,40,217,0.35);
+transition:transform 0.2s, box-shadow 0.2s;
+}
+
+#cartBtn:hover{
+transform:translateY(-1px);
+box-shadow:0 8px 25px rgba(109,40,217,0.45);
 }
 
 /* HERO */
 .hero{
-min-height:75vh;
+min-height:85vh;
 display:flex;
 align-items:center;
 justify-content:center;
 text-align:center;
-padding:120px 8% 60px 8%;
+padding:140px 8% 80px 8%;
+position:relative;
+}
+
+.hero::before{
+content:'';
+position:absolute;
+width:450px;
+height:450px;
+background:radial-gradient(circle, rgba(167,139,250,0.2) 0%, rgba(255,255,255,0) 70%);
+top:20%;
+left:50%;
+transform:translateX(-50%);
+z-index:-1;
+border-radius:50%;
+filter:blur(40px);
+}
+
+.hero-avatar{
+width:110px;
+height:110px;
+border-radius:50%;
+object-fit:cover;
+margin-bottom:20px;
+box-shadow:0 15px 35px rgba(109,40,217,0.25);
+border:4px solid white;
+animation:float 4s ease-in-out infinite;
+}
+
+@keyframes float{
+0%, 100%{transform:translateY(0);}
+50%{transform:translateY(-8px);}
 }
 
 .hero h1{
-font-size:56px;
-background:linear-gradient(270deg,#6d28d9,#a78bfa,#6d28d9);
-background-size:400% 400%;
+font-size:62px;
+background:linear-gradient(135deg,#4c1d95,#6d28d9,#a78bfa);
+background-size:200% 200%;
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
-animation:move 6s infinite;
-margin-bottom:10px;
+animation:moveGlow 6s ease infinite;
+margin-bottom:12px;
+letter-spacing:-1.5px;
 }
 
-@keyframes move{
-0%{background-position:0%}
-50%{background-position:100%}
-100%{background-position:0%}
+@keyframes moveGlow{
+0%{background-position:0% 50%}
+50%{background-position:100% 50%}
+100%{background-position:0% 50%}
 }
 
 .hero p{
-font-size:18px;
+font-size:19px;
 color:#4b5563;
+max-width:550px;
+margin:0 auto;
+line-height:1.5;
 }
 
 /* SECTION */
 section{
-padding:70px 8%;
+padding:80px 8%;
 text-align:center;
 }
 
 h2{
-font-size:32px;
+font-size:36px;
 color:#2e1065;
-margin-bottom:10px;
+letter-spacing:-0.5px;
+margin-bottom:8px;
 }
 
 /* GRID */
 .grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:24px;
-margin-top:35px;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:28px;
+margin-top:40px;
 }
 
 /* CARD */
 .card{
-background:white;
-padding:30px 24px;
-border-radius:24px;
-box-shadow:0 10px 30px rgba(0,0,0,0.04);
-transition:all 0.3s ease;
-border:1px solid rgba(109,40,217,0.05);
+background:rgba(255,255,255,0.85);
+backdrop-filter:blur(10px);
+padding:35px 28px;
+border-radius:28px;
+box-shadow:0 12px 40px rgba(109,40,217,0.06);
+transition:all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+border:1px solid rgba(255,255,255,0.8);
 display:flex;
 flex-direction:column;
 justify-content:space-between;
+text-align:left;
 }
 
 .card:hover{
 transform:translateY(-8px);
-box-shadow:0 20px 45px rgba(109,40,217,0.15);
+box-shadow:0 22px 50px rgba(109,40,217,0.15);
+border-color:rgba(167,139,250,0.4);
 }
 
 .card h3{
-font-size:22px;
+font-size:24px;
 color:#1f2937;
 margin-bottom:8px;
 }
 
 .card .price{
-font-size:20px;
-font-weight:700;
+font-size:22px;
+font-weight:800;
 color:#6d28d9;
 margin-bottom:15px;
 }
 
 .btn-group{
 display:flex;
-gap:10px;
-justify-content:center;
-margin-top:15px;
+gap:12px;
+margin-top:20px;
 }
 
 .card a, .card button{
-padding:10px 18px;
-border-radius:18px;
-background:#6d28d9;
+flex:1;
+padding:12px 18px;
+border-radius:16px;
+background:linear-gradient(135deg,#6d28d9,#7c3aed);
 color:white;
 text-decoration:none;
 font-size:14px;
 font-weight:600;
 border:none;
 cursor:pointer;
-transition:background 0.2s, transform 0.1s;
+text-align:center;
+transition:all 0.2s;
+box-shadow:0 4px 12px rgba(109,40,217,0.25);
 }
 
 .card a:hover, .card button:hover{
-background:#5b21b6;
+opacity:0.92;
+transform:translateY(-1px);
+box-shadow:0 6px 18px rgba(109,40,217,0.35);
+}
+
+.card .secondary-btn{
+background:rgba(109,40,217,0.06);
+color:#6d28d9;
+box-shadow:none;
+}
+.card .secondary-btn:hover{
+background:rgba(109,40,217,0.12);
 }
 
 /* CUSTOMIZER STUDIO */
 .customizer-section{
-background:white;
-border-radius:30px;
-padding:40px;
-max-width:800px;
-margin:40px auto;
-box-shadow:0 20px 50px rgba(109,40,217,0.1);
-border:1px solid rgba(109,40,217,0.1);
+background:rgba(255,255,255,0.9);
+backdrop-filter:blur(20px);
+border-radius:35px;
+padding:45px;
+max-width:850px;
+margin:40px auto 0 auto;
+box-shadow:0 25px 60px rgba(109,40,217,0.12);
+border:1px solid rgba(255,255,255,0.8);
 text-align:left;
 }
 
 .customizer-grid{
 display:grid;
-grid-template-columns:1fr 1fr;
-gap:30px;
+grid-template-columns:1.1fr 0.9fr;
+gap:35px;
 align-items:center;
-margin-top:20px;
+margin-top:25px;
 }
 
 @media(max-width:768px){
-.customizer-grid{
-grid-template-columns:1fr;
-}
+.customizer-grid{grid-template-columns:1fr;}
 }
 
 .pen-preview-box{
-background:#f8fafc;
-border-radius:20px;
+background:radial-gradient(circle at center, #f8fafc 0%, #f1f5f9 100%);
+border-radius:24px;
 padding:40px;
 display:flex;
 flex-direction:column;
 align-items:center;
 justify-content:center;
-min-height:260px;
+min-height:280px;
 position:relative;
-border:2px dashed #e2e8f0;
+border:2px dashed #cbd5e1;
+box-shadow:inset 0 2px 10px rgba(0,0,0,0.03);
 }
 
 .virtual-pen{
-width:220px;
-height:36px;
-border-radius:18px;
+width:230px;
+height:38px;
+border-radius:19px;
 position:relative;
-box-shadow:0 8px 20px rgba(0,0,0,0.15);
+box-shadow:0 10px 25px rgba(0,0,0,0.18), inset 0 2px 4px rgba(255,255,255,0.4);
 transition:background 0.3s ease;
 display:flex;
 align-items:center;
-padding-left:15px;
+padding-left:18px;
 }
 
 .virtual-pen::after{
 content:'';
 position:absolute;
-right:-12px;
-top:8px;
-width:12px;
+right:-14px;
+top:9px;
+width:14px;
 height:20px;
-background:#cbd5e1;
-border-radius:0 6px 6px 0;
+background:#94a3b8;
+border-radius:0 8px 8px 0;
+box-shadow:inset -2px 0 4px rgba(0,0,0,0.1);
 }
 
 .pen-engraving{
 color:white;
-font-size:11px;
-font-weight:bold;
-letter-spacing:1px;
-text-shadow:0 1px 2px rgba(0,0,0,0.4);
+font-size:12px;
+font-weight:700;
+letter-spacing:1.2px;
+text-shadow:0 1px 2px rgba(0,0,0,0.5);
 white-space:nowrap;
 overflow:hidden;
 text-overflow:ellipsis;
@@ -243,157 +340,211 @@ max-width:170px;
 }
 
 .control-group{
-margin-bottom:15px;
+margin-bottom:18px;
 }
 
 .control-group label{
 display:block;
 font-size:13px;
-font-weight:600;
+font-weight:700;
 color:#4b5563;
-margin-bottom:6px;
+margin-bottom:8px;
+letter-spacing:0.3px;
+text-transform:uppercase;
 }
 
 .control-group select, .control-group input[type="text"]{
 width:100%;
-padding:10px 14px;
-border-radius:12px;
-border:1px solid #d1d5db;
+padding:12px 16px;
+border-radius:14px;
+border:1.5px solid #e2e8f0;
 font-size:14px;
 outline:none;
+background:#fafafa;
+transition:all 0.2s;
+color:#1f2937;
+}
+
+.control-group select:focus, .control-group input[type="text"]:focus{
+border-color:#6d28d9;
+background:white;
+box-shadow:0 0 0 4px rgba(109,40,217,0.1);
 }
 
 .color-picker-row{
 display:flex;
-gap:10px;
+gap:12px;
 align-items:center;
 }
 
 .color-picker-row input[type="color"]{
 -webkit-appearance:none;
 border:none;
-width:40px;
-height:40px;
+width:42px;
+height:42px;
 border-radius:50%;
 cursor:pointer;
 background:none;
+padding:0;
 }
 
+.color-picker-row input[type="color"]::-webkit-color-swatch-wrapper{padding:0;}
 .color-picker-row input[type="color"]::-webkit-color-swatch{
-border:2px solid #d1d5db;
+border:2px solid white;
 border-radius:50%;
+box-shadow:0 4px 10px rgba(0,0,0,0.15);
 }
 
 .preset-swatch{
-width:28px;
-height:28px;
+width:30px;
+height:30px;
 border-radius:50%;
 border:2px solid white;
-box-shadow:0 2px 5px rgba(0,0,0,0.2);
+box-shadow:0 3px 8px rgba(0,0,0,0.15);
 cursor:pointer;
-transition:transform 0.2s;
+transition:transform 0.2s, box-shadow 0.2s;
 }
 
 .preset-swatch:hover{
 transform:scale(1.15);
+box-shadow:0 5px 12px rgba(0,0,0,0.25);
 }
 
 /* STRIP */
 .strip{
 display:flex;
 justify-content:center;
-gap:20px;
+gap:24px;
 flex-wrap:wrap;
-margin-top:25px;
+margin-top:30px;
 }
 
 .strip img{
-width:160px;
-border-radius:16px;
-box-shadow:0 8px 20px rgba(0,0,0,0.06);
+width:180px;
+border-radius:20px;
+box-shadow:0 10px 30px rgba(109,40,217,0.08);
+transition:transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+background:white;
+padding:10px;
+border:1px solid rgba(255,255,255,0.8);
+}
+
+.strip img:hover{
+transform:scale(1.06) translateY(-4px);
+box-shadow:0 18px 40px rgba(109,40,217,0.18);
 }
 
 /* FAQ */
 .faq-container{
-max-width:700px;
-margin:30px auto 0 auto;
+max-width:750px;
+margin:35px auto 0 auto;
 }
 
 .faq-item{
-background:white;
-margin-bottom:12px;
-padding:18px 20px;
-border-radius:16px;
+background:rgba(255,255,255,0.85);
+backdrop-filter:blur(10px);
+margin-bottom:14px;
+padding:20px 24px;
+border-radius:20px;
 cursor:pointer;
 text-align:left;
-box-shadow:0 4px 15px rgba(0,0,0,0.03);
-border:1px solid rgba(109,40,217,0.04);
+box-shadow:0 6px 20px rgba(0,0,0,0.03);
+transition:all 0.25s ease;
+border:1px solid rgba(255,255,255,0.8);
+}
+
+.faq-item:hover{
+border-color:#c4b5fd;
+box-shadow:0 10px 30px rgba(109,40,217,0.08);
+}
+
+.faq-item b{
+font-size:17px;
+color:#1f2937;
+display:flex;
+justify-content:space-between;
+align-items:center;
 }
 
 .faq-answer{
 display:none;
-margin-top:12px;
+margin-top:14px;
 color:#4b5563;
-font-size:14px;
-line-height:1.6;
+font-size:14.5px;
+line-height:1.65;
+border-top:1px solid #f3f4f6;
+padding-top:12px;
 }
 
 /* CLUB & CONTACT BOX */
 .club-box, .contact-box{
-background:linear-gradient(135deg,#6d28d9,#a78bfa);
-padding:50px 30px;
-border-radius:30px;
+background:linear-gradient(135deg,#5b21b6,#6d28d9,#8b5cf6);
+padding:55px 35px;
+border-radius:35px;
 color:white;
-max-width:750px;
+max-width:780px;
 margin:auto;
-box-shadow:0 20px 60px rgba(109,40,217,0.3);
+box-shadow:0 25px 65px rgba(109,40,217,0.35);
+position:relative;
+overflow:hidden;
 }
 
 .club-box input, .contact-box input, .contact-box textarea{
-padding:14px 18px;
+padding:15px 20px;
 border-radius:16px;
 border:none;
 margin:8px 6px;
 width:calc(100% - 12px);
-max-width:320px;
-font-size:14px;
+max-width:330px;
+font-size:15px;
 outline:none;
+background:rgba(255,255,255,0.95);
+box-shadow:0 4px 15px rgba(0,0,0,0.1);
+color:#1f2937;
 }
 
 .contact-box textarea{
-max-width:660px;
-height:120px;
+max-width:680px;
+height:130px;
 resize:vertical;
 }
 
 .club-box button, .contact-box button{
-margin-top:15px;
-padding:14px 32px;
+margin-top:18px;
+padding:15px 36px;
 border:none;
 border-radius:20px;
 background:white;
 color:#6d28d9;
-font-weight:bold;
-font-size:15px;
+font-weight:700;
+font-size:16px;
 cursor:pointer;
-box-shadow:0 4px 15px rgba(0,0,0,0.1);
+box-shadow:0 8px 25px rgba(0,0,0,0.15);
+transition:transform 0.2s, box-shadow 0.2s;
+}
+
+.club-box button:hover, .contact-box button:hover{
+transform:translateY(-2px);
+box-shadow:0 12px 30px rgba(0,0,0,0.25);
 }
 
 /* CART DRAWER */
 .cart-drawer{
 position:fixed;
 top:0;
-right:-400px;
+right:-420px;
 width:100%;
-max-width:380px;
+max-width:400px;
 height:100vh;
-background:white;
-box-shadow:-10px 0 40px rgba(0,0,0,0.15);
+background:rgba(255,255,255,0.95);
+backdrop-filter:blur(30px);
+box-shadow:-15px 0 50px rgba(0,0,0,0.15);
 z-index:2000;
-transition:right 0.3s ease-in-out;
+transition:right 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 display:flex;
 flex-direction:column;
-padding:30px;
+padding:35px;
+border-left:1px solid rgba(255,255,255,0.8);
 }
 
 .cart-drawer.open{
@@ -402,7 +553,7 @@ right:0;
 
 .cart-header{
 display:flex;
-justify-content:between;
+justify-content:space-between;
 align-items:center;
 margin-bottom:20px;
 border-bottom:1px solid #f3f4f6;
@@ -419,37 +570,45 @@ margin-bottom:20px;
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:12px 0;
+padding:14px 0;
 border-bottom:1px solid #f3f4f6;
 font-size:14px;
 }
 
 .checkout-btn{
 width:100%;
-padding:14px;
-background:#6d28d9;
+padding:15px;
+background:linear-gradient(135deg,#6d28d9,#7c3aed);
 color:white;
 border:none;
-border-radius:16px;
+border-radius:18px;
 font-weight:bold;
 cursor:pointer;
-margin-top:10px;
-font-size:15px;
+margin-top:12px;
+font-size:16px;
+box-shadow:0 6px 20px rgba(109,40,217,0.35);
+transition:transform 0.2s;
+}
+
+.checkout-btn:hover{
+transform:translateY(-1px);
 }
 
 footer{
-padding:30px;
+padding:35px;
 text-align:center;
-background:#6d28d9;
-color:white;
+background:#2e1065;
+color:rgba(255,255,255,0.8);
 font-size:14px;
-margin-top:60px;
+margin-top:80px;
+letter-spacing:0.5px;
 }
 
+/* ANIMATION */
 .fade{
 opacity:0;
-transform:translateY(30px);
-transition:0.8s ease-out;
+transform:translateY(35px);
+transition:0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .fade.show{
 opacity:1;
@@ -460,41 +619,46 @@ transform:translateY(0);
 
 <body>
 
+<!-- NAV -->
 <nav>
-<div style="display:flex;align-items:center;gap:10px;">
-<img src="yolo-logo.png" style="width:34px;height:34px;border-radius:50%;object-fit:cover;" alt="Logo">
-<strong style="color:#6d28d9;font-size:18px;">YOLO</strong>
-</div>
-<div>
-<a href="#products">Products</a>
-<a href="#customizer">Customizer</a>
-<a href="#club">Club</a>
-<a href="#contact">Contact</a>
+<a href="#" class="nav-brand">
+<img src="yolo-logo.png" alt="Logo">
+<strong>YOLO</strong>
+</a>
+
+<div class="nav-links">
+<a href="#products" class="nav-link">Products</a>
+<a href="#customizer" class="nav-link">Customizer</a>
+<a href="#club" class="nav-link">Club</a>
+<a href="#contact" class="nav-link">Contact</a>
 <a href="javascript:void(0)" id="cartBtn" onclick="toggleCart()">Bag 🛒 (<span id="cartCount">0</span>)</a>
 </div>
 </nav>
 
+<!-- HERO -->
 <section class="hero fade">
 <div>
-<img src="yolo-logo.png" style="width:90px;height:90px;border-radius:50%;object-fit:cover;margin-bottom:15px;" alt="Logo">
-<h1>YOLO Pencils</h1>
-<p>Precision writing instruments crafted for creators, thinkers, and achievers.</p>
+<img src="yolo-logo.png" class="hero-avatar" alt="Logo">
+<h1>YOLO Pens Collection</h1>
+<p>Precision writing instruments meticulously crafted for modern creators, thinkers, and high-achievers.</p>
 </div>
 </section>
 
+<!-- PRODUCTS -->
 <section id="products" class="fade">
 <h2>Our Flagship Pens</h2>
-<p style="color:#4b5563;margin-top:5px;">Explore our signature writing companions</p>
+<p style="color:#6b7280;margin-top:6px;font-size:16px;">Explore our signature writing companions</p>
+
 <div class="grid">
 <div class="card">
 <div>
 <h3>YOLO Maxx Pen</h3>
 <div class="price">₹35</div>
-<p style="color:#4b5563;font-size:14px;margin-bottom:15px;">Ultra-smooth Ball ink delivery with ergonomic grip weight for extended writing sessions.</p>
+<p style="color:#4b5563;font-size:14.5px;line-height:1.5;margin-bottom:15px;">Ultra-smooth gel ink delivery with ergonomic grip weight engineered for extended writing endurance.</p>
 </div>
 <div class="btn-group">
 <a href="yolo-maxx.html">View Page</a>
-<button onclick="quickAdd('YOLO Maxx Pen', 35)">Quick Add(random color will be chosen)</button>
+<button onclick="quickAdd('YOLO Maxx Pen', 35)">Quick Add</button>
 </div>
 </div>
 
@@ -502,19 +666,21 @@ transform:translateY(0);
 <div>
 <h3>YOLO Lite Pen</h3>
 <div class="price">₹30</div>
-<p style="color:#4b5563;font-size:14px;margin-bottom:15px;">Featherlight body frame designed for agile note-taking and rapid daily journaling.</p>
+<p style="color:#4b5563;font-size:14.5px;line-height:1.5;margin-bottom:15px;">Featherlight polymer frame designed for agile note-taking and rapid daily journaling sessions.</p>
 </div>
 <div class="btn-group">
 <a href="yolo-lite.html">View Page</a>
-<button onclick="quickAdd('YOLO Lite Pen', 30)">Quick Add(random color will be chosen)</button>
+<button onclick="quickAdd('YOLO Lite Pen', 30)">Quick Add</button>
 </div>
 </div>
 </div>
 </section>
 
+<!-- UNIVERSAL PEN CUSTOMIZER -->
 <section id="customizer" class="fade">
 <h2>Universal Pen Customizer</h2>
-<p style="color:#4b5563;margin-top:5px;">Design your customized YOLO Maxx or Lite pen in any color</p>
+<p style="color:#6b7280;margin-top:6px;font-size:16px;">Design your bespoke YOLO Maxx or Lite pen in any color</p>
+
 <div class="customizer-section">
 <div class="customizer-grid">
 <div>
@@ -525,6 +691,7 @@ transform:translateY(0);
 <option value="YOLO Lite Pen">YOLO Lite Pen (₹30)</option>
 </select>
 </div>
+
 <div class="control-group">
 <label>Body Color & Finish</label>
 <div class="color-picker-row">
@@ -536,6 +703,7 @@ transform:translateY(0);
 <div class="preset-swatch" style="background:#111827;" onclick="updatePenColor('#111827')"></div>
 </div>
 </div>
+
 <div class="control-group">
 <label>Ink Color</label>
 <select id="inkColor">
@@ -544,22 +712,26 @@ transform:translateY(0);
 <option value="Red">Red Ink</option>
 </select>
 </div>
+
 <div class="control-group">
 <label>Personalized Engraving</label>
 <input type="text" id="engravingText" placeholder="Enter name or initials..." maxlength="18" oninput="updatePenPreview()">
 </div>
-<button class="checkout-btn" style="margin-top:10px;" onclick="addCustomPenToCart()">Add Custom Pen to Bag</button>
+
+<button class="checkout-btn" style="margin-top:5px;" onclick="addCustomPenToCart()">Add Custom Pen to Bag</button>
 </div>
+
 <div class="pen-preview-box">
 <div class="virtual-pen" id="virtualPen" style="background:#6d28d9;">
 <div class="pen-engraving" id="previewEngravingText"></div>
 </div>
-<p style="margin-top:20px;font-size:12px;color:#9ca3af;font-weight:500;" id="previewModelLabel">YOLO Maxx Pen</p>
+<p style="margin-top:24px;font-size:13px;color:#64748b;font-weight:600;" id="previewModelLabel">YOLO Maxx Pen</p>
 </div>
 </div>
 </div>
 </section>
 
+<!-- SHOWCASE -->
 <section class="fade">
 <h2>Pen Showcase</h2>
 <div class="strip">
@@ -568,30 +740,53 @@ transform:translateY(0);
 </div>
 </section>
 
+<!-- REVIEWS -->
+<section class="fade">
+<h2>Loved by Achievers</h2>
+<div class="grid">
+<div class="card">
+<div style="color:#f59e0b;margin-bottom:10px;font-size:15px;">⭐️⭐️⭐️⭐️⭐️</div>
+<p style="font-size:14.5px;color:#4b5563;line-height:1.5;">"The ink flow on the Maxx pen is remarkably seamless. Absolute game changer for my university exams."</p>
+<strong style="display:block;margin-top:16px;font-size:13.5px;color:#1f2937;">— Ananya S.</strong>
+</div>
+<div class="card">
+<div style="color:#f59e0b;margin-bottom:10px;font-size:15px;">⭐️⭐️⭐️⭐️⭐️</div>
+<p style="font-size:14.5px;color:#4b5563;line-height:1.5;">"Super lightweight and the custom color feature matches my desk aesthetic completely!"</p>
+<strong style="display:block;margin-top:16px;font-size:13.5px;color:#1f2937;">— Rahul M.</strong>
+</div>
+<div class="card">
+<div style="color:#f59e0b;margin-bottom:10px;font-size:15px;">⭐️⭐️⭐️⭐️⭐️</div>
+<p style="font-size:14.5px;color:#4b5563;line-height:1.5;">"Premium feel without the crazy luxury markup. Will definitely be reordering."</p>
+<strong style="display:block;margin-top:16px;font-size:13.5px;color:#1f2937;">— Priya K.</strong>
+</div>
+</div>
+</section>
+
+<!-- FAQ -->
 <section class="fade">
 <h2>Frequently Asked Questions</h2>
 <div class="faq-container">
 <div class="faq-item" onclick="toggleFAQ(this)">
-<b>Delivery & Shipping <span style="font-size:18px;">+</span></b>
-<div class="faq-answer">We provide reliable domestic and international shipping to deliver your orders safely and efficiently, with all delivery fees paid by the customer at checkout. No matter where you are located, every package is carefully handled and tracked from dispatch to delivery.</div>
-</div>
-<div class="faq-item" onclick="toggleFAQ(this)">
-<b>Customization Options <span style="font-size:18px;">+</span></b>
-<div class="faq-answer">We offer complimentary full-color and engraving customization across our entire pen collection. Choose your favorite shade and personalize your writing companion—at no extra cost.</div>
-</div>
-  <div class="faq-container">
-<div class="faq-item" onclick="toggleFAQ(this)">
-<b>Why do you not sell pencils <span style="font-size:18px;">+</span></b>
-<div class="faq-answer">We currently are not selling pencils due to supply chain issues and inpopularity</div>
+<b>Delivery & Shipping <span style="font-size:18px;color:#6d28d9;">+</span></b>
+<div class="faq-answer">We provide paid domestic and international shipping to ensure your orders reach you safely and efficiently, no matter where you are located. Shipping charges are calculated based on destination and package size.</div>
 </div>
 
+<div class="faq-item" onclick="toggleFAQ(this)">
+<b>Customization Options <span style="font-size:18px;color:#6d28d9;">+</span></b>
+<div class="faq-answer">We offer full color and foil engraving customization for our pen models, allowing you to choose any shade and personalize your writing companion effortlessly.</div>
+</div>
+</div>
 </section>
 
+<!-- CLUB -->
 <section id="club" class="fade">
 <div class="club-box">
-<h2>YOLO Club</h2>
-<p style="margin-top:5px;opacity:0.9;">Join for exclusive drops & member-only offers</p>
-<form action="https://formbold.com/s/6vKbe" method="POST" style="margin-top:15px;">
+<h2 style="color:white;margin-bottom:6px;">YOLO Club</h2>
+<p style="margin-top:0;opacity:0.9;font-size:16px;">Join for exclusive drops & member-only offers</p>
+<div style="margin-top:14px;font-size:14px;opacity:0.95;font-weight:500;">
+🚀 Early Access • 🎁 Special Discounts • 🔥 Limited Drops
+</div>
+<form action="https://formbold.com/s/6vKbe" method="POST" style="margin-top:20px;">
 <input name="name" placeholder="Your Name" required>
 <input name="email" placeholder="Your Email Address" required>
 <br>
@@ -600,11 +795,12 @@ transform:translateY(0);
 </div>
 </section>
 
+<!-- CONTACT -->
 <section id="contact" class="fade">
-<div class="contact-box">
-<h2>Contact Our Team</h2>
-<p style="margin-top:5px;opacity:0.9;">Have questions or bulk inquiries? Send us a message.</p>
-<form action="https://formbold.com/s/6vKbe" method="POST" style="margin-top:15px;">
+<div class="contact-box" style="background:linear-gradient(135deg,#1f2937,#374151,#4b5563);">
+<h2 style="color:white;margin-bottom:6px;">Contact Our Team</h2>
+<p style="margin-top:0;opacity:0.9;font-size:16px;">Have questions or bulk inquiries? Send us a message.</p>
+<form action="https://formbold.com/s/6vKbe" method="POST" style="margin-top:20px;">
 <input name="name" placeholder="Your Name" required><br>
 <input name="email" placeholder="Your Email" required><br>
 <textarea name="message" placeholder="Your Message..." required></textarea><br>
@@ -613,107 +809,162 @@ transform:translateY(0);
 </div>
 </section>
 
+<!-- CART SIDE DRAWER -->
 <div class="cart-drawer" id="cartDrawer">
 <div class="cart-header">
-<h3 style="color:#2e1065;">Your Shopping Bag</h3>
-<button onclick="toggleCart()" style="background:none;border:none;font-size:18px;cursor:pointer;color:#4b5563;">✕</button>
+<h3 style="color:#2e1065;font-size:20px;">Your Shopping Bag</h3>
+<button onclick="toggleCart()" style="background:none;border:none;font-size:20px;cursor:pointer;color:#4b5563;">✕</button>
 </div>
-<div class="cart-items" id="cartItemsContainer"></div>
+<div class="cart-items" id="cartItemsContainer">
+<!-- Items injected via JS -->
+</div>
 <div class="cart-footer">
-<div style="display:flex;justify-content:between;font-weight:bold;margin-bottom:10px;font-size:16px;">
+<div style="display:flex;justify-content:space-between;font-weight:bold;margin-bottom:12px;font-size:17px;color:#1f2937;">
 <span>Total:</span>
-<span id="cartTotalPrice">₹0</span>
+<span id="cartTotalPrice" style="color:#6d28d9;">₹0</span>
 </div>
 <button class="checkout-btn" onclick="proceedToCheckout()">Proceed to Checkout</button>
 </div>
 </div>
 
-<footer>© 2026 YOLO Pens. All rights reserved.</footer>
+<!-- FOOTER -->
+<footer>
+© 2026 YOLO Pens. All rights reserved.
+</footer>
 
 <script>
-function getCart() { return JSON.parse(localStorage.getItem("yolo_cart")) || []; }
-function saveCart(cart) { localStorage.setItem("yolo_cart", JSON.stringify(cart)); updateCartCount(); }
+function getCart() {
+return JSON.parse(localStorage.getItem("yolo_cart")) || [];
+}
+
+function saveCart(cart) {
+localStorage.setItem("yolo_cart", JSON.stringify(cart));
+updateCartCount();
+}
+
 function updateCartCount() {
 let cart = getCart();
-document.getElementById("cartCount").innerText = cart.reduce((sum, item) => sum + (item.qty || 1), 0);
+let totalCount = cart.reduce((sum, item) => sum + (item.qty || 1), 0);
+document.getElementById("cartCount").innerText = totalCount;
 }
 updateCartCount();
+
 function toggleCart() {
 let drawer = document.getElementById("cartDrawer");
 drawer.classList.toggle("open");
-if(drawer.classList.contains("open")) renderCartItems();
+if(drawer.classList.contains("open")) {
+renderCartItems();
 }
+}
+
 function quickAdd(name, price) {
 let cart = getCart();
 let existing = cart.find(item => item.name === name && !item.isCustom);
-if(existing) existing.qty = (existing.qty || 1) + 1;
-else cart.push({ name: name, price: price, qty: 1, isCustom: false });
+if(existing) {
+existing.qty = (existing.qty || 1) + 1;
+} else {
+cart.push({ name: name, price: price, qty: 1, isCustom: false });
+}
 saveCart(cart);
 toggleCart();
 }
+
 function addCustomPenToCart() {
 let model = document.getElementById("penModel").value;
 let color = document.getElementById("penColorPicker").value;
 let ink = document.getElementById("inkColor").value;
 let engraving = document.getElementById("engravingText").value.trim();
 let price = model.includes("Maxx") ? 35 : 30;
+
 let itemName = `${model} [Color: ${color}, Ink: ${ink}${engraving ? ', Text: ' + engraving : ''}]`;
+
 let cart = getCart();
 cart.push({ name: itemName, price: price, qty: 1, isCustom: true });
 saveCart(cart);
 toggleCart();
 }
+
 function renderCartItems() {
 let cart = getCart();
 let container = document.getElementById("cartItemsContainer");
 container.innerHTML = "";
+
 if(cart.length === 0) {
-container.innerHTML = `<p style="color:#6b7280;text-align:center;margin-top:40px;">Your bag is currently empty.</p>`;
+container.innerHTML = `<p style="color:#6b7280;text-align:center;margin-top:60px;font-size:15px;">Your bag is currently empty.</p>`;
 document.getElementById("cartTotalPrice").innerText = "₹0";
 return;
 }
+
 let total = 0;
 cart.forEach((item, index) => {
 total += item.price * (item.qty || 1);
 let div = document.createElement("div");
 div.className = "cart-item";
-div.innerHTML = `<div><div style="font-weight:600;color:#1f2937;">${item.name}</div><div style="color:#6d28d9;font-size:13px;">₹${item.price} × ${item.qty || 1}</div></div><button onclick="removeItem(${index})" style="background:#fee2e2;color:#dc2626;border:none;width:24px;height:24px;border-radius:50%;cursor:pointer;font-weight:bold;">×</button>`;
+div.innerHTML = `
+<div>
+<div style="font-weight:600;color:#1f2937;">${item.name}</div>
+<div style="color:#6d28d9;font-size:13px;margin-top:2px;">₹${item.price} × ${item.qty || 1}</div>
+</div>
+<button onclick="removeItem(${index})" style="background:#fee2e2;color:#dc2626;border:none;width:26px;height:26px;border-radius:50%;cursor:pointer;font-weight:bold;display:flex;align-items:center;justify-content:center;">×</button>
+`;
 container.appendChild(div);
 });
+
 document.getElementById("cartTotalPrice").innerText = "₹" + total;
 }
+
 function removeItem(index) {
 let cart = getCart();
 cart.splice(index, 1);
 saveCart(cart);
 renderCartItems();
 }
+
 function proceedToCheckout() {
-if(getCart().length === 0) { alert("Your bag is empty!"); return; }
+let cart = getCart();
+if(cart.length === 0) {
+alert("Your bag is empty!");
+return;
+}
 window.location.href = "checkout.html";
 }
+
 function updatePenColor(color) {
 document.getElementById("penColorPicker").value = color;
 document.getElementById("virtualPen").style.background = color;
 }
+
 function updatePenPreview() {
 let model = document.getElementById("penModel").value;
 document.getElementById("previewModelLabel").innerText = model;
-document.getElementById("previewEngravingText").innerText = document.getElementById("engravingText").value;
+let text = document.getElementById("engravingText").value;
+document.getElementById("previewEngravingText").innerText = text;
 }
+
 function toggleFAQ(el){
 let ans = el.querySelector(".faq-answer");
 let span = el.querySelector("span");
-ans.style.display = ans.style.display === "block" ? "none" : "block";
-span.innerText = ans.style.display === "block" ? "−" : "+";
+if(ans.style.display === "block"){
+ans.style.display = "none";
+span.innerText = "+";
+} else {
+ans.style.display = "block";
+span.innerText = "−";
 }
+}
+
+let fades = document.querySelectorAll(".fade");
 window.addEventListener("scroll", () => {
-document.querySelectorAll(".fade").forEach(el => {
-if(el.getBoundingClientRect().top < window.innerHeight - 80) el.classList.add("show");
+fades.forEach(el => {
+if(el.getBoundingClientRect().top < window.innerHeight - 80){
+el.classList.add("show");
+}
 });
 });
 window.dispatchEvent(new Event('scroll'));
 </script>
-    <script src='https://www.noupe.com/embed/019bffd0c2e875efa7b986171f635cbfd0b6.js'></script>
+
 </body>
 </html>
+
+```
