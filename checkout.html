@@ -1,40 +1,254 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Checkout - YOLO Pens</title>
+<title>Checkout - YOLO Pencils</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" href="yolo-logo.png">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;}
-body{background:linear-gradient(135deg,#ffffff,#f5f3ff,#ede9fe);color:#1f2937;min-height:100vh;}
-nav{position:fixed;top:15px;left:50%;transform:translateX(-50%);width:92%;max-width:1200px;padding:12px 24px;background:rgba(255,255,255,0.8);backdrop-filter:blur(20px);border-radius:25px;display:flex;justify-content:space-between;align-items:center;z-index:1000;box-shadow:0 10px 30px rgba(109,40,217,0.08);}
-nav a{text-decoration:none;color:#6d28d9;font-weight:600;font-size:14px;}
-.container{max-width:900px;margin:120px auto 60px auto;padding:0 20px;}
-.checkout-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px;}
-@media(max-width:768px){.checkout-grid{grid-template-columns:1fr;}}
-.box{background:white;padding:30px;border-radius:24px;box-shadow:0 10px 30px rgba(0,0,0,0.04);border:1px solid rgba(109,40,217,0.05);}
-h2{font-size:24px;color:#2e1065;margin-bottom:20px;}
-.form-group{margin-bottom:15px;}
-.form-group label{display:block;font-size:13px;font-weight:600;color:#4b5563;margin-bottom:6px;}
-.form-group input, .form-group textarea{width:100%;padding:12px 14px;border-radius:12px;border:1px solid #d1d5db;font-size:14px;outline:none;}
-.order-summary-item{display:flex;justify-content:space-between;align-items:center;font-size:14px;padding:12px 0;border-bottom:1px solid #f3f4f6;}
-.qty-control{display:flex;align-items:center;gap:8px;background:#f3f4f6;padding:4px 8px;border-radius:12px;}
-.qty-btn{background:white;border:none;width:24px;height:24px;border-radius:50%;font-weight:bold;cursor:pointer;color:#6d28d9;box-shadow:0 2px 5px rgba(0,0,0,0.05);display:flex;align-items:center;justify-content:center;}
-.btn-primary{width:100%;padding:14px;background:#6d28d9;color:white;border:none;border-radius:16px;font-weight:bold;font-size:16px;cursor:pointer;margin-top:20px;box-shadow:0 4px 15px rgba(109,40,217,0.3);}
-footer{padding:30px;text-align:center;background:#6d28d9;color:white;font-size:14px;margin-top:60px;}
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+body{
+background:#0a0712;
+color:#f3f4f6;
+min-height:100vh;
+overflow-x:hidden;
+}
+
+/* GLOW ACCENTS */
+body::before{
+content:'';
+position:fixed;
+top:-10%;
+left:-10%;
+width:50vw;
+height:50vh;
+background:radial-gradient(circle, rgba(124,58,237,0.18) 0%, rgba(10,7,18,0) 70%);
+z-index:-1;
+filter:blur(60px);
+pointer-events:none;
+}
+
+body::after{
+content:'';
+position:fixed;
+bottom:-10%;
+right:-10%;
+width:50vw;
+height:50vh;
+background:radial-gradient(circle, rgba(147,51,234,0.15) 0%, rgba(10,7,18,0) 70%);
+z-index:-1;
+filter:blur(60px);
+pointer-events:none;
+}
+
+/* NAV */
+nav{
+position:fixed;
+top:20px;
+left:50%;
+transform:translateX(-50%);
+width:90%;
+max-width:1150px;
+padding:12px 28px;
+background:rgba(18, 14, 30, 0.75);
+backdrop-filter:blur(25px);
+-webkit-backdrop-filter:blur(25px);
+border-radius:40px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+z-index:1000;
+box-shadow:0 15px 35px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.1);
+border:1px solid rgba(255,255,255,0.08);
+}
+
+.nav-brand{
+display:flex;
+align-items:center;
+gap:12px;
+text-decoration:none;
+}
+
+.nav-brand img{
+width:32px;
+height:32px;
+border-radius:50%;
+object-fit:cover;
+box-shadow:0 0 12px rgba(168,85,247,0.4);
+display:block;
+}
+
+.nav-brand strong{
+color:#ffffff;
+font-size:18px;
+letter-spacing:1px;
+line-height:1;
+}
+
+nav a{
+text-decoration:none;
+color:#c084fc;
+font-weight:600;
+font-size:14px;
+transition:opacity 0.2s;
+}
+nav a:hover{opacity:0.8;}
+
+/* CONTAINER */
+.container{
+max-width:950px;
+margin:140px auto 60px auto;
+padding:0 20px;
+}
+
+.checkout-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:30px;
+}
+
+@media(max-width:768px){
+.checkout-grid{
+grid-template-columns:1fr;
+}
+}
+
+.box{
+background:rgba(20, 16, 35, 0.7);
+backdrop-filter:blur(25px);
+padding:35px;
+border-radius:30px;
+box-shadow:0 25px 65px rgba(0,0,0,0.5);
+border:1px solid rgba(255,255,255,0.1);
+}
+
+h2{
+font-size:24px;
+color:#ffffff;
+margin-bottom:20px;
+letter-spacing:-0.5px;
+}
+
+.form-group{
+margin-bottom:18px;
+}
+
+.form-group label{
+display:block;
+font-size:13px;
+font-weight:700;
+color:#a1a1aa;
+margin-bottom:8px;
+letter-spacing:0.3px;
+text-transform:uppercase;
+}
+
+.form-group input, .form-group textarea{
+width:100%;
+padding:12px 16px;
+border-radius:14px;
+border:1px solid rgba(255,255,255,0.12);
+font-size:14px;
+outline:none;
+background:rgba(10, 7, 18, 0.6);
+color:#ffffff;
+}
+
+.form-group input:focus, .form-group textarea:focus{
+border-color:#a855f7;
+box-shadow:0 0 0 3px rgba(168,85,247,0.2);
+}
+
+.form-group textarea{
+height:100px;
+resize:vertical;
+}
+
+.order-summary-item{
+display:flex;
+justify-content:space-between;
+align-items:center;
+font-size:14px;
+padding:14px 0;
+border-bottom:1px solid rgba(255,255,255,0.08);
+}
+
+.qty-control{
+display:flex;
+align-items:center;
+gap:10px;
+background:rgba(10, 7, 18, 0.6);
+padding:4px 10px;
+border-radius:12px;
+border:1px solid rgba(255,255,255,0.1);
+}
+
+.qty-btn{
+background:rgba(255,255,255,0.1);
+border:none;
+width:24px;
+height:24px;
+border-radius:50%;
+font-weight:bold;
+cursor:pointer;
+color:#ffffff;
+display:flex;
+align-items:center;
+justify-content:center;
+transition:background 0.2s;
+}
+
+.qty-btn:hover{
+background:rgba(168,85,247,0.4);
+}
+
+.btn-primary{
+width:100%;
+padding:15px;
+background:linear-gradient(135deg,#7c3aed,#9333ea);
+color:white;
+border:none;
+border-radius:20px;
+font-weight:bold;
+font-size:16px;
+cursor:pointer;
+margin-top:20px;
+box-shadow:0 0 25px rgba(124,58,237,0.5);
+transition:all 0.2s;
+}
+
+.btn-primary:hover{
+transform:translateY(-2px);
+box-shadow:0 0 35px rgba(147,51,234,0.7);
+}
+
+footer{
+padding:35px;
+text-align:center;
+background:#05030a;
+color:#6b7280;
+font-size:14px;
+margin-top:80px;
+border-top:1px solid rgba(255,255,255,0.05);
+}
 </style>
 </head>
 
 <body>
+
+<!-- NAV -->
 <nav>
-<div style="display:flex;align-items:center;gap:10px;">
-<img src="yolo-logo.png" style="width:34px;height:34px;border-radius:50%;object-fit:cover;display:block;" alt="Logo">
-<strong style="color:#6d28d9;font-size:18px;line-height:1;">YOLO</strong>
-</div>
+<a href="index.html" class="nav-brand">
+<img src="yolo-logo.png" alt="Logo">
+<strong>YOLO</strong>
+</a>
 <a href="index.html">← Return to Store</a>
 </nav>
 
@@ -54,15 +268,17 @@ footer{padding:30px;text-align:center;background:#6d28d9;color:white;font-size:1
 <div class="box">
 <h2>Order Summary</h2>
 <div id="checkoutItemsList" style="max-height:280px;overflow-y:auto;margin-bottom:15px;"></div>
-<div style="display:flex;justify-content:space-between;font-weight:bold;font-size:18px;border-top:2px solid #f3f4f6;padding-top:15px;">
+<div style="display:flex;justify-content:space-between;font-weight:bold;font-size:18px;border-top:2px solid rgba(255,255,255,0.1);padding-top:15px;color:#ffffff;">
 <span>Total Amount:</span>
-<span id="checkoutTotalPrice" style="color:#6d28d9;">₹0</span>
+<span id="checkoutTotalPrice" style="color:#c084fc;">₹0</span>
 </div>
 </div>
 </div>
 </div>
 
-<footer>© 2026 YOLO Pens. All rights reserved.</footer>
+<footer>
+© 2026 YOLO Pens. All rights reserved.
+</footer>
 
 <script>
 function loadCheckoutSummary() {
@@ -71,7 +287,7 @@ let container = document.getElementById("checkoutItemsList");
 container.innerHTML = "";
 
 if(cart.length === 0) {
-container.innerHTML = `<p style="color:#6b7280;font-size:14px;text-align:center;padding:20px 0;">Your cart is empty. <a href="index.html">Go shop</a></p>`;
+container.innerHTML = `<p style="color:#9ca3af;font-size:14px;text-align:center;padding:20px 0;">Your cart is empty. <a href="index.html" style="color:#c084fc;">Go shop</a></p>`;
 document.getElementById("checkoutTotalPrice").innerText = "₹0";
 document.getElementById("orderSummaryInput").value = "Empty Cart";
 return;
@@ -90,16 +306,16 @@ let div = document.createElement("div");
 div.className = "order-summary-item";
 div.innerHTML = `
 <div style="max-width:55%;">
-<div style="font-weight:600;color:#1f2937;">${item.name}</div>
-<div style="color:#6d28d9;font-size:12px;">₹${item.price} each</div>
+<div style="font-weight:600;color:#ffffff;">${item.name}</div>
+<div style="color:#c084fc;font-size:12px;">₹${item.price} each</div>
 </div>
 <div style="display:flex;align-items:center;gap:12px;">
 <div class="qty-control">
 <button type="button" class="qty-btn" onclick="updateQty(${index}, -1)">−</button>
-<span style="font-weight:600;min-width:16px;text-align:center;">${qty}</span>
+<span style="font-weight:600;min-width:16px;text-align:center;color:#ffffff;">${qty}</span>
 <button type="button" class="qty-btn" onclick="updateQty(${index}, 1)">+</button>
 </div>
-<span style="font-weight:600;min-width:40px;text-align:right;">₹${itemTotal}</span>
+<span style="font-weight:600;min-width:45px;text-align:right;color:#ffffff;">₹${itemTotal}</span>
 </div>
 `;
 container.appendChild(div);
@@ -128,7 +344,6 @@ localStorage.removeItem("yolo_cart");
 alert("Order placed successfully! Thank you for choosing YOLO Pens.");
 }
 </script>
+
 </body>
 </html>
-
-```
